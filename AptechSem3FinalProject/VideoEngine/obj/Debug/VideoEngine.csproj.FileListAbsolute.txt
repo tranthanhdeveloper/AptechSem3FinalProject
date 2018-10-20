@@ -1,0 +1,8 @@
+F:\AptechSem3FinalProject\AptechSem3FinalProject\VideoEngine\bin\Debug\VideoEngine.exe.config
+F:\AptechSem3FinalProject\AptechSem3FinalProject\VideoEngine\bin\Debug\VideoEngine.exe
+F:\AptechSem3FinalProject\AptechSem3FinalProject\VideoEngine\bin\Debug\VideoEngine.pdb
+F:\AptechSem3FinalProject\AptechSem3FinalProject\VideoEngine\obj\Debug\VideoEngine.csprojAssemblyReference.cache
+F:\AptechSem3FinalProject\AptechSem3FinalProject\VideoEngine\obj\Debug\VideoEngine.csproj.CoreCompileInputs.cache
+F:\AptechSem3FinalProject\AptechSem3FinalProject\VideoEngine\obj\Debug\VideoEngine.exe
+F:\AptechSem3FinalProject\AptechSem3FinalProject\VideoEngine\obj\Debug\VideoEngine.pdb
+F:\AptechSem3FinalProject\AptechSem3FinalProject\VideoEngine\bin\Debug\ffmpeg.exe
