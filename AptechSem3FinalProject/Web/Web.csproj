@@ -450,10 +450,28 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\js\easing.min.js" />
+    <Content Include="Scripts\js\hoverIntent.js" />
+    <Content Include="Scripts\js\jquery-ui.js" />
+    <Content Include="Scripts\js\jquery.ajaxchimp.min.js" />
+    <Content Include="Scripts\js\jquery.magnific-popup.min.js" />
+    <Content Include="Scripts\js\jquery.nice-select.min.js" />
+    <Content Include="Scripts\js\jquery.tabs.min.js" />
+    <Content Include="Scripts\js\mail-script.js" />
+    <Content Include="Scripts\js\main.js" />
+    <Content Include="Scripts\js\owl.carousel.min.js" />
+    <Content Include="Scripts\js\plyr\dist\blank.mp4" />
+    <Content Include="Scripts\js\plyr\dist\plyr.css" />
+    <Content Include="Scripts\js\plyr\dist\plyr.js" />
+    <Content Include="Scripts\js\plyr\dist\plyr.min.js" />
+    <Content Include="Scripts\js\plyr\dist\plyr.polyfilled.js" />
+    <Content Include="Scripts\js\plyr\dist\plyr.polyfilled.min.js" />
+    <Content Include="Scripts\js\plyr\dist\plyr.svg" />
+    <Content Include="Scripts\js\superfish.min.js" />
+    <Content Include="Scripts\js\vendor\bootstrap.min.js" />
+    <Content Include="Scripts\js\vendor\jquery-2.2.4.min.js" />
+    <Content Include="Scripts\js\video-hander.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\plyr.js" />
-    <Content Include="Scripts\video-hander.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -468,6 +486,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Scripts\js\.DS_Store" />
+    <Content Include="Scripts\js\plyr\dist\plyr.js.map" />
+    <Content Include="Scripts\js\plyr\dist\plyr.min.js.map" />
+    <Content Include="Scripts\js\plyr\dist\plyr.polyfilled.js.map" />
+    <Content Include="Scripts\js\plyr\dist\plyr.polyfilled.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
