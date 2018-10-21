@@ -4303,3 +4303,8 @@ dl.toggle.time-line:before {
   margin: 10px 10px;
   background: #111;
 }
+
+/**/
+.user-logout-link {
+    color: #f7631b !important;
+}
