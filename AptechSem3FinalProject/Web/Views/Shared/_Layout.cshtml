@@ -1,46 +1,44 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="img/fav.png">
-    <meta name="author" content="colorlib">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta charset="UTF-8">
-    <title>>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-    <link rel="stylesheet" href="@Url.Content("/Content/css/linearicons.css")">
-    <link rel="stylesheet" href="@Url.Content("/Content/css/font-awesome.min.css")">
-    <link rel="stylesheet" href="@Url.Content("/Content/css/bootstrap.css")">
-    <link rel="stylesheet" href="@Url.Content("/Content/css/magnific-popup.css")">
-    <link rel="stylesheet" href="@Url.Content("/Content/css/nice-select.css")">
-    <link rel="stylesheet" href="@Url.Content("/Content/css/animate.min.css")">
-    <link rel="stylesheet" href="@Url.Content("/Content/css/owl.carousel.css")">
-    <link rel="stylesheet" href="@Url.Content("/Content/css/jquery-ui.css")">
-    <link rel="stylesheet" href="@Url.Content("/Content/css/main.css")">
+
 </head>
 <body>
-    @RenderPage("/Views/Shared/_Header.cshtml")
-    @RenderBody()
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
 
-    @RenderPage("/Views/Shared/_Footer.cshtml")
-    <script type="text/javascript" src="@Url.Content("/Scripts/js/vendor/jquery-2.2.4.min.js")"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/js/vendor/bootstrap.min.js")"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/js/easing.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/js/hoverIntent.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/js/superfish.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/js/jquery.ajaxchimp.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/js/jquery.magnific-popup.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/js/jquery.tabs.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/js/jquery.nice-select.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/js/owl.carousel.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/js/mail-script.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/js/main.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/js/main.js")"></script>
-    @RenderSection("JavaScript", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
