@@ -12,14 +12,17 @@ namespace Web.Controllers
     {
         public ActionResult Index()
         {
-            var a = new AptechSem3FinalProjectEntities();
-            var c = a.Users.ToList();
-            var uow = new Uow<User>();
-            var user = new User{Name = "Thanh", Email = "Thanh@gmail.com", Address = "Ha Tinh"};
-            var aaa = uow.Repository.GetById(1);
-            uow.Repository.Insert(user);
-            uow.Save();
+            //var a = new AptechSem3FinalProjectEntities();
+            //var c = a.Users.ToList();
+            //var uow = new Uow<User>();
+            //var user = new User { Name = "Thanh", Email = "Thanh@gmail.com", Address = "Ha Tinh" };
+            //var aaa = uow.Repository.GetById(1);
+            //uow.Repository.Insert(user);
+            //uow.Save();
+
             return View();
+
+
         }
     }
 }
