@@ -1,4 +1,6 @@
-﻿<header id="header" class="header-scrolled">
+﻿@using Web.Helper.Sercurity
+@using AuthenticationManager = Web.Helper.Sercurity.AuthenticationManager
+<header id="header" class="header-scrolled">
     <div class="container main-menu">
         <div class="row align-items-center justify-content-between d-flex">
             <div id="logo">
@@ -11,6 +13,8 @@
                     <li><a href="courses.html">Courses</a></li>
                     <li><a href="events.html">Events</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="@Url.Action("Login", "Account")">Login</a></li>
+                    <li><a href="@Url.Action("Register", "Account")" class="user-logout-link">Register</a></li>
                     <li class="menu-has-children">
                         <a href="">Blog</a>
                         <ul>
@@ -20,7 +24,7 @@
                     </li>
                     @{
                         ViewBag.Title = "Contact";
-                        if (User.Identity.IsAuthenticated)
+                        if (SessionPersister.AccountInformation == null)
                         {
                             
                             <li><a href="@Url.Action("Login", "Account")">Login</a></li>

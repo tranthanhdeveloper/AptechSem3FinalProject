@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Context.Database;
 
 namespace Web.Models
 {
@@ -46,12 +47,12 @@ namespace Web.Models
         public string Email { get; set; }
     }
 
-    public class LoginViewModel
+    public class LoginViewModel : Account
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "USername")]
         [EmailAddress]
-        public string Email { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -62,12 +63,12 @@ namespace Web.Models
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterViewModel
+    public class AccountModel
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

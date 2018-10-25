@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Context.Database;
@@ -24,6 +25,13 @@ namespace Context.Repository
         public virtual void Insert(U u)
         {
             _dbSet.Add(u);
+        }
+
+        public virtual U Add(U u)
+        {
+            _dbSet.Add(u);
+            _context.SaveChanges();
+            return u;
         }
 
         public virtual void Update(U u)
