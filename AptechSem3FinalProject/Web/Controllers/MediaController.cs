@@ -13,15 +13,14 @@ using System.Web.Http;
 
 namespace Web.Controllers
 {
-    [RoutePrefix("api")]
-    public class VideoMediaController : ApiController
+    public class MediaController : ApiController
     {
         public const int ReadStreamBufferSize = 1024 * 1024;
         public static readonly IReadOnlyDictionary<string, string> MimeNames;
         public static readonly IReadOnlyCollection<char> InvalidFileNameChars;
         public static readonly string InitialDirectory;
 
-        static VideoMediaController()
+        static MediaController()
         {
             var mimeNames = new Dictionary<string, string>
             {
@@ -41,21 +40,20 @@ namespace Web.Controllers
 
         #region Actions method
 
-        [HttpGet]
-        public HttpResponseMessage Play(string f)
+        public HttpResponseMessage Get(string f)
         {
+            var response = new HttpResponseMessage();
             // This can prevent some unnecessary accesses. These kind of file names won't be existing at all. 
             if (string.IsNullOrWhiteSpace(f) || AnyInvalidFileNameChars(f))
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            var fileInfo = new FileInfo(Path.Combine(InitialDirectory, f));
+            FileInfo fileInfo = new FileInfo(Path.Combine(@"D:\\MediaDirectory\", f));
 
             if (!fileInfo.Exists)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
             var totalLength = fileInfo.Length;
             var rangeHeader = Request.Headers.Range;
-            var response = new HttpResponseMessage();
             response.Headers.AcceptRanges.Add("bytes");
 
             // The request will be treated as normal request if there is no Range header.
