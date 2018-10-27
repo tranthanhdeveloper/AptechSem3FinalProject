@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Context
+namespace Context.Repository
 {
-    public class Class1
+    public interface IUow
     {
+        
+        void Save();
     }
 }

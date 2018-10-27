@@ -11,20 +11,28 @@ using Context.Database;
 
 namespace Context.Repository
 {
-    public class Repository<U> where U : class
+    public class Repository<U> : IRepository<U> where U : class
     {
         internal AptechSem3FinalProjectEntities _context;
         internal DbSet<U> _dbSet;
-
-        public Repository(AptechSem3FinalProjectEntities context)
+        protected IDbFactory DbFactory
         {
-            this._context = context;
-            this._dbSet = context.Set<U>();
+            get;
+            private set;
+        }
+
+        protected AptechSem3FinalProjectEntities DbContext => _context ?? (_context = DbFactory.Init());
+
+        public Repository(IDbFactory dbFactory)
+        {
+            DbFactory = dbFactory;
+            this._dbSet = DbContext.Set<U>();
         }
 
         public virtual void Insert(U u)
         {
             _dbSet.Add(u);
+            _context.SaveChanges();
         }
 
         public virtual U Add(U u)
@@ -36,8 +44,9 @@ namespace Context.Repository
 
         public virtual void Update(U u)
         {
-            
+            _dbSet.Attach(u);
             _context.Entry(u).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         public virtual void Delete(object id)
@@ -52,6 +61,7 @@ namespace Context.Repository
                 _dbSet.Attach(u);
             }
             _dbSet.Remove(u);
+            _context.SaveChanges();
         }
 
         public virtual U GetById(object id)
@@ -82,6 +92,19 @@ namespace Context.Repository
             {
                 return query.ToList();
             }
+        }
+    }
+
+    public interface IUserRepository : IRepository<User>
+    {
+
+    }
+
+    public class UserRepository : Repository<User>, IUserRepository
+    {
+        public UserRepository(IDbFactory context) : base(context)
+        {
+
         }
     }
 }

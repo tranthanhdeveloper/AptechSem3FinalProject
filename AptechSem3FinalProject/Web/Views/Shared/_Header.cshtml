@@ -13,8 +13,8 @@
                     <li><a href="courses.html">Courses</a></li>
                     <li><a href="events.html">Events</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="@Url.Action("Login", "Account")">Login</a></li>
-                    <li><a href="@Url.Action("Register", "Account")" class="user-logout-link">Register</a></li>
+                    @*<li><a href="@Url.Action("Login", "Account")">Login</a></li>
+                    <li><a href="@Url.Action("Register", "Account")" class="user-logout-link">Register</a></li>*@
                     <li class="menu-has-children">
                         <a href="">Blog</a>
                         <ul>
@@ -28,7 +28,7 @@
                         {
                             
                             <li><a href="@Url.Action("Login", "Account")">Login</a></li>
-                            <li><a href="@Url.Action("LogOff", "Account")" class="user-logout-link">Register</a></li>
+                            <li><a href="@Url.Action("Register", "Account")" class="user-logout-link">Register</a></li>
                         }
                         else
                         {
@@ -39,7 +39,7 @@
                                     <li><a href="event-details.html">Billing History</a></li>
                                     <li><div class="clearfix"></div></li>
                                     <li><a href="elements.html">Become an instructor</a></li>
-                                    <li><a href="@Url.Action("LogOff", "Account")" class="user-logout-link">Logout</a></li>
+                                    <li><a href="@Url.Action("Logout", "Account")">Logout</a></li>
                                 </ul>
                             </li>
                         }
