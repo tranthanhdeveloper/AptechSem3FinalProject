@@ -13,6 +13,7 @@ using System.Web.Http;
 
 namespace Web.Controllers
 {
+    [RoutePrefix("api")]
     public class VideoMediaController : ApiController
     {
         public const int ReadStreamBufferSize = 1024 * 1024;
@@ -24,18 +25,18 @@ namespace Web.Controllers
         {
             var mimeNames = new Dictionary<string, string>
             {
-                { ".mp3", "audio/mpeg" }, 
-                { ".mp4", "video/mp4" },
-                { ".ogg", "application/ogg" },
-                { ".ogv", "video/ogg" },
-                { ".oga", "audio/ogg" },
-                { ".wav", "audio/x-wav" },
-                { ".webm", "video/webm" }
+                {".mp3", "audio/mpeg"},
+                {".mp4", "video/mp4"},
+                {".ogg", "application/ogg"},
+                {".ogv", "video/ogg"},
+                {".oga", "audio/ogg"},
+                {".wav", "audio/x-wav"},
+                {".webm", "video/webm"}
             };
 
             MimeNames = new ReadOnlyDictionary<string, string>(mimeNames);
             InvalidFileNameChars = Array.AsReadOnly(Path.GetInvalidFileNameChars());
-            InitialDirectory = WebConfigurationManager.AppSettings["InitialDirectory"];
+            InitialDirectory = WebConfigurationManager.AppSettings["DefaultFullHD"];
         }
 
         #region Actions method
@@ -84,9 +85,6 @@ namespace Web.Controllers
 
             long start = 0, end = 0;
 
-            // 1. If the unit is not 'bytes'.
-            // 2. If there are multiple ranges in header value.
-            // 3. If start or end position is greater than file length.
             if (rangeHeader.Unit != "bytes" || rangeHeader.Ranges.Count > 1 ||
                 !TryReadRangeItem(rangeHeader.Ranges.First(), totalLength, out start, out end))
             {

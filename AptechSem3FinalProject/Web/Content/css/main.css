@@ -2570,7 +2570,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin-bottom: 0px;
 }
 .about-banner {
-  background: url(../img/top-banner.jpg) right no-repeat;
+  background: url(../../img/top-banner.jpg) right no-repeat;
   background-size: cover;
 }
 .about-content {
