@@ -1,36 +1,22 @@
-﻿<header id="header" class="header-scrolled">
-    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "userLogoutForm"}))
-    {
-        @Html.AntiForgeryToken()
-    }
+﻿@using Web.Helper.Sercurity
+<header id="header" class="header-scrolled">
     <div class="container main-menu">
         <div class="row align-items-center justify-content-between d-flex">
             <div id="logo">
                 <a href="@Url.Action("index", "Home")">
-                    <img src="@Url.Content("~/img/logo.png")" alt="" title=""/>
+                    <img src="@Url.Content("~/img/logo.png")" alt="" title="" />
                 </a>
             </div>
             <nav id="nav-menu-container">
+                <form action="#" class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </nav>
+            <nav id="nav-menu-container">
                 <ul class="nav-menu">
-                    <li>@Html.ActionLink("Home", "index", "Home")</li>
-                    <li>
-                        <a href="about.html">About</a>
-                    </li>
                     <li>
                         <a href="@Url.Action("Index", "Course")">Courses</a>
-                    </li>
-                    <li>
-                        <a href="events.html">Events</a>
-                    </li>
-                    <li>
-                        <a href="gallery.html">Gallery</a>
-                    </li>
-                    <li class="menu-has-children">
-                        <a href="">Blog</a>
-                        <ul>
-                            <li><a href="blog-home.html">Blog Home</a></li>
-                            <li><a href="blog-single.html">Blog Single</a></li>
-                        </ul>
                     </li>
                     @{
                         ViewBag.Title = "Contact";
@@ -67,8 +53,10 @@
                             </li>
                         }
                     }
-                    
-                    <li><a href="contact.html">Contact</a></li>
+
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
                 </ul>
             </nav>
         </div>
