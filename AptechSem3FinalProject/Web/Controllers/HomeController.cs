@@ -5,21 +5,26 @@ using System.Web;
 using System.Web.Mvc;
 using Context.Database;
 using Context.Repository;
+using Service.Service;
 
 namespace Web.Controllers
 {
     public class HomeController : Controller
     {
+        private IUserService _serviceUser;
+
+        public HomeController(IUserService serviceUser)
+        {
+            _serviceUser = serviceUser;
+        }
         public ActionResult Index()
         {
-            //var a = new AptechSem3FinalProjectEntities();
-            //var c = a.Users.ToList();
-            //var uow = new Uow<User>();
-            //var user = new User { Name = "Thanh", Email = "Thanh@gmail.com", Address = "Ha Tinh" };
-            //var aaa = uow.Repository.GetById(1);
-            //uow.Repository.Insert(user);
-            //uow.Save();
-
+           
+            var a = _serviceUser.GetAll();
+            var u = _serviceUser.GetById(3);
+            u.Address = "456";
+            _serviceUser.Update(u);
+           // _serviceUser.Save();
             return View();
 
 

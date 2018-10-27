@@ -23,7 +23,7 @@ namespace Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        Uow<Account> _ouw = new Uow<Account>();
+        //Uow<Account> _ouw = new Uow<Account>();
         public AccountController()
         {
         }
@@ -61,9 +61,9 @@ namespace Web.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnUrl;
+            //ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
@@ -72,23 +72,23 @@ namespace Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                model.Password = Encryptor.EncryptSHA1(model.Password);
-                var accountLogin = _ouw.Repository.GetAll(a =>
-                    a.UserName.Contains(model.UserName) && a.Password.Contains(model.Password)).SingleOrDefault();
-                if (accountLogin == null)
-                {
-                    ModelState.AddModelError("", MessageConstants.LoginFail);
-                    return View(model);
-                }
+            //if (ModelState.IsValid)
+            //{
+            //    model.Password = Encryptor.EncryptSHA1(model.Password);
+            //    var accountLogin = _ouw.Repository.GetAll(a =>
+            //        a.UserName.Contains(model.UserName) && a.Password.Contains(model.Password)).SingleOrDefault();
+            //    if (accountLogin == null)
+            //    {
+            //        ModelState.AddModelError("", MessageConstants.LoginFail);
+            //        return View(model);
+            //    }
 
-                SessionPersister.AccountInformation = accountLogin;
-                return RedirectToAction("index", "Home");
+            //    SessionPersister.AccountInformation = accountLogin;
+            //    return RedirectToAction("index", "Home");
 
-            }
+            //}
 
             return View(model);
 
@@ -108,6 +108,15 @@ namespace Web.Controllers
             //        ModelState.AddModelError("", "Invalid login attempt.");
             //        return View(model);
             //}
+        }
+
+        public ActionResult Logout()
+        {
+            if (SessionPersister.AccountInformation != null)
+            {
+                SessionPersister.AccountInformation = null;
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -166,7 +175,7 @@ namespace Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(AccountModel model)
+        public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
@@ -186,24 +195,25 @@ namespace Web.Controllers
                 //}
                 //AddErrors(result);
 
-                var acc = _ouw.Repository.GetAll(a => a.UserName.ToLower().Contains(model.UserName.ToLower()));
-                if (acc.Any())
-                {
-                    ModelState.AddModelError("", MessageConstants.AccountExist);
-                    return View(model);
-                }
-                
-                model.Password = Encryptor.EncryptSHA1(model.Password);
-               
-                var account = _ouw.Repository.Add(new Account{UserName = model.UserName, Password = model.Password, RoleId = (int)RoleEnum.User, UserId = 1});
-               
-                if (account == null)
-                {
-                    ModelState.AddModelError("", MessageConstants.InsertFail);
-                    return View(model);
-                }
+                //var acc = _ouw.Repository.GetAll(a => a.UserName.ToLower().Contains(model.UserName.ToLower()));
 
-                return RedirectToAction("index", "Home");
+                //if (acc.Any())
+                //{
+                //    ModelState.AddModelError("", MessageConstants.AccountExist);
+                //    return View(model);
+                //}
+                
+                //model.Password = Encryptor.EncryptSHA1(model.Password);
+               
+                //var account = _ouw.Repository.Add(new Account{UserName = model.UserName, Password = model.Password, RoleId = (int)RoleEnum.User, UserId = 1});
+               
+                //if (account == null)
+                //{
+                //    ModelState.AddModelError("", MessageConstants.InsertFail);
+                //    return View(model);
+                //}
+
+                //return RedirectToAction("index", "Home");
             }
 
             // If we got this far, something failed, redisplay form
@@ -423,15 +433,8 @@ namespace Web.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-        [HttpGet]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
-        {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
-        }
+        
+       
 
         //
         // GET: /Account/ExternalLoginFailure
