@@ -107,4 +107,18 @@ namespace Context.Repository
 
         }
     }
+
+
+    public interface ICourseRepository : IRepository<Course>
+    {
+
+    }
+
+    public class CourseRepository : Repository<Course>, ICourseRepository
+    {
+        public CourseRepository(IDbFactory context) : base(context)
+        {
+
+        }
+    }
 }

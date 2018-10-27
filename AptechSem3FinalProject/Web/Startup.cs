@@ -28,7 +28,7 @@ namespace Web
             var builder = new ContainerBuilder();
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             // Register your Web API controllers.
-            //builder.RegisterApiControllers(Assembly.GetExecutingAssembly()); //Register WebApi Controllers
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()); //Register WebApi Controllers
 
             builder.RegisterType<Uow>().As<IUow>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
@@ -48,14 +48,14 @@ namespace Web
                 .AsImplementedInterfaces().InstancePerRequest();
 
             // Repositories
-            //builder.RegisterAssemblyTypes(typeof(Repository<User>).Assembly)
-            //    .Where(t => t.Name.EndsWith("Repository"))
-            //    .AsImplementedInterfaces().InstancePerRequest();
+            builder.RegisterAssemblyTypes(typeof(Repository<User>).Assembly)
+                .Where(t => t.Name.EndsWith("Repository"))
+                .AsImplementedInterfaces().InstancePerRequest();
 
             // Services
-            //builder.RegisterGeneric(typeof(IService).Assembly)
-            //   .Where(t => t.Name.EndsWith("Service"))
-            //   .AsImplementedInterfaces().InstancePerRequest();
+            builder.RegisterAssemblyTypes(typeof(IService).Assembly)
+               .Where(t => t.Name.EndsWith("Service"))
+               .AsImplementedInterfaces().InstancePerRequest();
 
             Autofac.IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

@@ -1,17 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+using Service.Service;
+
 
 namespace Web.Controllers
 {
     public class CourseController : Controller
     {
+        #region Declare field and Constructors
+
+        private ICourseService _courseService;
+
+        public CourseController(ICourseService courseService)
+        {
+            _courseService = courseService;
+        }
+
+        #endregion
+
+        #region Action methods
+
         // GET: Course
         public ActionResult Index()
         {
+            var a = _courseService.GetAll();
             return View();
         }
 
@@ -24,5 +36,15 @@ namespace Web.Controllers
         {
             return View();
         }
+
+        #endregion
+
+        #region manipulate methods
+
+        
+
+        #endregion
+
+
     }
 }

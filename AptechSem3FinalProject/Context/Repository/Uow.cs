@@ -18,8 +18,7 @@ namespace Context.Repository
             this._dbFactory = dbFactory;
         }
 
-        public AptechSem3FinalProjectEntities Context
-            => _context ?? (_context = _dbFactory.Init());
+        public AptechSem3FinalProjectEntities Context => _context ?? (_context = _dbFactory.Init());
         public void Save()
         {
             Context.SaveChanges();

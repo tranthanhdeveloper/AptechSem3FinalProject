@@ -34,5 +34,7 @@ namespace Context.Database
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Video> Videos { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
     }
 }

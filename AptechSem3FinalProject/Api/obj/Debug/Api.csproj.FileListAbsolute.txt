@@ -188,7 +188,6 @@ F:\AptechSem3FinalProject\AptechSem3FinalProject\Api\bin\System.Web.WebPages.Dep
 F:\AptechSem3FinalProject\AptechSem3FinalProject\Api\bin\System.Web.WebPages.Razor.xml
 F:\AptechSem3FinalProject\AptechSem3FinalProject\Api\bin\System.Web.Optimization.xml
 F:\AptechSem3FinalProject\AptechSem3FinalProject\Api\bin\Antlr3.Runtime.pdb
-F:\AptechSem3FinalProject\AptechSem3FinalProject\Api\obj\Debug\Api.csprojAssemblyReference.cache
 F:\AptechSem3FinalProject\AptechSem3FinalProject\Api\obj\Debug\Api.csproj.CoreCompileInputs.cache
 F:\AptechSem3FinalProject\AptechSem3FinalProject\Api\obj\Debug\Api.csproj.CopyComplete
 F:\AptechSem3FinalProject\AptechSem3FinalProject\Api\obj\Debug\Api.dll

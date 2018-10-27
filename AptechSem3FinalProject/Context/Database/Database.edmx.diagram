@@ -22,6 +22,10 @@
         <AssociationConnector Association="AptechSem3FinalProjectModel.FK_Order_Payment" ManuallyRouted="false" />
         <AssociationConnector Association="AptechSem3FinalProjectModel.FK_Order_User" ManuallyRouted="false" />
         <AssociationConnector Association="AptechSem3FinalProjectModel.OrderDetail" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AptechSem3FinalProjectModel.Category" Width="1.5" PointX="0.75" PointY="8.625" />
+        <EntityTypeShape EntityType="AptechSem3FinalProjectModel.PaymentMethod" Width="1.5" PointX="5.25" PointY="12" />
+        <AssociationConnector Association="AptechSem3FinalProjectModel.FK_Course_Category" />
+        <AssociationConnector Association="AptechSem3FinalProjectModel.FK_PaymentMethod_Payment" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
