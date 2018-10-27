@@ -23,13 +23,13 @@ namespace Context.Database
     
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Discription { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string Comment { get; set; }
         public string Image { get; set; }
         public Nullable<long> Price { get; set; }
         public Nullable<int> Status { get; set; }
         public int UserId { get; set; }
+        public string Description { get; set; }
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

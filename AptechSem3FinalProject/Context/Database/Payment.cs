@@ -28,5 +28,6 @@ namespace Context.Database
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
+        public virtual PaymentMethod PaymentMethod { get; set; }
     }
 }

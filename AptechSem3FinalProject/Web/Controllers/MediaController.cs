@@ -13,48 +13,47 @@ using System.Web.Http;
 
 namespace Web.Controllers
 {
-    public class VideoMediaController : ApiController
+    public class MediaController : ApiController
     {
         public const int ReadStreamBufferSize = 1024 * 1024;
         public static readonly IReadOnlyDictionary<string, string> MimeNames;
         public static readonly IReadOnlyCollection<char> InvalidFileNameChars;
         public static readonly string InitialDirectory;
 
-        static VideoMediaController()
+        static MediaController()
         {
             var mimeNames = new Dictionary<string, string>
             {
-                { ".mp3", "audio/mpeg" }, 
-                { ".mp4", "video/mp4" },
-                { ".ogg", "application/ogg" },
-                { ".ogv", "video/ogg" },
-                { ".oga", "audio/ogg" },
-                { ".wav", "audio/x-wav" },
-                { ".webm", "video/webm" }
+                {".mp3", "audio/mpeg"},
+                {".mp4", "video/mp4"},
+                {".ogg", "application/ogg"},
+                {".ogv", "video/ogg"},
+                {".oga", "audio/ogg"},
+                {".wav", "audio/x-wav"},
+                {".webm", "video/webm"}
             };
 
             MimeNames = new ReadOnlyDictionary<string, string>(mimeNames);
             InvalidFileNameChars = Array.AsReadOnly(Path.GetInvalidFileNameChars());
-            InitialDirectory = WebConfigurationManager.AppSettings["InitialDirectory"];
+            InitialDirectory = WebConfigurationManager.AppSettings["DefaultFullHD"];
         }
 
         #region Actions method
 
-        [HttpGet]
-        public HttpResponseMessage Play(string f)
+        public HttpResponseMessage Get(string f)
         {
+            var response = new HttpResponseMessage();
             // This can prevent some unnecessary accesses. These kind of file names won't be existing at all. 
             if (string.IsNullOrWhiteSpace(f) || AnyInvalidFileNameChars(f))
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            var fileInfo = new FileInfo(Path.Combine(InitialDirectory, f));
+            FileInfo fileInfo = new FileInfo(Path.Combine(@"D:\\MediaDirectory\", f));
 
             if (!fileInfo.Exists)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
             var totalLength = fileInfo.Length;
             var rangeHeader = Request.Headers.Range;
-            var response = new HttpResponseMessage();
             response.Headers.AcceptRanges.Add("bytes");
 
             // The request will be treated as normal request if there is no Range header.
@@ -84,9 +83,6 @@ namespace Web.Controllers
 
             long start = 0, end = 0;
 
-            // 1. If the unit is not 'bytes'.
-            // 2. If there are multiple ranges in header value.
-            // 3. If start or end position is greater than file length.
             if (rangeHeader.Unit != "bytes" || rangeHeader.Ranges.Count > 1 ||
                 !TryReadRangeItem(rangeHeader.Ranges.First(), totalLength, out start, out end))
             {

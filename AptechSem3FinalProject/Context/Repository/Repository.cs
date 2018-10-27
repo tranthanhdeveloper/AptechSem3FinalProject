@@ -95,16 +95,5 @@ namespace Context.Repository
         }
     }
 
-    public interface IUserRepository : IRepository<User>
-    {
 
-    }
-
-    public class UserRepository : Repository<User>, IUserRepository
-    {
-        public UserRepository(IDbFactory context) : base(context)
-        {
-
-        }
-    }
 }
