@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using Context.Database;
 using Context.Repository;
 
@@ -19,7 +16,7 @@ namespace Service.Service
         {
             try
             {
-                return GetAll();
+                return GetAll(null, courses => courses.OrderByDescending(course => course.Id)).Take(5);
             }
             catch (Exception e)
             {

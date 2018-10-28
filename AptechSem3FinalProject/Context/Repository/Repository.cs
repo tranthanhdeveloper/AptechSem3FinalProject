@@ -121,4 +121,17 @@ namespace Context.Repository
 
         }
     }
+
+    public interface ILectureRepository : IRepository<Lecture>
+    {
+
+    }
+
+    public class LectureRepository : Repository<Lecture>, ILectureRepository
+    {
+        public LectureRepository(IDbFactory context) : base(context)
+        {
+
+        }
+    }
 }
