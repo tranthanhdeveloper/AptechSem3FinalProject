@@ -28,6 +28,8 @@ namespace Web
 
             bundles.Add(new StyleBundle("~/ContentLayout").Include(
                 "~/Content/css/*.css"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/Client/Register").Include("~/Scripts/Client/Register.js"));
         }
     }
 }
