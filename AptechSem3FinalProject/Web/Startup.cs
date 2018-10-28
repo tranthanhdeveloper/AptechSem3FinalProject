@@ -28,18 +28,12 @@ namespace Web
             var builder = new ContainerBuilder();
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             // Register your Web API controllers.
-            //builder.RegisterApiControllers(Assembly.GetExecutingAssembly()); //Register WebApi Controllers
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()); //Register WebApi Controllers
 
             builder.RegisterType<Uow>().As<IUow>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
 
             builder.RegisterType<AptechSem3FinalProjectEntities>().AsSelf().InstancePerRequest();
-
-            builder.RegisterAssemblyTypes(typeof(IService<>).Assembly)
-                .Where(t => t.GetTypeInfo()
-                    .ImplementedInterfaces.Any(
-                        i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IService<>)))
-                .AsImplementedInterfaces().InstancePerRequest();
 
             builder.RegisterAssemblyTypes(typeof(IRepository<>).Assembly)
                 .Where(t => t.GetTypeInfo()
@@ -47,15 +41,11 @@ namespace Web
                         i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IRepository<>)))
                 .AsImplementedInterfaces().InstancePerRequest();
 
-            // Repositories
-            //builder.RegisterAssemblyTypes(typeof(Repository<User>).Assembly)
-            //    .Where(t => t.Name.EndsWith("Repository"))
-            //    .AsImplementedInterfaces().InstancePerRequest();
-
-            // Services
-            //builder.RegisterGeneric(typeof(IService).Assembly)
-            //   .Where(t => t.Name.EndsWith("Service"))
-            //   .AsImplementedInterfaces().InstancePerRequest();
+            builder.RegisterAssemblyTypes(typeof(IService<>).Assembly)
+                .Where(t => t.GetTypeInfo()
+                    .ImplementedInterfaces.Any(
+                        i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IService<>)))
+                .AsImplementedInterfaces().InstancePerRequest();
 
             Autofac.IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
