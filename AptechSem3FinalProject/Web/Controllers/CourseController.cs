@@ -24,12 +24,5 @@ namespace Web.Controllers
         {
             return View();
         }
-
-        public WebResponse video()
-        {
-            var externalRequest = (HttpWebRequest)WebRequest.Create("http://stackoverflow.com");
-            return (HttpWebResponse)externalRequest.GetResponse();
-        }
-
     }
 }
