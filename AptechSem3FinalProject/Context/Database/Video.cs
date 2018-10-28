@@ -21,7 +21,6 @@ namespace Context.Database
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> Status { get; set; }
         public int LectureId { get; set; }
-        public int CourseId { get; set; }
     
         public virtual Lecture Lecture { get; set; }
     }

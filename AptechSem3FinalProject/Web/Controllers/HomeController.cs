@@ -21,7 +21,7 @@ namespace Web.Controllers
         {
            
             var a = _serviceUser.GetAll();
-            var u = _serviceUser.GetById(1);
+            var u = _serviceUser.GetById(3);
             u.Address = "456";
             _serviceUser.Update(u);
            // _serviceUser.Save();

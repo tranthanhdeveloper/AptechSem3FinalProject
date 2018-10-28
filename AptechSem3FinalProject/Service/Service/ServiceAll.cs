@@ -19,5 +19,4 @@ namespace Service.Service
         {
         }
     }
-    
 }
