@@ -35,7 +35,7 @@
           <Property Name="Comment" Type="varchar" MaxLength="500" />
           <Property Name="Image" Type="varchar" MaxLength="250" />
           <Property Name="Price" Type="bigint" />
-          <Property Name="Status" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
@@ -397,7 +397,7 @@
           <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Int64" />
-          <Property Name="Status" Type="Int32" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="AptechSem3FinalProjectModel.FK_Course_Category" FromRole="Course" ToRole="Category" />
