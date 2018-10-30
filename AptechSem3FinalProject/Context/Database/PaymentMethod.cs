@@ -16,7 +16,7 @@ namespace Context.Database
     {
         public string Name { get; set; }
         public int PaymentId { get; set; }
-        public string Discription { get; set; }
+        public string Description { get; set; }
     
         public virtual Payment Payment { get; set; }
     }

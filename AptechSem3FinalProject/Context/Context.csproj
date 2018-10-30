@@ -53,6 +53,9 @@
     <Compile Include="Database\Account.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\Category.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\Course.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -80,10 +83,10 @@
     <Compile Include="Database\Payment.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Role.cs">
+    <Compile Include="Database\PaymentMethod.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\sysdiagram.cs">
+    <Compile Include="Database\Role.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\User.cs">
