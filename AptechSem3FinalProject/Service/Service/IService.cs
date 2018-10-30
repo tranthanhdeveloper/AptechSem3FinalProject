@@ -21,6 +21,7 @@ namespace Service.Service
         void Delete(U u);
         U GetById(object id);
         IEnumerable<U> GetAll(Expression<Func<U, bool>> filter = null, Func<IQueryable<U>, IOrderedQueryable<U>> orderBy = null, string includeProperties = "");
+        
         void Save();
     }
 }

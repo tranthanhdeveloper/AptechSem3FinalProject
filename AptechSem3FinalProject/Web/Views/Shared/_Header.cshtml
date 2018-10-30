@@ -1,5 +1,6 @@
-﻿<header id="header" class="header-scrolled">
-    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "userLogoutForm"}))
+﻿@using AuthenticationManager = Web.Helper.Sercurity.AuthenticationManager
+<header id="header" class="header-scrolled">
+    @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new {id = "userLogoutForm"}))
     {
         @Html.AntiForgeryToken()
     }
@@ -34,7 +35,7 @@
                     </li>
                     @{
                         ViewBag.Title = "Contact";
-                        if (SessionPersister.AccountInformation == null)
+                        if (!AuthenticationManager.IsAuthenticated)
                         {
                             <li>
                                 <a href="@Url.Action("Login", "Account")">Login</a>
@@ -61,7 +62,11 @@
                                         <a href="elements.html">Become an instructor</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:document.getElementById('userLogoutForm').submit()" id="userLogoutLink">Logout</a>
+                                        <a href="@Url.Action("ResetPassword","Account")">ResetPassword</a>
+                                    </li>
+                                    <li>
+                                        
+                                        <a href="@Url.Action("Logout", "Account")" id="userLogoutLink">Logout</a>
                                     </li>
                                 </ul>
                             </li>

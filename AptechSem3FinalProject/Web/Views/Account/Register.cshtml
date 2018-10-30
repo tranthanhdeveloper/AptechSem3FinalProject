@@ -1,4 +1,5 @@
-﻿@using Context.Database;
+﻿@using BotDetect.Web.Mvc
+@using Context.Database;
 @using Web.Models;
 
 @model RegisterModel
@@ -13,68 +14,77 @@
     @Scripts.Render("~/Scripts/Client/Register");
 
 }
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-   
-    <div class="col-md-6" style="margin: 0 auto; padding-top: 100px">
+
+    <div class="col-md-6" style="margin: auto; padding-top: 100px">
         <div class="form-group col-md-8">
             <h4>Create a new account.</h4>
             <hr />
         </div>
-        
-        <div class="form-group">
-            @Html.ValidationSummary("", new {@class = "text-danger"})
+
+        <div class="form-group col-md-8">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.Name, new {@class = "col-md-4 control-label"})
+            @Html.LabelFor(m => m.Name, new { @class = "col-md-4 control-label" })
             <div class="col-md-8">
-                @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Phone, new {@class = "col-md-4 control-label"})
+            @Html.LabelFor(m => m.Phone, new { @class = "col-md-4 control-label" })
             <div class="col-md-8">
-                @Html.TextBoxFor(m => m.Phone, new {@class = "form-control"})
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Address, new {@class = "col-md-4 control-label"})
+            @Html.LabelFor(m => m.Address, new { @class = "col-md-4 control-label" })
             <div class="col-md-8">
-                @Html.TextBoxFor(m => m.Address, new {@class = "form-control"})
+                @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.BirthDay, new {@class = "col-md-4 control-label"})
+            @Html.LabelFor(m => m.BirthDay, new { @class = "col-md-4 control-label" })
             <div class="col-md-8">
-                <input name="BirthDay" value="@date" class="form-control"/>
+                <input name="BirthDay" value="@date" class="form-control" />
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.UserName, new {@class = "col-md-4 control-label"})
+            @Html.LabelFor(m => m.UserName, new { @class = "col-md-4 control-label" })
             <div class="col-md-8">
-                @Html.TextBoxFor(m => m.UserName, new {@class = "form-control"})
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.Password, new {@class = "col-md-4 control-label"})
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
             <div class="col-md-8">
-                @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.ConfirmPassword, new {@class = "col-md-4 control-label"})
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-4 control-label" })
             <div class="col-md-8">
-                @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control"})
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
             </div>
+        </div>
+        <div class="form-group col-md-8">
+            @{
+                MvcCaptcha registerCaptcha = new MvcCaptcha("registerCaptcha");
+            }
+            @Html.Captcha(registerCaptcha)
+            
+            @Html.TextBox("CaptchaCode", null, new { @class = "form-control" })
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="Register"/>
+                <input type="submit" class="btn btn-default" value="Register" />
             </div>
         </div>
     </div>

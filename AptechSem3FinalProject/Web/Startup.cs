@@ -19,7 +19,7 @@ namespace Web
         public void Configuration(IAppBuilder app)
         {
             ConfigAutofac(app);
-            ConfigureAuth(app);
+            //ConfigureAuth(app);
             
         }
 

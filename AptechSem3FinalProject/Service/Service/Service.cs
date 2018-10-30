@@ -12,6 +12,12 @@ namespace Service.Service
     {
         private IUow _uow;
         private IRepository<U> _repository;
+
+        public virtual string NameForFinding
+        {
+            get { return string.Empty; }
+        }
+
         public Service(IUow uow, IRepository<U> repository)
         {
             this._uow = uow;

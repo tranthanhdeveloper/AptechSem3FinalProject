@@ -7,6 +7,7 @@ namespace Web.Helper.Sercurity
 {
     public class AuthenticationManager
     {
+        public static bool IsAuthenticated => SessionPersister.AccountInformation != null;
         public static int AccountId => SessionPersister.AccountInformation.Id;
     }
 }
