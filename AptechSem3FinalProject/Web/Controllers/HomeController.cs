@@ -19,15 +19,12 @@ namespace Web.Controllers
         }
         public ActionResult Index()
         {
-           
             var a = _serviceUser.GetAll();
-            var u = _serviceUser.GetById(3);
+            var u = _serviceUser.GetById(1);
             u.Address = "456";
             _serviceUser.Update(u);
-           // _serviceUser.Save();
+            // _serviceUser.Save();
             return View();
-
-
         }
     }
 }

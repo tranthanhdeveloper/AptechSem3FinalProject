@@ -256,6 +256,7 @@
     <Content Include="Content\css\bootstrap\bootstrap-grid.css" />
     <Content Include="Content\css\bootstrap\bootstrap-reboot.css" />
     <Content Include="Content\css\bootstrap\bootstrap.css" />
+    <Content Include="Content\css\course-detail.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\jquery-ui.css" />
     <Content Include="Content\css\linearicons.css" />
