@@ -22,6 +22,17 @@ namespace Web.Helper.Sercurity
             _types = types;
         }
 
+        protected override bool AuthorizeCore(System.Web.HttpContextBase httpContext)
+        {
+            
+            if (_types != null)
+            {
+                return _types.Any(AuthenticationManager.Is) || AuthenticationManager.IsAdmin;
+            }
+           
+            return !AuthenticationManager.IsAuthenticated;
+        }
+
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
             if (filterContext.HttpContext.Request.IsAuthenticated)
