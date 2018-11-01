@@ -47,6 +47,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=4.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.4.2.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.DependencyCollector, Version=2.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.8.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
     </Reference>
@@ -114,6 +126,9 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -122,6 +137,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -203,10 +222,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\VideoMediaController.cs" />
+    <Compile Include="Controllers\MediaController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,8 +237,10 @@
     <Compile Include="Helper\Sercurity\SessionPersister.cs" />
     <Compile Include="Helper\SessionContrants.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CourseViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Mapping\CourseProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
@@ -237,6 +261,7 @@
     <Content Include="Content\css\bootstrap\bootstrap-grid.css" />
     <Content Include="Content\css\bootstrap\bootstrap-reboot.css" />
     <Content Include="Content\css\bootstrap\bootstrap.css" />
+    <Content Include="Content\css\course-detail.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\jquery-ui.css" />
     <Content Include="Content\css\linearicons.css" />
@@ -287,6 +312,24 @@
     <Content Include="img\blog\prev.jpg" />
     <Content Include="img\blog\s-img.jpg" />
     <Content Include="img\blog\user-info.png" />
+    <Content Include="img\courses\courseImage1.jpg" />
+    <Content Include="img\courses\courseImage10.jpg" />
+    <Content Include="img\courses\courseImage11.jpg" />
+    <Content Include="img\courses\courseImage12.jpg" />
+    <Content Include="img\courses\courseImage13.jpg" />
+    <Content Include="img\courses\courseImage14.jpg" />
+    <Content Include="img\courses\courseImage15.jpg" />
+    <Content Include="img\courses\courseImage16.jpg" />
+    <Content Include="img\courses\courseImage17.jpg" />
+    <Content Include="img\courses\courseImage18.jpg" />
+    <Content Include="img\courses\courseImage2.jpg" />
+    <Content Include="img\courses\courseImage3.jpg" />
+    <Content Include="img\courses\courseImage4.jpg" />
+    <Content Include="img\courses\courseImage5.jpg" />
+    <Content Include="img\courses\courseImage6.jpg" />
+    <Content Include="img\courses\courseImage7.jpg" />
+    <Content Include="img\courses\courseImage8.jpg" />
+    <Content Include="img\courses\courseImage9.jpg" />
     <Content Include="img\cta-bg.jpg" />
     <Content Include="img\e1.jpg" />
     <Content Include="img\e2.jpg" />
@@ -567,6 +610,11 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\WebCustom.config" />
+    <Content Include="Views\Course\CourseDetail.cshtml" />
+    <Content Include="Views\Course\CoursePlay.cshtml" />
+    <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\Payment\PaymentPaypalFailure.cshtml" />
+    <Content Include="Views\Payment\PaymentPaypalSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -584,6 +632,10 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{21059006-9a3d-44f1-a414-835fb7b4b97c}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{5a36edf5-9d3c-4c19-a5b6-210c8b8295ef}</Project>
+      <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

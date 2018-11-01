@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Context.Database;
 
@@ -63,8 +64,27 @@ namespace Web.Models
         public bool RememberMe { get; set; }
     }
 
-    public class AccountModel
+    public class RegisterModel
     {
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "BirthDay")]
+        [DataType(DataType.DateTime)]
+        public DateTime BirthDay { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Phone")]
+        public string Phone { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "UserName")]

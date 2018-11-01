@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "CoursePlay";
+}
+<section class="course-details-area pt-120">
+    <div class="container-fluid">
+        <div class="row row-eq-height">
+            <div class="col-lg-8 col-sm-12 left-contents">
+                <div id="videoPlayerSection">
+                    <video crossorigin playsinline data-plyr-config='{ "title": "This is an example video", "ratio": "16:9"}' id="player">
+                        <source src="/api/media?f=demo.mp4" type="video/mp4" size="1080">
+                        @*<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4" size="720">
+                        <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4" type="video/mp4" size="1080">
+                        <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1440p.mp4" type="video/mp4" size="1440">*@
+                        <track kind="captions" label="English" srclang="en" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt" default>
+                        <track kind="captions" label="Français" srclang="fr" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt">
+                        @*<a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download>Download</a>*@
+                    </video>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-12 col-md-12 right-contents">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tableOfContent" aria-controls="tableOfContent" role="tab" data-toggle="tab">Course outline</a></li>
+                        <li role="presentation"><a href="#courseDescription" aria-controls="courseDescription" role="tab" data-toggle="tab">Description</a></li>
+                        <li role="presentation"><a href="#courseDisscuss" aria-controls="courseDisscuss" role="tab" data-toggle="tab">Discussion</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="tableOfContent">
+                            <div>
+                                <div class="clearfix"></div>
+                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingModule1">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseModule1" aria-expanded="true"
+                                                   aria-controls="collapseOne">
+                                                    Course module 1
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseModule1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseModule1">
+                                            <div class="panel-body">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">Item 1</li>
+                                                    <li class="list-group-item">Item 2</li>
+                                                    <li class="list-group-item">Item 3</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingModule2">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseModule2" aria-expanded="true" aria-controls="collapseModule2">
+                                                    Course module 2
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseModule2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseModule2">
+                                            <div class="panel-body">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">Item 1</li>
+                                                    <li class="list-group-item">Item 2</li>
+                                                    <li class="list-group-item">Item 3</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingModule3">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseModule3" aria-expanded="true" aria-controls="collapseModule3">
+                                                    Course module 3
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseModule3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseModule3">
+                                            <div class="panel-body">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">Item 1</li>
+                                                    <li class="list-group-item">Item 2</li>
+                                                    <li class="list-group-item">Item 3</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="courseDescription">
+                            <div class="clearfix"></div>
+                            <p class="">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="courseDisscuss">
+                            <div id="disqus_thread"></div>
+                            <script>
+									(function() { // DON'T EDIT BELOW THIS LINE
+									var d = document, s = d.createElement('script');
+									s.src = 'https://aptechsem3finalproject.disqus.com/embed.js';
+									s.setAttribute('data-timestamp', +new Date());
+									(d.head || d.body).appendChild(s);
+									})();
+                            </script>
+                            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>

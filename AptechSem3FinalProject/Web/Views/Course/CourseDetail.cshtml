@@ -1,0 +1,237 @@
+﻿@model Web.Models.CourseDetailViewModel
+@{
+    ViewBag.Title = "Course Detail";
+}
+
+<section class="course-details-area pt-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 left-contents">
+                <div class="main-image">
+                    <img class="img-fluid" src="@Url.Content("~/img/courses/"+Model.CourseListItemViewModel.Image)" alt="">
+                </div>
+                <div class="jq-tab-wrapper" id="horizontalTab">
+                    <div class="jq-tab-menu">
+                        <div class="jq-tab-title active" data-tab="1">Objectives</div>
+                        <div class="jq-tab-title" data-tab="2">Prerequisites</div>
+                        <div class="jq-tab-title" data-tab="3">Course Outline</div>
+                        <div class="jq-tab-title" data-tab="4">Comments</div>
+                        <div class="jq-tab-title" data-tab="5">Reviews</div>
+                    </div>
+                    <div class="jq-tab-content-wrapper">
+                    <div class="jq-tab-content active" data-tab="1">
+                        @Model.CourseListItemViewModel.Description
+                    </div>
+                        <div class="jq-tab-content" data-tab="2">
+                            @Model.CourseListItemViewModel.Description
+                        </div>
+                        <div class="jq-tab-content" data-tab="3">
+                            <ul class="course-list">
+                                @{
+                                    foreach (var courseOutline in Model.CourseOutline)
+                                    {
+                                        <li class="justify-content-between d-flex">
+                                            <p>@courseOutline.Name</p>
+                                            <a class="primary-btn text-uppercase" href="#">View Details</a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        <div class="jq-tab-content comment-wrap" data-tab="4">
+                            <div id="disqus_thread"></div>
+                            <script>
+                                (function () { // DON'T EDIT BELOW THIS LINE
+                                    var d = document, s = d.createElement('script');
+                                    s.src = 'https://aptechsem3finalproject.disqus.com/embed.js';
+                                    s.setAttribute('data-timestamp', +new Date());
+                                    (d.head || d.body).appendChild(s);
+                                })();
+                            </script>
+                            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                        </div>
+                        <div class="jq-tab-content" data-tab="5">
+                            <div class="review-top row pt-40">
+                                <div class="col-lg-3">
+                                    <div class="avg-review">
+                                        Average <br>
+                                        <span>5.0</span> <br>
+                                        (3 Ratings)
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <h4 class="mb-20">Provide Your Rating</h4>
+                                    <div class="d-flex flex-row reviews">
+                                        <span>Quality</span>
+                                        <div class="star">
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <span>Outstanding</span>
+                                    </div>
+                                    <div class="d-flex flex-row reviews">
+                                        <span>Puncuality</span>
+                                        <div class="star">
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <span>Outstanding</span>
+                                    </div>
+                                    <div class="d-flex flex-row reviews">
+                                        <span>Quality</span>
+                                        <div class="star">
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <span>Outstanding</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feedeback">
+                                <h4 class="pb-20">Your Feedback</h4>
+                                <textarea name="feedback" class="form-control" cols="10" rows="10"></textarea>
+                                <a href="#" class="mt-20 primary-btn text-right text-uppercase">Submit</a>
+                            </div>
+                            <div class="comments-area mb-30">
+                                <div class="comment-list">
+                                    <div class="single-comment single-reviews justify-content-between d-flex">
+                                        <div class="user justify-content-between d-flex">
+                                            <div class="thumb">
+                                                <img src="@Url.Content("~/img/blog/c1.jpg")" alt="">
+                                            </div>
+                                            <div class="desc">
+                                                <h5>
+                                                    <a href="#">Emilly Blunt</a>
+                                                    <div class="star">
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                    </div>
+                                                </h5>
+                                                <p class="comment">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ut sed, dolorum asperiores perspiciatis provident, odit maxime doloremque aliquam.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comment-list">
+                                    <div class="single-comment single-reviews justify-content-between d-flex">
+                                        <div class="user justify-content-between d-flex">
+                                            <div class="thumb">
+                                                <img src="@Url.Content("~/img/blog/c2.jpg")" alt="">
+                                            </div>
+                                            <div class="desc">
+                                                <h5>
+                                                    <a href="#">Elsie Cunningham</a>
+                                                    <div class="star">
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                    </div>
+                                                </h5>
+                                                <p class="comment">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ut sed, dolorum asperiores perspiciatis provident, odit maxime doloremque aliquam.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comment-list">
+                                    <div class="single-comment single-reviews justify-content-between d-flex">
+                                        <div class="user justify-content-between d-flex">
+                                            <div class="thumb">
+                                                <img src="@Url.Content("~/img/blog/c3.jpg")" alt="">
+                                            </div>
+                                            <div class="desc">
+                                                <h5>
+                                                    <a href="#">Maria Luna</a>
+                                                    <div class="star">
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                    </div>
+                                                </h5>
+                                                <p class="comment">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ut sed, dolorum asperiores perspiciatis provident, odit maxime doloremque aliquam.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comment-list">
+                                    <div class="single-comment single-reviews justify-content-between d-flex">
+                                        <div class="user justify-content-between d-flex">
+                                            <div class="thumb">
+                                                <img src="@Url.Content("~/img/blog/c4.jpg")" alt="">
+                                            </div>
+                                            <div class="desc">
+                                                <h5>
+                                                    <a href="#">Maria Luna</a>
+                                                    <div class="star">
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                    </div>
+                                                </h5>
+                                                <p class="comment">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ut sed, dolorum asperiores perspiciatis provident, odit maxime doloremque aliquam.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 right-contents">
+                <ul>
+                    <li>
+                        <a class="justify-content-between d-flex" href="#">
+                            <p>Trainer’s Name</p>
+                            <span class="or">@Model.Author.Name</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="justify-content-between d-flex" href="#">
+                            <p>Course Fee </p>
+                            <span>$@Model.CourseListItemViewModel.Price</span>
+                        </a>
+                    </li>
+                    @*<li>
+                        <a class="justify-content-between d-flex" href="#">
+                            <p>Available Seats </p>
+                            <span>15</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="justify-content-between d-flex" href="#">
+                            <p>Schedule </p>
+                            <span>2.00 pm to 4.00 pm</span>
+                        </a>
+                    </li>*@
+                </ul>
+                <a href="#" class="primary-btn text-uppercase">Enroll the course</a>
+            </div>
+        </div>
+    </div>
+</section>
