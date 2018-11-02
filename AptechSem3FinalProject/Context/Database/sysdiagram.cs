@@ -12,12 +12,12 @@ namespace Context.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class PaymentMethod
+    public partial class sysdiagram
     {
-        public string Name { get; set; }
-        public int PaymentId { get; set; }
-        public string Discription { get; set; }
-    
-        public virtual Payment Payment { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

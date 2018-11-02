@@ -90,15 +90,12 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\PaymentMethod.cs">
-<<<<<<< HEAD
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Role.cs">
-=======
->>>>>>> master
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Role.cs">
+    <Compile Include="Database\sysdiagram.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\User.cs">
@@ -125,15 +122,13 @@
     <None Include="Database\Database.edmx.diagram">
       <DependentUpon>Database.edmx</DependentUpon>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-<<<<<<< HEAD
-=======
-  <ItemGroup />
->>>>>>> master
   <ItemGroup>
     <Content Include="Database\Database.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

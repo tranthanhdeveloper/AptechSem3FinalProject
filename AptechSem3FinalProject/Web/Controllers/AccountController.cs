@@ -8,7 +8,6 @@ using System.Web.Configuration;
 using System.Web.Mvc;
 using BotDetect.Web.Mvc;
 using Context.Database;
-using Context.Repository;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;

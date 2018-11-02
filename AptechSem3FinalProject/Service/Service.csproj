@@ -55,12 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
-=======
+
     <Compile Include="Service\CourseService.cs" />
     <Compile Include="Service\ICourseService.cs" />
     <Compile Include="Service\ILectureService.cs" />
->>>>>>> master
+
     <Compile Include="Service\IService.cs" />
     <Compile Include="Service\LectureService.cs" />
     <Compile Include="Service\Payment\PaypalPaymentService.cs" />

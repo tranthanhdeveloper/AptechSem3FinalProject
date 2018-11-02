@@ -47,29 +47,29 @@ namespace Service.Service
     }
 
 
-    public interface ICourseService : IService<Course> 
-    {
+    //public interface ICourseService : IService<Course> 
+    //{
 
-    }
+    //}
 
-    public class CourseService : Service<Course>, ICourseService
-    {
-        public CourseService(IUow uow, IRepository<Course> repository) : base(uow, repository)
-        {
-        }
-    }
+    //public class CourseService : Service<Course>, ICourseService
+    //{
+    //    public CourseService(IUow uow, IRepository<Course> repository) : base(uow, repository)
+    //    {
+    //    }
+    //}
 
-    public interface ILectureService : IService<Lecture> 
-    {
+    //public interface ILectureService : IService<Lecture> 
+    //{
 
-    }
+    //}
 
-    public class LectureService : Service<Lecture>, ILectureService
-    {
-        public LectureService(IUow uow, IRepository<Lecture> repository) : base(uow, repository)
-        {
-        }
-    }
+    //public class LectureService : Service<Lecture>, ILectureService
+    //{
+    //    public LectureService(IUow uow, IRepository<Lecture> repository) : base(uow, repository)
+    //    {
+    //    }
+    //}
 
     public interface IOrderService : IService<Order> 
     {
@@ -84,14 +84,14 @@ namespace Service.Service
     }
 
 
-    public interface IPaymentService : IService<Payment>
+    public interface IPaymentService : IService<PayPal.Api.Payment>
     {
 
     }
 
-    public class PaymentService : Service<Payment>, IPaymentService
+    public class PaymentService : Service<PayPal.Api.Payment>, IPaymentService
     {
-        public PaymentService(IUow uow, IRepository<Payment> repository) : base(uow, repository)
+        public PaymentService(IUow uow, IRepository<PayPal.Api.Payment> repository) : base(uow, repository)
         {
         }
     }
