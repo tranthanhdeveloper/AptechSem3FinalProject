@@ -4,7 +4,11 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
+<<<<<<< HEAD
     <Schema Namespace="AptechSem3FinalProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+=======
+      <Schema Namespace="AptechSem3FinalProjectV2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+>>>>>>> master
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
@@ -15,28 +19,39 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="100" />
           <Property Name="Description" Type="varchar" MaxLength="1000" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="Comment" Type="varchar" MaxLength="500" />
           <Property Name="Image" Type="varchar" MaxLength="250" />
           <Property Name="Price" Type="bigint" />
-          <Property Name="Status" Type="int" />
-          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Lecture">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="CourseId" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="100" />
-          <Property Name="Status" Type="int" />
           <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -65,8 +80,10 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="PaymentStatus" Type="int" />
           <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="PaymentMethod" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PaymentMethod">
+<<<<<<< HEAD
           <Key>
             <PropertyRef Name="PaymentId" />
           </Key>
@@ -75,22 +92,22 @@
           <Property Name="Discription" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Role">
+=======
+>>>>>>> master
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Role">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="varchar" MaxLength="50" />
-          <Property Name="Discription" Type="varchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -114,6 +131,7 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="Status" Type="int" />
           <Property Name="LectureId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Account_Role">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
@@ -136,6 +154,18 @@
             </Principal>
             <Dependent Role="Account">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -211,6 +241,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+<<<<<<< HEAD
         <Association Name="FK_PaymentMethod_Payment">
           <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
           <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="0..1" />
@@ -220,6 +251,17 @@
             </Principal>
             <Dependent Role="PaymentMethod">
               <PropertyRef Name="PaymentId" />
+=======
+        <Association Name="FK_Payment_PaymentMethod">
+          <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PaymentMethod" />
+>>>>>>> master
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -229,14 +271,17 @@
           <ReferentialConstraint>
             <Principal Role="Lecture">
               <PropertyRef Name="Id" />
+              <PropertyRef Name="CourseId" />
             </Principal>
             <Dependent Role="Video">
               <PropertyRef Name="LectureId" />
+              <PropertyRef Name="CourseId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AptechSem3FinalProjectModelStoreContainer">
+        <EntityContainer Name="AptechSem3FinalProjectV2ModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lecture" EntityType="Self.Lecture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
@@ -244,7 +289,6 @@
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentMethod" EntityType="Self.PaymentMethod" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Video" EntityType="Self.Video" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Account_Role" Association="Self.FK_Account_Role">
@@ -254,6 +298,10 @@
           <AssociationSet Name="FK_Account_User" Association="Self.FK_Account_User">
             <End Role="User" EntitySet="User" />
             <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Category" Association="Self.FK_Course_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Course" EntitySet="Course" />
           </AssociationSet>
           <AssociationSet Name="FK_Course_User" Association="Self.FK_Course_User">
             <End Role="User" EntitySet="User" />
@@ -279,9 +327,15 @@
             <End Role="Order" EntitySet="Order" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
+<<<<<<< HEAD
           <AssociationSet Name="FK_PaymentMethod_Payment" Association="Self.FK_PaymentMethod_Payment">
             <End Role="Payment" EntitySet="Payment" />
             <End Role="PaymentMethod" EntitySet="PaymentMethod" />
+=======
+          <AssociationSet Name="FK_Payment_PaymentMethod" Association="Self.FK_Payment_PaymentMethod">
+            <End Role="PaymentMethod" EntitySet="PaymentMethod" />
+            <End Role="Payment" EntitySet="Payment" />
+>>>>>>> master
           </AssociationSet>
           <AssociationSet Name="FK_Video_Lecture" Association="Self.FK_Video_Lecture">
             <End Role="Lecture" EntitySet="Lecture" />
@@ -291,7 +345,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="AptechSem3FinalProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="AptechSem3FinalProjectV2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
@@ -304,18 +358,34 @@
           <NavigationProperty Name="Role" Relationship="Self.FK_Account_Role" FromRole="Account" ToRole="Role" />
           <NavigationProperty Name="User" Relationship="Self.FK_Account_User" FromRole="Account" ToRole="User" />
         </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_Course_Category" FromRole="Category" ToRole="Course" />
+        </EntityType>
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+<<<<<<< HEAD
+=======
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+>>>>>>> master
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Int64" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Course_Category" FromRole="Course" ToRole="Category" />
           <NavigationProperty Name="User" Relationship="Self.FK_Course_User" FromRole="Course" ToRole="User" />
           <NavigationProperty Name="Lectures" Relationship="Self.FK_Lecture_Course" FromRole="Course" ToRole="Lecture" />
           <NavigationProperty Name="Orders" Relationship="Self.OrderDetail" FromRole="Course" ToRole="Order" />
@@ -324,11 +394,12 @@
         <EntityType Name="Lecture">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="CourseId" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="Int32" />
           <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
           <NavigationProperty Name="Course" Relationship="Self.FK_Lecture_Course" FromRole="Lecture" ToRole="Course" />
           <NavigationProperty Name="Videos" Relationship="Self.FK_Video_Lecture" FromRole="Lecture" ToRole="Video" />
         </EntityType>
@@ -354,7 +425,9 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="PaymentStatus" Type="Int32" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="PaymentMethod" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Payment" FromRole="Payment" ToRole="Order" />
+<<<<<<< HEAD
           <NavigationProperty Name="PaymentMethod" Relationship="Self.FK_PaymentMethod_Payment" FromRole="Payment" ToRole="PaymentMethod" />
         </EntityType>
         <EntityType Name="PaymentMethod">
@@ -365,6 +438,18 @@
           <Property Name="PaymentId" Type="Int32" Nullable="false" />
           <Property Name="Discription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Payment" Relationship="Self.FK_PaymentMethod_Payment" FromRole="PaymentMethod" ToRole="Payment" />
+=======
+          <NavigationProperty Name="PaymentMethod1" Relationship="Self.FK_Payment_PaymentMethod" FromRole="Payment" ToRole="PaymentMethod" />
+        </EntityType>
+        <EntityType Name="PaymentMethod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_PaymentMethod" FromRole="PaymentMethod" ToRole="Payment" />
+>>>>>>> master
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -372,18 +457,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Discription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Role" FromRole="Role" ToRole="Account" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -410,6 +485,7 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" />
           <Property Name="LectureId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Lecture" Relationship="Self.FK_Video_Lecture" FromRole="Video" ToRole="Lecture" />
         </EntityType>
         <Association Name="FK_Account_Role">
@@ -433,6 +509,18 @@
             </Principal>
             <Dependent Role="Account">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -466,9 +554,11 @@
           <ReferentialConstraint>
             <Principal Role="Lecture">
               <PropertyRef Name="Id" />
+              <PropertyRef Name="CourseId" />
             </Principal>
             <Dependent Role="Video">
               <PropertyRef Name="LectureId" />
+              <PropertyRef Name="CourseId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -496,6 +586,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+<<<<<<< HEAD
         <Association Name="FK_PaymentMethod_Payment">
           <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
           <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="0..1" />
@@ -505,6 +596,17 @@
             </Principal>
             <Dependent Role="PaymentMethod">
               <PropertyRef Name="PaymentId" />
+=======
+        <Association Name="FK_Payment_PaymentMethod">
+          <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PaymentMethod" />
+>>>>>>> master
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -514,13 +616,13 @@
         </Association>
         <EntityContainer Name="AptechSem3FinalProjectEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Courses" EntityType="Self.Course" />
           <EntitySet Name="Lectures" EntityType="Self.Lecture" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Payments" EntityType="Self.Payment" />
           <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethod" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Videos" EntityType="Self.Video" />
           <AssociationSet Name="FK_Account_Role" Association="Self.FK_Account_Role">
@@ -530,6 +632,10 @@
           <AssociationSet Name="FK_Account_User" Association="Self.FK_Account_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Category" Association="Self.FK_Course_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Course" EntitySet="Courses" />
           </AssociationSet>
           <AssociationSet Name="FK_Course_User" Association="Self.FK_Course_User">
             <End Role="User" EntitySet="Users" />
@@ -551,9 +657,15 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
+<<<<<<< HEAD
           <AssociationSet Name="FK_PaymentMethod_Payment" Association="Self.FK_PaymentMethod_Payment">
             <End Role="Payment" EntitySet="Payments" />
             <End Role="PaymentMethod" EntitySet="PaymentMethods" />
+=======
+          <AssociationSet Name="FK_Payment_PaymentMethod" Association="Self.FK_Payment_PaymentMethod">
+            <End Role="PaymentMethod" EntitySet="PaymentMethods" />
+            <End Role="Payment" EntitySet="Payments" />
+>>>>>>> master
           </AssociationSet>
           <AssociationSet Name="OrderDetail" Association="Self.OrderDetail">
             <End Role="Course" EntitySet="Courses" />
@@ -565,9 +677,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AptechSem3FinalProjectModelStoreContainer" CdmEntityContainer="AptechSem3FinalProjectEntities">
+        <EntityContainerMapping StorageEntityContainer="AptechSem3FinalProjectV2ModelStoreContainer" CdmEntityContainer="AptechSem3FinalProjectEntities">
           <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="AptechSem3FinalProjectModel.Account">
+            <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.Account">
               <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -577,33 +689,48 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Courses">
-            <EntityTypeMapping TypeName="AptechSem3FinalProjectModel.Course">
+            <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.Course">
               <MappingFragment StoreEntitySet="Course">
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+<<<<<<< HEAD
+=======
+                <ScalarProperty Name="Description" ColumnName="Description" />
+>>>>>>> master
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Lectures">
-            <EntityTypeMapping TypeName="AptechSem3FinalProjectModel.Lecture">
+            <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.Lecture">
               <MappingFragment StoreEntitySet="Lecture">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="AptechSem3FinalProjectModel.Order">
+            <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.Order">
               <MappingFragment StoreEntitySet="Order">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -614,17 +741,19 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Payments">
-            <EntityTypeMapping TypeName="AptechSem3FinalProjectModel.Payment">
+            <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.Payment">
               <MappingFragment StoreEntitySet="Payment">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PaymentName" ColumnName="PaymentName" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PaymentMethods">
+<<<<<<< HEAD
             <EntityTypeMapping TypeName="AptechSem3FinalProjectModel.PaymentMethod">
               <MappingFragment StoreEntitySet="PaymentMethod">
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -636,25 +765,27 @@
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="AptechSem3FinalProjectModel.Role">
               <MappingFragment StoreEntitySet="Role">
+=======
+            <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.PaymentMethod">
+              <MappingFragment StoreEntitySet="PaymentMethod">
+>>>>>>> master
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="AptechSem3FinalProjectModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="AptechSem3FinalProjectModel.User">
+            <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -666,7 +797,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Videos">
-            <EntityTypeMapping TypeName="AptechSem3FinalProjectModel.Video">
+            <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.Video">
               <MappingFragment StoreEntitySet="Video">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ImageMain" ColumnName="ImageMain" />
@@ -675,10 +806,11 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="LectureId" ColumnName="LectureId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="OrderDetail" TypeName="AptechSem3FinalProjectModel.OrderDetail" StoreEntitySet="OrderDetail">
+          <AssociationSetMapping Name="OrderDetail" TypeName="AptechSem3FinalProjectV2Model.OrderDetail" StoreEntitySet="OrderDetail">
             <EndProperty Name="Course">
               <ScalarProperty Name="Id" ColumnName="CourseId" />
             </EndProperty>

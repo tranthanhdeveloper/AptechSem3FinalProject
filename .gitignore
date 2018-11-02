@@ -11,5 +11,7 @@ AptechSem3FinalProject/Context/bin
 AptechSem3FinalProject/Context/obj
 *.cache
 *.force
-AptechSem3FinalProject/Context/obj/Debug/Context.csprojAssemblyReference.cache
-/.vs
+/AptechSem3FinalProject/Api/bin
+/AptechSem3FinalProject/Service/bin/Debug
+/AptechSem3FinalProject/Api/obj/Release
+/AptechSem3FinalProject/Service/bin/Release

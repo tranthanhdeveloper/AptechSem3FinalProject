@@ -4299,12 +4299,229 @@ dl.toggle.time-line:before {
 }
 
 /* Course video player section */
-#videoPlayerSection{
-  margin: 10px 10px;
-  background: #111;
+left-contents .jq-tab-content-wrapper {
+  -webkit-box-flex: 4;
+  -ms-flex: 4;
+  flex: 4;
 }
 
+.left-contents .jq-tab-content {
+  display: none;
+  padding: 1em 1.8em;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+<<<<<<< HEAD
 /**/
 .user-logout-link {
     color: #f7631b !important;
 }
+=======
+.left-contents #verticalTab .jq-tab-content-wrapper {
+  border: 1px solid #eee;
+}
+
+.left-contents #horizontalTab .jq-tab-content-wrapper {
+  background: #f9f9ff;
+}
+
+.left-contents .jq-tab-content.active {
+  display: block;
+}
+
+@media (max-width: 413px) {
+  .left-contents .comment-wrap {
+    padding: 0px !important;
+  }
+}
+
+.left-contents .course-list li {
+  margin-bottom: 20px;
+}
+
+.left-contents .course-list li .primary-btn {
+  background: #fff;
+  color: #222;
+}
+
+.left-contents .course-list li .primary-btn:hover {
+  background: #f7631b;
+  color: #fff;
+}
+
+@media (max-width: 414px) {
+  .left-contents .course-list li {
+    font-size: 8px;
+  }
+}
+
+.left-contents .comments-area {
+  padding: 0px 20px;
+  margin-top: 50px;
+  background: transparent !important;
+  border: none !important;
+}
+
+@media (max-width: 414px) {
+  .left-contents .comments-area {
+    padding: 50px 8px;
+  }
+}
+
+.left-contents .comments-area h4 {
+  text-align: center;
+  margin-bottom: 50px;
+  font-weight: 600;
+}
+
+.left-contents .comments-area a {
+  color: #222;
+}
+
+.left-contents .comments-area .comment-list {
+  padding-bottom: 30px;
+}
+
+.left-contents .comments-area .comment-list:last-child {
+  padding-bottom: 0px;
+}
+
+.left-contents .comments-area .comment-list.left-padding {
+  padding-left: 25px;
+}
+
+@media (max-width: 414px) {
+  .left-contents .comments-area .comment-list .single-comment h5 {
+    font-size: 12px;
+  }
+}
+
+.left-contents .comments-area .comment-list .single-comment .date {
+  font-size: 11px;
+}
+
+.left-contents .comments-area .comment-list .single-comment .comment {
+  font-size: 10px;
+}
+
+.left-contents .comments-area .thumb {
+  margin-right: 20px;
+}
+
+.left-contents .comments-area .desc h5 {
+  font-weight: 600;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.left-contents .comments-area .desc h5:hover a {
+  color: #f7631b !important;
+}
+
+.left-contents .comments-area .date {
+  font-size: 13px;
+  color: #cccccc;
+}
+
+.left-contents .comments-area .comment {
+  color: #777777;
+  margin-bottom: 0px;
+}
+
+.left-contents .comments-area .btn-reply {
+  background-color: #fcfaff;
+  color: #222;
+  font-weight: 400;
+  padding: 8px 30px;
+  display: block;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.left-contents .comments-area .btn-reply:hover {
+  background: #f7631b;
+  color: #fff;
+}
+
+.left-contents .comment-form {
+  border: none;
+}
+
+.left-contents .star .checked {
+  color: #f7631b;
+}
+
+.left-contents .reviews span,
+.left-contents .reviews .star {
+  width: 25%;
+  margin-bottom: 10px;
+}
+
+.left-contents .avg-review {
+  background: #04091e;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 20px 0px;
+}
+
+.left-contents .avg-review span {
+  font-size: 18px;
+  color: #f7631b;
+}
+
+@media (max-width: 991px) {
+  .left-contents .avg-review {
+    margin-bottom: 20px;
+  }
+}
+
+.left-contents .single-reviews h5 {
+  display: inline-flex;
+}
+
+.left-contents .single-reviews h5 .star {
+  margin-left: 10px;
+}
+
+.right-contents ul li {
+  background: #f9f9ff;
+  padding: 10px 22px;
+  margin-bottom: 10px;
+}
+
+.right-contents ul li a {
+  color: #222;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.right-contents ul li a p {
+  margin-bottom: 0px;
+}
+
+.right-contents ul li .or {
+  color: #f7631b !important;
+}
+
+.right-contents .primary-btn {
+  margin-top: 10px;
+  width: 100%;
+  background: #222;
+  text-align: center;
+}
+
+@media (max-width: 991px) {
+  .right-contents {
+    margin-top: 30px;
+  }
+}
+
+>>>>>>> master

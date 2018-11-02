@@ -1,158 +1,54 @@
-﻿
+﻿@model Web.Models.CourseDetailViewModel
 @{
     ViewBag.Title = "Course Detail";
 }
 
-<section class="course-details-area pt-20">
+<section class="course-details-area pt-120">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 left-contents">
                 <div class="main-image">
-                    <img class="img-fluid" src="@Url.Content("~/img/m-img.jpg")" alt="">
+                    <img class="img-fluid" src="@Url.Content("~/img/courses/"+Model.CourseListItemViewModel.Image)" alt="">
                 </div>
                 <div class="jq-tab-wrapper" id="horizontalTab">
                     <div class="jq-tab-menu">
                         <div class="jq-tab-title active" data-tab="1">Objectives</div>
-                        <div class="jq-tab-title" data-tab="2">Eligibility</div>
+                        <div class="jq-tab-title" data-tab="2">Prerequisites</div>
                         <div class="jq-tab-title" data-tab="3">Course Outline</div>
                         <div class="jq-tab-title" data-tab="4">Comments</div>
                         <div class="jq-tab-title" data-tab="5">Reviews</div>
                     </div>
                     <div class="jq-tab-content-wrapper">
-                        <div class="jq-tab-content active" data-tab="1">
-                            When you enter into any new area of science, you almost always find yourself with a baffling new language of technical terms to learn before you can converse with the experts. This is certainly true in astronomy both in terms of terms that refer to the cosmos and terms that describe the tools of the trade, the most prevalent being the telescope.
-                            <br>
-                            <br>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
-                        </div>
+                    <div class="jq-tab-content active" data-tab="1">
+                        @Model.CourseListItemViewModel.Description
+                    </div>
                         <div class="jq-tab-content" data-tab="2">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
-                            <br>
-                            <br>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
+                            @Model.CourseListItemViewModel.Description
                         </div>
                         <div class="jq-tab-content" data-tab="3">
                             <ul class="course-list">
-                                <li class="justify-content-between d-flex">
-                                    <p>Introduction Lesson</p>
-                                    <a class="primary-btn text-uppercase" href="#">View Details</a>
-                                </li>
-                                <li class="justify-content-between d-flex">
-                                    <p>Basics of HTML</p>
-                                    <a class="primary-btn text-uppercase" href="#">View Details</a>
-                                </li>
-                                <li class="justify-content-between d-flex">
-                                    <p>Getting Know about HTML</p>
-                                    <a class="primary-btn text-uppercase" href="#">View Details</a>
-                                </li>
-                                <li class="justify-content-between d-flex">
-                                    <p>Tags and Attributes</p>
-                                    <a class="primary-btn text-uppercase" href="#">View Details</a>
-                                </li>
-                                <li class="justify-content-between d-flex">
-                                    <p>Basics of CSS</p>
-                                    <a class="primary-btn text-uppercase" href="#">View Details</a>
-                                </li>
-                                <li class="justify-content-between d-flex">
-                                    <p>Getting Familiar with CSS</p>
-                                    <a class="primary-btn text-uppercase" href="#">View Details</a>
-                                </li>
-                                <li class="justify-content-between d-flex">
-                                    <p>Introduction to Bootstrap</p>
-                                    <a class="primary-btn text-uppercase" href="#">View Details</a>
-                                </li>
-                                <li class="justify-content-between d-flex">
-                                    <p>Responsive Design</p>
-                                    <a class="primary-btn text-uppercase" href="#">View Details</a>
-                                </li>
-                                <li class="justify-content-between d-flex">
-                                    <p>Canvas in HTML 5</p>
-                                    <a class="primary-btn text-uppercase" href="#">View Details</a>
-                                </li>
-
+                                @{
+                                    foreach (var courseOutline in Model.CourseOutline)
+                                    {
+                                        <li class="justify-content-between d-flex">
+                                            <p>@courseOutline.Name</p>
+                                            <a class="primary-btn text-uppercase" href="#">View Details</a>
+                                        </li>
+                                    }
+                                }
                             </ul>
                         </div>
                         <div class="jq-tab-content comment-wrap" data-tab="4">
-                            <div class="comments-area">
-                                <h4>05 Comments</h4>
-                                <div class="comment-list">
-                                    <div class="single-comment justify-content-between d-flex">
-                                        <div class="user justify-content-between d-flex">
-                                            <div class="thumb">
-                                                <img src="@Url.Content("~/img/blog/c1.jpg")" alt="">
-                                            </div>
-                                            <div class="desc">
-                                                <h5><a href="#">Emilly Blunt</a></h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
-                                                <p class="comment">
-                                                    Never say goodbye till the end comes!
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="reply-btn">
-                                            <a href="" class="btn-reply text-uppercase">reply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="comment-list left-padding">
-                                    <div class="single-comment justify-content-between d-flex">
-                                        <div class="user justify-content-between d-flex">
-                                            <div class="thumb">
-                                                <img src="@Url.Content("~/img/blog/c2.jpg")" alt="">
-                                            </div>
-                                            <div class="desc">
-                                                <h5><a href="#">Elsie Cunningham</a></h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
-                                                <p class="comment">
-                                                    Never say goodbye till the end comes!
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="reply-btn">
-                                            <a href="" class="btn-reply text-uppercase">reply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="comment-list">
-                                    <div class="single-comment justify-content-between d-flex">
-                                        <div class="user justify-content-between d-flex">
-                                            <div class="thumb">
-                                                <img src="@Url.Content("~/img/blog/c4.jpg")" alt="">
-                                            </div>
-                                            <div class="desc">
-                                                <h5><a href="#">Maria Luna</a></h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
-                                                <p class="comment">
-                                                    Never say goodbye till the end comes!
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="reply-btn">
-                                            <a href="" class="btn-reply text-uppercase">reply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="comment-form">
-                                <h4>Leave a Comment</h4>
-                                <form>
-                                    <div class="form-group form-inline">
-                                        <div class="form-group col-lg-6 col-md-12 name">
-                                            <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
-                                        </div>
-                                        <div class="form-group col-lg-6 col-md-12 email">
-                                            <input type="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-                                    </div>
-                                    <a href="#" class="mt-40 text-uppercase genric-btn primary text-center">Post Comment</a>
-                                </form>
-                            </div>
+                            <div id="disqus_thread"></div>
+                            <script>
+                                (function () { // DON'T EDIT BELOW THIS LINE
+                                    var d = document, s = d.createElement('script');
+                                    s.src = 'https://aptechsem3finalproject.disqus.com/embed.js';
+                                    s.setAttribute('data-timestamp', +new Date());
+                                    (d.head || d.body).appendChild(s);
+                                })();
+                            </script>
+                            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                         </div>
                         <div class="jq-tab-content" data-tab="5">
                             <div class="review-top row pt-40">
@@ -210,7 +106,7 @@
                                     <div class="single-comment single-reviews justify-content-between d-flex">
                                         <div class="user justify-content-between d-flex">
                                             <div class="thumb">
-                                                <img src="img/blog/c1.jpg" alt="">
+                                                <img src="@Url.Content("~/img/blog/c1.jpg")" alt="">
                                             </div>
                                             <div class="desc">
                                                 <h5>
@@ -234,7 +130,7 @@
                                     <div class="single-comment single-reviews justify-content-between d-flex">
                                         <div class="user justify-content-between d-flex">
                                             <div class="thumb">
-                                                <img src="img/blog/c2.jpg" alt="">
+                                                <img src="@Url.Content("~/img/blog/c2.jpg")" alt="">
                                             </div>
                                             <div class="desc">
                                                 <h5>
@@ -258,7 +154,7 @@
                                     <div class="single-comment single-reviews justify-content-between d-flex">
                                         <div class="user justify-content-between d-flex">
                                             <div class="thumb">
-                                                <img src="img/blog/c3.jpg" alt="">
+                                                <img src="@Url.Content("~/img/blog/c3.jpg")" alt="">
                                             </div>
                                             <div class="desc">
                                                 <h5>
@@ -282,7 +178,7 @@
                                     <div class="single-comment single-reviews justify-content-between d-flex">
                                         <div class="user justify-content-between d-flex">
                                             <div class="thumb">
-                                                <img src="img/blog/c4.jpg" alt="">
+                                                <img src="@Url.Content("~/img/blog/c4.jpg")" alt="">
                                             </div>
                                             <div class="desc">
                                                 <h5>
@@ -312,16 +208,16 @@
                     <li>
                         <a class="justify-content-between d-flex" href="#">
                             <p>Trainer’s Name</p>
-                            <span class="or">George Mathews</span>
+                            <span class="or">@Model.Author.Name</span>
                         </a>
                     </li>
                     <li>
                         <a class="justify-content-between d-flex" href="#">
                             <p>Course Fee </p>
-                            <span>$230</span>
+                            <span>$@Model.CourseListItemViewModel.Price</span>
                         </a>
                     </li>
-                    <li>
+                    @*<li>
                         <a class="justify-content-between d-flex" href="#">
                             <p>Available Seats </p>
                             <span>15</span>
@@ -332,7 +228,7 @@
                             <p>Schedule </p>
                             <span>2.00 pm to 4.00 pm</span>
                         </a>
-                    </li>
+                    </li>*@
                 </ul>
                 <a href="#" class="primary-btn text-uppercase">Enroll the course</a>
             </div>

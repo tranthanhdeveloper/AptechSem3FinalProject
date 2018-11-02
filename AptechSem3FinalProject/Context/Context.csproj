@@ -37,6 +37,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -51,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\Account.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Category.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Course.cs">
@@ -81,12 +90,15 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\PaymentMethod.cs">
+<<<<<<< HEAD
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Role.cs">
+=======
+>>>>>>> master
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\sysdiagram.cs">
+    <Compile Include="Database\Role.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\User.cs">
@@ -118,6 +130,10 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+<<<<<<< HEAD
+=======
+  <ItemGroup />
+>>>>>>> master
   <ItemGroup>
     <Content Include="Database\Database.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
