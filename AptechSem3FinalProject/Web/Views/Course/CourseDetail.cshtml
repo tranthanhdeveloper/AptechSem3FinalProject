@@ -214,7 +214,17 @@
                     <li>
                         <a class="justify-content-between d-flex" href="#">
                             <p>Course Fee </p>
-                            <span>$@Model.CourseListItemViewModel.Price</span>
+                            @{
+                                if (Model.CourseListItemViewModel.Price == 0)
+                                {
+                                    <span>Free</span>
+                                }
+                                else
+                                {
+                                    <span>$@Model.CourseListItemViewModel.Price</span>
+                                }
+                            }
+
                         </a>
                     </li>
                     @*<li>
@@ -230,7 +240,17 @@
                         </a>
                     </li>*@
                 </ul>
-                <a href="#" class="primary-btn text-uppercase">Enroll the course</a>
+                @{
+                    if (Model.CourseListItemViewModel.Price == 0)
+                    {
+                        <a href="@Url.Action("CoursePlay", "Course", new {id = Model.CourseListItemViewModel.Id})" class="primary-btn text-uppercase">Enroll the course</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("PaymentWithPaypal", "Payment", new {id = Model.CourseListItemViewModel.Id})" class="primary-btn text-uppercase">Enroll the course</a>
+                    }
+                }
+                
             </div>
         </div>
     </div>

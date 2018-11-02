@@ -11,15 +11,15 @@ namespace Web.Controllers
     public class PaymentController : Controller
     {
         private string payorId;
-        private readonly ICourseService _courseService;
-        private readonly PaypalPaymentService _paypalPaymentService = new PaypalPaymentService();
-        private readonly APIContext _apiContext = PaypalConfiguration.GetAPIContext();
+        private ICourseService _courseService;
+        private PaypalPaymentService _paypalPaymentService = new PaypalPaymentService();
+        private APIContext _apiContext = PaypalConfiguration.GetAPIContext();
         public PaymentController(ICourseService courseService)
         {
-            this._courseService = courseService;
+            _courseService = courseService;
         }        
 
-        public ActionResult PaymentWithPaypal(Int32 id, string cancel = null)
+        public ActionResult PaymentWithPaypal(int id, string cancel = null)
         {            
             try
             {                
@@ -39,7 +39,7 @@ namespace Web.Controllers
                 Session.Add(guid, createdPayment.id);
                 return Redirect(paypalRedirectUrl);
             }
-            catch (Exception)
+            catch (Exception exception)
             {
                 return View("PaymentPaypalFailure");
             }

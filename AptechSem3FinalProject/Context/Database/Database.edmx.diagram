@@ -14,17 +14,17 @@
         <EntityTypeShape EntityType="AptechSem3FinalProjectV2Model.PaymentMethod" Width="1.5" PointX="3.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AptechSem3FinalProjectV2Model.Role" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="AptechSem3FinalProjectV2Model.User" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AptechSem3FinalProjectV2Model.Video" Width="1.5" PointX="10.5" PointY="4.625" IsExpanded="true" />
         <AssociationConnector Association="AptechSem3FinalProjectV2Model.FK_Account_Role" ManuallyRouted="false" />
         <AssociationConnector Association="AptechSem3FinalProjectV2Model.FK_Account_User" ManuallyRouted="false" />
         <AssociationConnector Association="AptechSem3FinalProjectV2Model.FK_Course_Category" ManuallyRouted="false" />
         <AssociationConnector Association="AptechSem3FinalProjectV2Model.FK_Course_User" ManuallyRouted="false" />
         <AssociationConnector Association="AptechSem3FinalProjectV2Model.FK_Lecture_Course" ManuallyRouted="false" />
-        <AssociationConnector Association="AptechSem3FinalProjectV2Model.FK_Video_Lecture" ManuallyRouted="false" />
         <AssociationConnector Association="AptechSem3FinalProjectV2Model.FK_Order_Payment" ManuallyRouted="false" />
         <AssociationConnector Association="AptechSem3FinalProjectV2Model.FK_Order_User" ManuallyRouted="false" />
         <AssociationConnector Association="AptechSem3FinalProjectV2Model.FK_Payment_PaymentMethod" ManuallyRouted="false" />
         <AssociationConnector Association="AptechSem3FinalProjectV2Model.OrderDetail" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AptechSem3FinalProjectV2Model.Video" Width="1.5" PointX="10.5" PointY="4.625" />
+        <AssociationConnector Association="AptechSem3FinalProjectV2Model.FK_Video_Lecture" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -7,7 +7,7 @@ namespace Web.Models.Mapping
     {
         public CourseProfile()
         {
-            CreateMap<CourseListItemViewModel, Course>();
+            CreateMap<CourseItemViewModel, Course>();
             CreateMap<CourseOutlineViewModel, Lecture>();
         }
     }

@@ -6,7 +6,7 @@ using Context.Database;
 
 namespace Web.Models
 {
-    public class CourseListItemViewModel
+    public class CourseItemViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -17,15 +17,16 @@ namespace Web.Models
 
     public class ShowCoursesViewModel
     {
-        public List<CourseListItemViewModel> PopularCourses { get; set; }
-        public List<CourseListItemViewModel> LastedCourses { get; set; }
+        public List<CourseItemViewModel> PopularCourses { get; set; }
+        public List<CourseItemViewModel> LastedCourses { get; set; }
     }
 
     public class CourseDetailViewModel
     {
-        public  CourseListItemViewModel CourseListItemViewModel { get; set; }
+        public CourseItemViewModel CourseListItemViewModel { get; set; }
         public virtual User Author { get; set; }
         public virtual List<CourseOutlineViewModel> CourseOutline { get; set; }
+        public List<CourseItemViewModel> RelatedCourses { get; set; }
     }
 
     public class CourseOutlineViewModel
@@ -34,8 +35,22 @@ namespace Web.Models
         public string Name { get; set; }
     }
 
+    public class CourseLessonViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public bool IsPreview { get; set; }
+    }
+    public class CourseModuleViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public List<CourseLessonViewModel> CourseLessonViewModels { get; set; }
+    }
+
     public class CoursePlayViewModel
     {
-
+        public CourseItemViewModel CourseItemViewModel { get; set; }
+        public List<CourseModuleViewModel> CourseModuleViewModels{ get; set; }
     }
 }

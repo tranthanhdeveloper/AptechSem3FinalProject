@@ -34,8 +34,8 @@ namespace Web.Controllers
             var showCoursesViewModel = new ShowCoursesViewModel();
             var popularCourses = _courseService.GetAll();
             var lastedCourses = _courseService.GetLastedCourse();
-            showCoursesViewModel.PopularCourses = Mapper.Map<List<CourseListItemViewModel>>(popularCourses);
-            showCoursesViewModel.LastedCourses = Mapper.Map<List<CourseListItemViewModel>>(lastedCourses);
+            showCoursesViewModel.PopularCourses = Mapper.Map<List<CourseItemViewModel>>(popularCourses);
+            showCoursesViewModel.LastedCourses = Mapper.Map<List<CourseItemViewModel>>(lastedCourses);
             return View(showCoursesViewModel);
         }
 
@@ -43,7 +43,7 @@ namespace Web.Controllers
         {
             var courseDetailViewModel = new CourseDetailViewModel();
             var course = _courseService.GetById(id);
-            courseDetailViewModel.CourseListItemViewModel = Mapper.Map<CourseListItemViewModel>(course);
+            courseDetailViewModel.CourseListItemViewModel = Mapper.Map<CourseItemViewModel>(course);
             courseDetailViewModel.Author = _userService.GetById(course.UserId);
             courseDetailViewModel.CourseOutline = Mapper.Map< List<CourseOutlineViewModel>>(_lectureService.GetByCourseId(course.Id));
             return View(courseDetailViewModel);
@@ -51,6 +51,14 @@ namespace Web.Controllers
 
         public ActionResult CoursePlay(int id)
         {
+            var course = _courseService.GetById(id);
+            var modules = course.Lectures;
+            var videos = new List<Video>();
+            foreach (var module in modules)
+            {
+                videos.AddRange(module.Videos);
+            }
+            int videoCounter = videos.Count;
             return View();
         }
 

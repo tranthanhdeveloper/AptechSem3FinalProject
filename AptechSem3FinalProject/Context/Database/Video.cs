@@ -22,6 +22,7 @@ namespace Context.Database
         public Nullable<int> Status { get; set; }
         public int LectureId { get; set; }
         public int CourseId { get; set; }
+        public Nullable<byte> IsPreview { get; set; }
     
         public virtual Lecture Lecture { get; set; }
     }
