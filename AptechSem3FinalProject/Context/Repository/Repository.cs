@@ -134,4 +134,17 @@ namespace Context.Repository
 
         }
     }
+
+    public interface IVideoRepository : IRepository<Video>
+    {
+
+    }
+
+    public class VideoRepository : Repository<Video>, IVideoRepository
+    {
+        public VideoRepository(IDbFactory context) : base(context)
+        {
+
+        }
+    }
 }

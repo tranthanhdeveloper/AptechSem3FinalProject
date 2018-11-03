@@ -9,6 +9,7 @@ namespace Web.Models.Mapping
         {
             CreateMap<CourseItemViewModel, Course>();
             CreateMap<CourseOutlineViewModel, Lecture>();
+            CreateMap<CourseLessonViewModel, Video>();
         }
     }
 }

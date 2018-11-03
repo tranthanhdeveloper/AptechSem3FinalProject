@@ -23,7 +23,7 @@
         <AssociationConnector Association="AptechSem3FinalProjectV2Model.FK_Order_User" ManuallyRouted="false" />
         <AssociationConnector Association="AptechSem3FinalProjectV2Model.FK_Payment_PaymentMethod" ManuallyRouted="false" />
         <AssociationConnector Association="AptechSem3FinalProjectV2Model.OrderDetail" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="AptechSem3FinalProjectV2Model.Video" Width="1.5" PointX="10.5" PointY="4.625" />
+        <EntityTypeShape EntityType="AptechSem3FinalProjectV2Model.Video" Width="1.5" PointX="10.5" PointY="4.5" />
         <AssociationConnector Association="AptechSem3FinalProjectV2Model.FK_Video_Lecture" />
       </Diagram>
     </edmx:Diagrams>

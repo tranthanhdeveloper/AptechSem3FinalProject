@@ -110,14 +110,15 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ImageMain" Type="varchar" MaxLength="250" />
           <Property Name="Path" Type="varchar" MaxLength="250" />
-          <Property Name="TimeLimit" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
           <Property Name="Status" Type="int" />
           <Property Name="LectureId" Type="int" Nullable="false" />
           <Property Name="CourseId" Type="int" Nullable="false" />
-          <Property Name="IsPreview" Type="tinyint" />
+          <Property Name="IsPreview" Type="tinyint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="TimeLimit" Type="int" />
         </EntityType>
         <Association Name="FK_Account_Role">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
@@ -582,14 +583,15 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ImageMain" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Path" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="TimeLimit" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" />
           <Property Name="LectureId" Type="Int32" Nullable="false" />
           <Property Name="CourseId" Type="Int32" Nullable="false" />
-          <Property Name="IsPreview" Type="Byte" />
+          <Property Name="IsPreview" Type="Byte" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="TimeLimit" Type="Int32" />
           <NavigationProperty Name="Lecture" Relationship="AptechSem3FinalProjectV2Model.FK_Video_Lecture" FromRole="Video" ToRole="Lecture" />
         </EntityType>
         <Association Name="FK_Video_Lecture">
@@ -723,14 +725,15 @@
           <EntitySetMapping Name="Videos">
             <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.Video">
               <MappingFragment StoreEntitySet="Video">
+                <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="IsPreview" ColumnName="IsPreview" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
                 <ScalarProperty Name="LectureId" ColumnName="LectureId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
                 <ScalarProperty Name="Path" ColumnName="Path" />
                 <ScalarProperty Name="ImageMain" ColumnName="ImageMain" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
