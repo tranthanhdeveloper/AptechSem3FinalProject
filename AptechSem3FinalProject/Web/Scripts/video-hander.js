@@ -6,4 +6,4 @@ document.addEventListener('DOMContentLoaded', () => {
     function on(selector, type, callback) {
       document.querySelector(selector).addEventListener(type, callback, false);
     }
-});
+  });

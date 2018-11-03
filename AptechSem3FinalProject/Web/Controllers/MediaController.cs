@@ -10,22 +10,15 @@ using System.Net.Http.Headers;
 using System.Net.Mime;
 using System.Web.Configuration;
 using System.Web.Http;
-using Service.Service;
 
 namespace Web.Controllers
 {
     public class MediaController : ApiController
     {
-        private readonly IVideoService _videoService;
-        private const int ReadStreamBufferSize = 1024 * 1024;
-        private static readonly IReadOnlyDictionary<string, string> MimeNames;
-        private static readonly IReadOnlyCollection<char> InvalidFileNameChars;
-        private static readonly string InitialDirectory;
-
-        public MediaController(IVideoService videoService)
-        {
-            _videoService = videoService;
-        }
+        public const int ReadStreamBufferSize = 1024 * 1024;
+        public static readonly IReadOnlyDictionary<string, string> MimeNames;
+        public static readonly IReadOnlyCollection<char> InvalidFileNameChars;
+        public static readonly string InitialDirectory;
 
         static MediaController()
         {
@@ -47,16 +40,14 @@ namespace Web.Controllers
 
         #region Actions method
 
-        public HttpResponseMessage Get(int id)
+        public HttpResponseMessage Get(string f)
         {
-            var video = _videoService.GetById(id);
-            string videoPath = video.Path;
             var response = new HttpResponseMessage();
             // This can prevent some unnecessary accesses. These kind of file names won't be existing at all. 
-            if (string.IsNullOrWhiteSpace(videoPath) || AnyInvalidFileNameChars(videoPath))
+            if (string.IsNullOrWhiteSpace(f) || AnyInvalidFileNameChars(f))
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            FileInfo fileInfo = new FileInfo(Path.Combine(InitialDirectory, videoPath));
+            FileInfo fileInfo = new FileInfo(Path.Combine(@"D:\\MediaDirectory\", f));
 
             if (!fileInfo.Exists)
                 throw new HttpResponseException(HttpStatusCode.NotFound);

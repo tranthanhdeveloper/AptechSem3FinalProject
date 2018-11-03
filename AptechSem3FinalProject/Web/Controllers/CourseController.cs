@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using Context.Database;
-using Microsoft.Ajax.Utilities;
 using Service.Service;
 using Web.Models;
 
@@ -18,14 +16,12 @@ namespace Web.Controllers
         private ICourseService _courseService;
         private IUserService _userService;
         private ILectureService _lectureService;
-        private IVideoService _videoService;
 
-        public CourseController(ICourseService courseService, IUserService userService, ILectureService lectureService, IVideoService videoService)
+        public CourseController(ICourseService courseService, IUserService userService, ILectureService lectureService)
         {
             _courseService = courseService;
             _userService = userService;
             _lectureService = lectureService;
-            _videoService = videoService;
         }
 
         #endregion
@@ -50,31 +46,20 @@ namespace Web.Controllers
             courseDetailViewModel.CourseListItemViewModel = Mapper.Map<CourseItemViewModel>(course);
             courseDetailViewModel.Author = _userService.GetById(course.UserId);
             courseDetailViewModel.CourseOutline = Mapper.Map< List<CourseOutlineViewModel>>(_lectureService.GetByCourseId(course.Id));
-            courseDetailViewModel.RelatedCourses =
-                Mapper.Map<List<CourseItemViewModel>>(course.Category.Courses
-                    .OrderByDescending(relCourse => relCourse.Id).Take(5));
             return View(courseDetailViewModel);
         }
 
-        public ActionResult CoursePlay(int id, Nullable<int> video = null)
+        public ActionResult CoursePlay(int id)
         {
-            var courseViewModel = new CoursePlayViewModel();
             var course = _courseService.GetById(id);
-            courseViewModel.CourseItemViewModel = Mapper.Map<CourseItemViewModel>(_courseService.GetById(id));
-            var courseModuleVideo = new List<CourseModuleViewModel>();
-            foreach (var courseLecture in course.Lectures)
+            var modules = course.Lectures;
+            var videos = new List<Video>();
+            foreach (var module in modules)
             {
-                var courseModelView = new CourseModuleViewModel();
-                var moduleLesson = Mapper.Map<List<CourseLessonViewModel>>(courseLecture.Videos);
-                courseModelView.CourseLessonViewModels = moduleLesson;
-                courseModelView.Id = courseLecture.Id;
-                courseModelView.Name = courseLecture.Name;
-                courseModuleVideo.Add(courseModelView);
+                videos.AddRange(module.Videos);
             }
-
-            courseViewModel.CourseModuleViewModels = Mapper.Map<List<CourseModuleViewModel>>(courseModuleVideo);
-            courseViewModel.LastLessonViewedViewModel = !video.HasValue ? courseViewModel.CourseModuleViewModels.First().CourseLessonViewModels.First() : Mapper.Map<CourseLessonViewModel>(_videoService.GetById(video));            
-            return View(courseViewModel);
+            int videoCounter = videos.Count;
+            return View();
         }
 
         #endregion
