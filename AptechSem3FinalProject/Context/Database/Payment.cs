@@ -25,10 +25,11 @@ namespace Context.Database
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> PaymentStatus { get; set; }
         public int UserId { get; set; }
-        public int PaymentMethod { get; set; }
+        public int PaymentMethodId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
-        public virtual PaymentMethod PaymentMethod1 { get; set; }
+        public virtual PaymentMethod PaymentMethod { get; set; }
+        public virtual User User { get; set; }
     }
 }

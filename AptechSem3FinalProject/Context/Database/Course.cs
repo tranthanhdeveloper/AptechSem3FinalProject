@@ -28,7 +28,7 @@ namespace Context.Database
         public string Comment { get; set; }
         public string Image { get; set; }
         public Nullable<long> Price { get; set; }
-        public int Status { get; set; }
+        public byte Status { get; set; }
         public int CategoryId { get; set; }
         public int UserId { get; set; }
     

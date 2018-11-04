@@ -55,11 +55,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\PaymentMethodService.cs" />
+    <Compile Include="Service\IPaymentMethodService.cs" />
+    <Compile Include="Service\PaymentService.cs" />
     <Compile Include="Service\CourseService.cs" />
+    <Compile Include="Service\IPaymentService.cs" />
     <Compile Include="Service\ICourseService.cs" />
     <Compile Include="Service\ILectureService.cs" />
+    <Compile Include="Service\IOrderService.cs" />
     <Compile Include="Service\IService.cs" />
     <Compile Include="Service\LectureService.cs" />
+    <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\Payment\PaypalPaymentService.cs" />
     <Compile Include="Service\Service.cs" />
     <Compile Include="Service\ServiceAll.cs" />

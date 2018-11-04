@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using Context.Database;
@@ -12,11 +13,19 @@ namespace Web.Controllers
     {
         private string payorId;
         private ICourseService _courseService;
+        private IOrderService _orderService;
+        private IUserService _userService;
+        private IPaymentService _paymentService;
+        private IPaymentMethodService _paymentMethodService;
         private PaypalPaymentService _paypalPaymentService = new PaypalPaymentService();
         private APIContext _apiContext = PaypalConfiguration.GetAPIContext();
-        public PaymentController(ICourseService courseService)
+        public PaymentController(ICourseService courseService, IOrderService orderService, IUserService userService, IPaymentService paymentService, IPaymentMethodService paymentMethodService)
         {
             _courseService = courseService;
+            _orderService = orderService;
+            _userService = userService;
+            _paymentService = paymentService;
+            _paymentMethodService = paymentMethodService;
         }        
 
         public ActionResult PaymentWithPaypal(int id, string cancel = null)
@@ -56,10 +65,31 @@ namespace Web.Controllers
                 {
                     return View("PaymentPaypalFailure");
                 }
+                var payment = new Context.Database.Payment
+                {
+                    PaymentMethod = _paymentMethodService.GetById(1), // Hard code for test this controller
+                    PaymentStatus = 1,
+                    CreatedDate = DateTime.Now,
+                    User = _userService.GetAll().First(),
+                };
+                var savedPayment = _paymentService.Add(payment);
+
+                var coursePaidId = int.Parse(executedPayment.transactions.First().item_list.items.First().sku);
+                var order = new Context.Database.Order
+                {
+                    User = _userService.GetAll().First(),
+                    Course = _courseService.GetById(coursePaidId),
+                    Payment = savedPayment,
+                    Status = 1,
+                    CreatedDate = DateTime.Now,
+                    
+                };
+                _orderService.Insert(order);
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                return View("PaymentPaypalFailure");
+                throw exception;
+                //return View("PaymentPaypalFailure");
             }
             
             // handle code update data and redirect user to play page.
