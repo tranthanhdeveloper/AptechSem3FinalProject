@@ -19,7 +19,7 @@ namespace Web
         public void Configuration(IAppBuilder app)
         {
             ConfigAutofac(app);
-            ConfigureAuth(app);
+            //ConfigureAuth(app);
             
         }
 
@@ -46,16 +46,6 @@ namespace Web
                     .ImplementedInterfaces.Any(
                         i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IRepository<>)))
                 .AsImplementedInterfaces().InstancePerRequest();
-
-            // Repositories
-            //builder.RegisterAssemblyTypes(typeof(Repository<User>).Assembly)
-            //    .Where(t => t.Name.EndsWith("Repository"))
-            //    .AsImplementedInterfaces().InstancePerRequest();
-
-            // Services
-            //builder.RegisterGeneric(typeof(IService).Assembly)
-            //   .Where(t => t.Name.EndsWith("Service"))
-            //   .AsImplementedInterfaces().InstancePerRequest();
 
             Autofac.IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

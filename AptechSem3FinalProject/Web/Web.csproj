@@ -56,8 +56,19 @@
     <Reference Include="Autofac.Integration.WebApi, Version=4.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.WebApi2.4.2.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
+    <!--<Reference Include="BotDetect, Version=4.3.3.0, Culture=neutral, PublicKeyToken=74616036388b765f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Captcha.4.3.3\lib\net46\BotDetect.dll</HintPath>
+    </Reference>
+    <Reference Include="BotDetect.Web.Mvc, Version=4.3.3.0, Culture=neutral, PublicKeyToken=74616036388b765f, processorArchitecture=MSIL"/>
+      <HintPath>..\packages\Captcha.4.3.3\lib\net46\BotDetect.Web.Mvc.dll</HintPath>-->
     <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="BotDetect, Version=4.3.3.0, Culture=neutral, PublicKeyToken=74616036388b765f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Captcha.4.3.3\lib\net46\BotDetect.dll</HintPath>
+    </Reference>
+    <Reference Include="BotDetect.Web.Mvc, Version=4.3.3.0, Culture=neutral, PublicKeyToken=74616036388b765f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Captcha.4.3.3\lib\net46\BotDetect.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.DependencyCollector, Version=2.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.8.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
@@ -120,8 +131,9 @@
     <Reference Include="Microsoft.Owin.Security.Twitter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.0\lib\net451\Microsoft.Owin.Security.Twitter.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\AptechSem3FinalProject - Copy\AptechSem3FinalProject\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -130,6 +142,7 @@
       <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
@@ -138,6 +151,9 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
@@ -220,7 +236,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -232,8 +247,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\MailHelper\MailHelper.cs" />
     <Compile Include="Helper\MessageConstants.cs" />
     <Compile Include="Helper\Sercurity\AuthenticationManager.cs" />
+    <Compile Include="Helper\Sercurity\Authorize.cs" />
     <Compile Include="Helper\Sercurity\SessionPersister.cs" />
     <Compile Include="Helper\SessionContrants.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -381,10 +398,13 @@
     <Content Include="img\search-bg.jpg" />
     <Content Include="img\top-banner.jpg" />
     <Content Include="img\video-bg.jpg" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Client\Register.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />

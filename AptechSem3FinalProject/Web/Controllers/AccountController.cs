@@ -4,31 +4,36 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
+using BotDetect.Web.Mvc;
 using Context.Database;
-using Context.Repository;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Model.Enum;
 using Model.Sercurity;
+using Service.Service;
 using Web.Helper;
+using Web.Helper.EmailHelper;
 using Web.Helper.Sercurity;
 using Web.Models;
 
 namespace Web.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        //Uow<Account> _ouw = new Uow<Account>();
-        public AccountController()
+        private IAccountService _accountService;
+        private IUserService _userService;
+        public AccountController(IAccountService accountService, IUserService userService)
         {
+            _accountService = accountService;
+            _userService = userService;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -40,9 +45,9 @@ namespace Web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -74,21 +79,20 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    model.Password = Encryptor.EncryptSHA1(model.Password);
-            //    var accountLogin = _ouw.Repository.GetAll(a =>
-            //        a.UserName.Contains(model.UserName) && a.Password.Contains(model.Password)).SingleOrDefault();
-            //    if (accountLogin == null)
-            //    {
-            //        ModelState.AddModelError("", MessageConstants.LoginFail);
-            //        return View(model);
-            //    }
+            if (ModelState.IsValid)
+            {
+                model.Password = Encryptor.EncryptSHA1(model.Password);
+                var accountLogin = _accountService.Login(model.UserName, model.Password);
+                if (accountLogin == null)
+                {
+                    ModelState.AddModelError("", MessageConstants.LoginFail);
+                    return View(model);
+                }
 
-            //    SessionPersister.AccountInformation = accountLogin;
-            //    return RedirectToAction("index", "Home");
+                SessionPersister.AccountInformation = accountLogin;
+                return RedirectToAction("index", "Home");
 
-            //}
+            }
 
             return View(model);
 
@@ -110,9 +114,12 @@ namespace Web.Controllers
             //}
         }
 
+        [HttpGet]
+       
+        [AllowAnonymous]
         public ActionResult Logout()
         {
-            if (SessionPersister.AccountInformation != null)
+            if (Helper.Sercurity.AuthenticationManager.IsAuthenticated)
             {
                 SessionPersister.AccountInformation = null;
             }
@@ -148,7 +155,7 @@ namespace Web.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -175,6 +182,7 @@ namespace Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [CaptchaValidation("CaptchaCode", "registerCaptcha", "CaptchaCode not match")]
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
@@ -184,7 +192,7 @@ namespace Web.Controllers
                 //if (result.Succeeded)
                 //{
                 //    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                 //    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 //    // Send an email with this link
                 //    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -195,25 +203,26 @@ namespace Web.Controllers
                 //}
                 //AddErrors(result);
 
-                //var acc = _ouw.Repository.GetAll(a => a.UserName.ToLower().Contains(model.UserName.ToLower()));
+                var acc = _accountService.GetByUserName(model.UserName);
 
-                //if (acc.Any())
-                //{
-                //    ModelState.AddModelError("", MessageConstants.AccountExist);
-                //    return View(model);
-                //}
                 
-                //model.Password = Encryptor.EncryptSHA1(model.Password);
-               
-                //var account = _ouw.Repository.Add(new Account{UserName = model.UserName, Password = model.Password, RoleId = (int)RoleEnum.User, UserId = 1});
-               
-                //if (account == null)
-                //{
-                //    ModelState.AddModelError("", MessageConstants.InsertFail);
-                //    return View(model);
-                //}
+                if (acc != null)
+                {
+                    ModelState.AddModelError("", MessageConstants.AccountExist);
+                    return View(model);
+                }
 
-                //return RedirectToAction("index", "Home");
+                model.Password = Encryptor.EncryptSHA1(model.Password);
+                var user = _userService.Add(new User { Name = model.Name, BirthDay = model.BirthDay, Phone = model.Phone, Address = model.Address, Email = model.UserName });
+                var account = _accountService.Add(new Account { UserName = model.UserName, Password = model.Password, RoleId = (int)RoleEnum.User, UserId = 1 });
+
+                if (account == null || user == null)
+                {
+                    ModelState.AddModelError("", MessageConstants.InsertFail);
+                    return View(model);
+                }
+
+                return RedirectToAction("index", "Home");
             }
 
             // If we got this far, something failed, redisplay form
@@ -250,8 +259,8 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var acc = _accountService.GetAll(a => a.UserName == model.Email).SingleOrDefault();
+                if (acc == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
@@ -259,9 +268,16 @@ namespace Web.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = $"{WebConfigurationManager.AppSettings["Base_Url"]}Account/login";
+                //await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                var password = acc.Password.Substring(0, 10);
+                acc.Password = Encryptor.EncryptSHA1(password);
+                _accountService.Update(acc);
+
+                var content = $"Your password is changed : {password}" +
+                              $" Click {callbackUrl} to login";
+                MailHelper.SendMail(acc.UserName, "Reset Password", content);
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
@@ -280,9 +296,9 @@ namespace Web.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public ActionResult ResetPassword()
         {
-            return code == null ? View("Error") : View();
+            return  View();
         }
 
         //
@@ -296,18 +312,18 @@ namespace Web.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
-            if (user == null)
+
+            var account = SessionPersister.AccountInformation;
+            if (account != null)
             {
-                // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                var acc = _accountService.Login(account.UserName, model.CurrentPassword);
+                if (acc != null)
+                {
+                    acc.Password = Encryptor.EncryptSHA1(model.Password);
+                    _accountService.Update(account);
+                    return RedirectToAction("index", "Home");
+                }
             }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-            AddErrors(result);
             return View();
         }
 
@@ -433,8 +449,8 @@ namespace Web.Controllers
             return View(model);
         }
 
-        
-       
+
+
 
         //
         // GET: /Account/ExternalLoginFailure
@@ -444,25 +460,25 @@ namespace Web.Controllers
             return View();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        if (_userManager != null)
+        //        {
+        //            _userManager.Dispose();
+        //            _userManager = null;
+        //        }
 
-                if (_signInManager != null)
-                {
-                    _signInManager.Dispose();
-                    _signInManager = null;
-                }
-            }
+        //        if (_signInManager != null)
+        //        {
+        //            _signInManager.Dispose();
+        //            _signInManager = null;
+        //        }
+        //    }
 
-            base.Dispose(disposing);
-        }
+        //    base.Dispose(disposing);
+        //}
 
         #region Helpers
         // Used for XSRF protection when adding external logins

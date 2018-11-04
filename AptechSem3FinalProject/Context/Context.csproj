@@ -37,8 +37,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
       <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
@@ -107,10 +107,13 @@
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\IUow.cs" />
     <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\RepositoryAll.cs" />
     <Compile Include="Repository\Uow.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="Database\Database.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Database.Designer.cs</LastGenOutput>
