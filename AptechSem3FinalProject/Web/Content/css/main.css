@@ -4194,6 +4194,9 @@ dl.toggle.time-line:before {
   height: 100%;
   background-color: #111;
 }
+#player {
+    max-height: 800px;
+}
 
 /* END OF scalling video properties */
 

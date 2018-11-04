@@ -9,6 +9,7 @@ using Service.Service;
 using Service.Service.Payment;
 namespace Web.Controllers
 {
+    [Helper.Sercurity.Authorize]
     public class PaymentController : Controller
     {
         private string payorId;

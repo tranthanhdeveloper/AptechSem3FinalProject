@@ -36,10 +36,14 @@ namespace Web.Models
     }
 
     public class CourseLessonViewModel
-    {
+    {       
         public int Id { get; set; }
-        public string Name { get; set; }
-        public bool IsPreview { get; set; }
+        public string Title { get; set; }
+        public string ImageMain { get; set; }
+        public string Path { get; set; }
+        public int Status { get; set; }
+        public byte IsPreview { get; set; }
+
     }
     public class CourseModuleViewModel
     {

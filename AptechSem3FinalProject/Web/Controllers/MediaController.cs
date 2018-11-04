@@ -12,7 +12,7 @@ using System.Web.Configuration;
 using System.Web.Http;
 
 namespace Web.Controllers
-{
+{    
     public class MediaController : ApiController
     {
         public const int ReadStreamBufferSize = 1024 * 1024;
@@ -39,7 +39,7 @@ namespace Web.Controllers
         }
 
         #region Actions method
-
+        [Helper.Sercurity.Authorize]
         public HttpResponseMessage Get(string f)
         {
             var response = new HttpResponseMessage();

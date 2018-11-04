@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\IVideoService.cs" />
     <Compile Include="Service\PaymentMethodService.cs" />
     <Compile Include="Service\IPaymentMethodService.cs" />
     <Compile Include="Service\PaymentService.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Service\Payment\PaypalPaymentService.cs" />
     <Compile Include="Service\Service.cs" />
     <Compile Include="Service\ServiceAll.cs" />
+    <Compile Include="Service\VideoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Context\Context.csproj">
