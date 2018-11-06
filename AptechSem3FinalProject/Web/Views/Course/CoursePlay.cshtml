@@ -1,14 +1,11 @@
 ﻿@model Web.Models.CoursePlayViewModel
-@{
-    ViewBag.Title = "CoursePlay";
-}
 <section class="course-details-area pt-120">
     <div class="container-fluid">
         <div class="row row-eq-height">
             <div class="col-lg-8 col-sm-12 left-contents">
                 <div id="videoPlayerSection">
                     <video crossorigin playsinline data-plyr-config='{ "title": "This is an example video", "ratio": "16:9"}' id="player">
-                        <source src="/api/media?f=demo.mp4" type="video/mp4" size="1080">                       
+                        <source src="/api/media?f=@Model.CurrentLesson.Path" type="video/mp4" size="1080">
                     </video>
                 </div>
             </div>
@@ -27,7 +24,7 @@
                                     
                                     @foreach (var module in Model.CourseModuleViewModels)
                                     {
-                                        var moduleId = "collapseModule"+module.Id;
+                                        var moduleId = "collapseModule"+ module.Id;
                                         <div class="panel panel-default">
                                             <div class="panel-heading" role="tab" id="headingModule1">
                                                 <h4 class="panel-title">
@@ -41,7 +38,7 @@
                                                     <ul class="list-group">
                                                         @foreach (var lesson in module.CourseLessonViewModels)
                                                         {
-                                                            <li class="list-group-item">@Html.ActionLink(lesson.Title, "CoursePlay", "Course")</li>
+                                                            <li class="list-group-item"><a href="@Url.Action("CoursePlay", "Course", new{ id=@Model.CourseItemViewModel.Id, video=lesson.Id})">@lesson.Title</a></li>
                                                         }
                                                     </ul>
                                                 </div>

@@ -3264,46 +3264,6 @@ dl.toggle.time-line:before {
 .gallery-area .single-imgs:hover .overlay-bg {
   opacity: 1;
 }
-.blog-home-banner {
-  background: url(../img/blog/blog-home-banner.jpg) bottom;
-  background-size: cover;
-  padding: 130px 0px;
-}
-.blog-home-banner .primary-btn {
-  border-radius: 0px;
-  background: #fff;
-  color: #222;
-  font-weight: 600;
-  border: 1px solid transparent;
-  -webkit-transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-}
-.blog-home-banner .primary-btn:hover {
-  background: transparent;
-  border-color: #fff;
-  color: #fff;
-}
-.blog-home-banner .overlay-bg {
-  background: rgba(0, 0, 0, 0.5);
-}
-.blog-page {
-  background: #f9f9ff;
-}
-.blog-header-content h1 {
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-@media (max-width: 414px) {
-  .blog-header-content h1 {
-    font-size: 30px;
-  }
-}
-.blog-header-content p {
-  margin: 20px 0px;
-}
 .top-category-widget-area {
   background-color: #f9f9ff;
 }

@@ -28,7 +28,7 @@ namespace Web
             var builder = new ContainerBuilder();
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             // Register your Web API controllers.
-            //builder.RegisterApiControllers(Assembly.GetExecutingAssembly()); //Register WebApi Controllers
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()); //Register WebApi Controllers
 
             builder.RegisterType<Uow>().As<IUow>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();

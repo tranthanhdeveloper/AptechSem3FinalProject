@@ -23,5 +23,25 @@ namespace Service.Service
                 return new List<Course>();
             }
         }
+
+        public bool ValidateCourseAccessible(int userId, int id)
+        {
+            var courseToBeCheck = GetById(id);
+            if (courseToBeCheck.Price <=0 )
+            {
+                return true;
+            }
+            else
+            {
+                var userOrdered = courseToBeCheck.Orders;
+                if (!userOrdered.Any() & userOrdered.Last().Payment.PaymentStatus != 1)
+                {
+                    return false;
+                }
+                 
+            }
+
+            return true;
+        }
     }
 }

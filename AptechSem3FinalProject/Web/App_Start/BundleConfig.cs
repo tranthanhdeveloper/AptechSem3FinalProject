@@ -23,8 +23,13 @@ namespace Web
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                "~/Content/css/*.css",
+                "~/Content/css/font-awesome.min.css"));
+
+            bundles.Add(new StyleBundle("~/Instructor/Content/css").Include(
+                "~/Content/css/*.css",
+                "~/Content/css/font-awesome.min.css",
+                "~/Content/css/instructor.css"));
 
             bundles.Add(new StyleBundle("~/ContentLayout").Include(
                 "~/Content/css/*.css"));

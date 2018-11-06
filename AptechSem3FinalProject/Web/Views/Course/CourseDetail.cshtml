@@ -228,17 +228,17 @@
                         </a>
                     </li>
                     @*<li>
-                        <a class="justify-content-between d-flex" href="#">
-                            <p>Available Seats </p>
-                            <span>15</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="justify-content-between d-flex" href="#">
-                            <p>Schedule </p>
-                            <span>2.00 pm to 4.00 pm</span>
-                        </a>
-                    </li>*@
+                <a class="justify-content-between d-flex" href="#">
+                    <p>Available Seats </p>
+                    <span>15</span>
+                </a>
+            </li>
+            <li>
+                <a class="justify-content-between d-flex" href="#">
+                    <p>Schedule </p>
+                    <span>2.00 pm to 4.00 pm</span>
+                </a>
+            </li>*@
                 </ul>
                 @{
                     if (Model.CourseListItemViewModel.Price == 0)
@@ -247,10 +247,18 @@
                     }
                     else
                     {
-                        <a href="@Url.Action("PaymentWithPaypal", "Payment", new {id = Model.CourseListItemViewModel.Id})" class="primary-btn text-uppercase">Enroll the course</a>
+                        if (Model.IsPaid)
+                        {
+                            <a href="@Url.Action("CoursePlay", "Course", new {id = Model.CourseListItemViewModel.Id})" class="primary-btn text-uppercase">Enroll the course</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("PaymentWithPaypal", "Payment", new {id = Model.CourseListItemViewModel.Id})" class="primary-btn text-uppercase">Pay for enrollment</a>
+                        }
+
                     }
                 }
-                
+
             </div>
         </div>
     </div>

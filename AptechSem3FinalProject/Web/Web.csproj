@@ -131,9 +131,8 @@
     <Reference Include="Microsoft.Owin.Security.Twitter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.0\lib\net451\Microsoft.Owin.Security.Twitter.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\AptechSem3FinalProject - Copy\AptechSem3FinalProject\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -238,12 +237,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Instructor\Controllers\InstructorController.cs" />
+    <Compile Include="Areas\Instructor\InstructorAreaRegistration.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MediaController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -268,33 +270,24 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\animate.min.css" />
     <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\bootstrap\bootstrap-grid.css" />
-    <Content Include="Content\css\bootstrap\bootstrap-reboot.css" />
-    <Content Include="Content\css\bootstrap\bootstrap.css" />
     <Content Include="Content\css\course-detail.css" />
     <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\instructor.css" />
     <Content Include="Content\css\jquery-ui.css" />
     <Content Include="Content\css\linearicons.css" />
     <Content Include="Content\css\magnific-popup.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\nice-select.css" />
     <Content Include="Content\css\owl.carousel.css" />
-    <Content Include="Content\css\plyr\dist\blank.mp4" />
-    <Content Include="Content\css\plyr\dist\plyr.css" />
-    <Content Include="Content\css\plyr\dist\plyr.svg" />
+    <Content Include="Content\css\plyr.css" />
+    <Content Include="Content\css\plyr.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\Linearicons-Free.svg" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -418,14 +411,7 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Content\css\.DS_Store" />
-    <Content Include="Content\css\bootstrap.map" />
+    <Content Include="Content\css\.map" />
     <Content Include="Content\css\main.map" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
@@ -541,6 +527,13 @@
     <Content Include="Content\scss\theme\_mixins.scss" />
     <Content Include="Content\scss\theme\_reset.scss" />
     <Content Include="Content\scss\theme\_variables.scss" />
+    <Content Include="Areas\Instructor\Views\web.config" />
+    <Content Include="Areas\Instructor\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Instructor\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Instructor\Views\Instructor\Index.cshtml" />
+    <Content Include="Areas\Instructor\Views\Shared\_InstructorHeader.cshtml" />
+    <Content Include="Areas\Instructor\Views\Shared\_InstructorFooter.cshtml" />
+    <Content Include="Areas\Instructor\Views\Instructor\Register.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -581,7 +574,9 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\video-hander.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -636,9 +631,11 @@
     <Content Include="Views\Course\Index.cshtml" />
     <Content Include="Views\Payment\PaymentPaypalFailure.cshtml" />
     <Content Include="Views\Payment\PaymentPaypalSuccess.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Instructor\Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

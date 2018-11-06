@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using Context.Database;
+using Model.Enum;
 using Service.Service;
 using Web.Models;
 
@@ -18,13 +19,15 @@ namespace Web.Controllers
         private IUserService _userService;
         private ILectureService _lectureService;
         private IVideoService _videoService;
+        private IOrderService _orderService;
 
-        public CourseController(ICourseService courseService, IUserService userService, ILectureService lectureService, IVideoService videoService)
+        public CourseController(ICourseService courseService, IUserService userService, ILectureService lectureService, IVideoService videoService, IOrderService orderService)
         {
             _courseService = courseService;
             _userService = userService;
             _lectureService = lectureService;
             _videoService = videoService;
+            _orderService = orderService;
         }
 
         #endregion
@@ -44,6 +47,7 @@ namespace Web.Controllers
 
         public ActionResult CourseDetail(int id)
         {
+            var loggedUserId = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
             var courseDetailViewModel = new CourseDetailViewModel();
             var course = _courseService.GetById(id);
             courseDetailViewModel.CourseListItemViewModel = Mapper.Map<CourseItemViewModel>(course);
@@ -51,25 +55,45 @@ namespace Web.Controllers
             courseDetailViewModel.CourseOutline = Mapper.Map< List<CourseOutlineViewModel>>(_lectureService.GetByCourseId(course.Id));
             courseDetailViewModel.RelatedCourses =Mapper.Map<List<CourseItemViewModel>>(course.Category.Courses
                     .OrderByDescending(relCourse => relCourse.Id).Take(5));
+            courseDetailViewModel.IsPaid = _courseService.ValidateCourseAccessible(loggedUserId, id);
             return View(courseDetailViewModel);
         }
 
         [Helper.Sercurity.Authorize]
-        public ActionResult CoursePlay(int id, Nullable<int> video)
+        public ActionResult CoursePlay(int id, int? video)
         {
-            var coursePlayViewModel = new CoursePlayViewModel();
-            coursePlayViewModel.CourseModuleViewModels = new List<CourseModuleViewModel>();
-            var course = _courseService.GetById(id);
-            coursePlayViewModel.CourseItemViewModel = Mapper.Map<CourseItemViewModel>(course);
-            foreach (var lecture in course.Lectures)
+            var loggedUserId = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
+            if (_courseService.ValidateCourseAccessible(loggedUserId, id))
             {
-                var lectureMap = new CourseModuleViewModel();
-                lectureMap.CourseLessonViewModels = Mapper.Map<List<CourseLessonViewModel>>(lecture.Videos);
-                lectureMap.Id = lecture.Id;
-                lectureMap.Name = lecture.Name;
-                coursePlayViewModel.CourseModuleViewModels.Add(lectureMap);
+                var course = _courseService.GetById(id);
+                if (!_orderService.GetOrderByCourseAndUser(course.Id, loggedUserId).Any())
+                {
+                    _orderService.AddOrder(course, loggedUserId, (int)(PaymentType.FREE));
+                }
+
+                var coursePlayViewModel = new CoursePlayViewModel
+                {
+                    CourseModuleViewModels = new List<CourseModuleViewModel>(),
+                    CourseItemViewModel = Mapper.Map<CourseItemViewModel>(course)
+                };
+                foreach (var lecture in course.Lectures)
+                {
+                    var lectureMap = new CourseModuleViewModel
+                    {
+                        CourseLessonViewModels = Mapper.Map<List<CourseLessonViewModel>>(lecture.Videos),
+                        Id = lecture.Id,
+                        Name = lecture.Name
+                    };
+                    coursePlayViewModel.CourseModuleViewModels.Add(lectureMap);
+                }
+
+                coursePlayViewModel.CurrentLesson = video != null ? Mapper.Map<CourseLessonViewModel>(_videoService.GetById(video)) : coursePlayViewModel.CourseModuleViewModels.First().CourseLessonViewModels.First();
+                return View(coursePlayViewModel);
+            }else
+            {
+                return RedirectToAction("PaymentWithPaypal","Payment", new {id=id});
             }
-            return View(coursePlayViewModel);
+
         }
         #endregion
 

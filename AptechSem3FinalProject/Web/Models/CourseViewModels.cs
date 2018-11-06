@@ -27,6 +27,7 @@ namespace Web.Models
         public virtual User Author { get; set; }
         public virtual List<CourseOutlineViewModel> CourseOutline { get; set; }
         public List<CourseItemViewModel> RelatedCourses { get; set; }
+        public bool IsPaid { get; set; }
     }
 
     public class CourseOutlineViewModel
@@ -55,6 +56,7 @@ namespace Web.Models
     public class CoursePlayViewModel
     {
         public CourseItemViewModel CourseItemViewModel { get; set; }
+        public CourseLessonViewModel CurrentLesson { get; set; }
         public List<CourseModuleViewModel> CourseModuleViewModels{ get; set; }
     }
 }

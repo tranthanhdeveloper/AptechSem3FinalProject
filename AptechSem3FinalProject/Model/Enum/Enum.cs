@@ -12,4 +12,9 @@ namespace Model.Enum
         Author = 2,
         Admin = 3
     }
+
+    public enum PaymentType
+    {
+        FREE = 8
+    }
 }
