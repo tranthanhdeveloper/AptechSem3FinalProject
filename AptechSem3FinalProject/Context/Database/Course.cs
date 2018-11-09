@@ -31,6 +31,7 @@ namespace Context.Database
         public byte Status { get; set; }
         public int CategoryId { get; set; }
         public int UserId { get; set; }
+        public string Prerequisites { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual User User { get; set; }

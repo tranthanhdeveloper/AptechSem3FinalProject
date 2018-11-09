@@ -23,7 +23,7 @@ namespace Context.Database
         public int Id { get; set; }
         public int CourseId { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Status { get; set; }
+        public Nullable<byte> Status { get; set; }
     
         public virtual Course Course { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -24,5 +24,9 @@ namespace Web.Helper
         public static string OrderFail = "Order Fail";
 
         public static string AccountExist = "Identity or Phone is already existed";
+
+        public static string ImageRequired = "Course image is required";
+
+        public static string EditCourseDeny = "Your do not have permistion to Edit this course";
     }
 }

@@ -38,6 +38,7 @@
           <Property Name="Status" Type="tinyint" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Prerequisites" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="Lecture">
           <Key>
@@ -47,7 +48,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CourseId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
-          <Property Name="Status" Type="int" />
+          <Property Name="Status" Type="tinyint" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -57,7 +58,7 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="Status" Type="tinyint" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="PaymentId" Type="int" Nullable="false" />
+          <Property Name="PaymentId" Type="int" />
           <Property Name="CourseId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Payment">
@@ -97,6 +98,7 @@
           <Property Name="BirthDay" Type="datetime" />
           <Property Name="Address" Type="varchar" MaxLength="100" />
           <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Company" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Video">
           <Key>
@@ -112,6 +114,7 @@
           <Property Name="IsPreview" Type="tinyint" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="TimeLimit" Type="int" />
+          <Property Name="IsEnable" Type="tinyint" Nullable="false" />
         </EntityType>
         <Association Name="FK_Account_Role">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
@@ -188,7 +191,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Payment">
-          <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Payment">
@@ -401,6 +404,7 @@
           <Property Name="Status" Type="Byte" Nullable="false" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Prerequisites" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Category" Relationship="AptechSem3FinalProjectV2Model.FK_Course_Category" FromRole="Course" ToRole="Category" />
           <NavigationProperty Name="User" Relationship="AptechSem3FinalProjectV2Model.FK_Course_User" FromRole="Course" ToRole="User" />
           <NavigationProperty Name="Lectures" Relationship="AptechSem3FinalProjectV2Model.FK_Lecture_Course" FromRole="Course" ToRole="Lecture" />
@@ -414,7 +418,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CourseId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
+          <Property Name="Status" Type="Byte" />
           <NavigationProperty Name="Course" Relationship="AptechSem3FinalProjectV2Model.FK_Lecture_Course" FromRole="Lecture" ToRole="Course" />
           <NavigationProperty Name="Videos" Relationship="AptechSem3FinalProjectV2Model.FK_Video_Lecture" FromRole="Lecture" ToRole="Video" />
         </EntityType>
@@ -426,7 +430,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Status" Type="Byte" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="PaymentId" Type="Int32" Nullable="false" />
+          <Property Name="PaymentId" Type="Int32" />
           <Property Name="CourseId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Course" Relationship="AptechSem3FinalProjectV2Model.FK_Order_Course" FromRole="Order" ToRole="Course" />
           <NavigationProperty Name="Payment" Relationship="AptechSem3FinalProjectV2Model.FK_Order_Payment" FromRole="Order" ToRole="Payment" />
@@ -474,6 +478,7 @@
           <Property Name="BirthDay" Type="DateTime" Precision="3" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Accounts" Relationship="AptechSem3FinalProjectV2Model.FK_Account_User" FromRole="User" ToRole="Account" />
           <NavigationProperty Name="Courses" Relationship="AptechSem3FinalProjectV2Model.FK_Course_User" FromRole="User" ToRole="Course" />
           <NavigationProperty Name="Orders" Relationship="AptechSem3FinalProjectV2Model.FK_Order_User" FromRole="User" ToRole="Order" />
@@ -493,6 +498,7 @@
           <Property Name="IsPreview" Type="Byte" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="TimeLimit" Type="Int32" />
+          <Property Name="IsEnable" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Lecture" Relationship="AptechSem3FinalProjectV2Model.FK_Video_Lecture" FromRole="Video" ToRole="Lecture" />
         </EntityType>
         <Association Name="FK_Account_Role">
@@ -584,7 +590,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Payment">
-          <End Type="AptechSem3FinalProjectV2Model.Payment" Role="Payment" Multiplicity="1" />
+          <End Type="AptechSem3FinalProjectV2Model.Payment" Role="Payment" Multiplicity="0..1" />
           <End Type="AptechSem3FinalProjectV2Model.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Payment">
@@ -661,6 +667,7 @@
           <EntitySetMapping Name="Courses">
             <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.Course">
               <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="Prerequisites" ColumnName="Prerequisites" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -729,6 +736,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
@@ -741,6 +749,7 @@
           <EntitySetMapping Name="Videos">
             <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.Video">
               <MappingFragment StoreEntitySet="Video">
+                <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
                 <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="IsPreview" ColumnName="IsPreview" />

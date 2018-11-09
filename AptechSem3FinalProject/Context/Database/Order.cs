@@ -18,7 +18,7 @@ namespace Context.Database
         public System.DateTime CreatedDate { get; set; }
         public byte Status { get; set; }
         public int UserId { get; set; }
-        public int PaymentId { get; set; }
+        public Nullable<int> PaymentId { get; set; }
         public int CourseId { get; set; }
     
         public virtual Course Course { get; set; }

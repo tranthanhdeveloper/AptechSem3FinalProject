@@ -24,6 +24,7 @@ namespace Context.Database
         public byte IsPreview { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> TimeLimit { get; set; }
+        public byte IsEnable { get; set; }
     
         public virtual Lecture Lecture { get; set; }
     }

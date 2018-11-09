@@ -12,6 +12,18 @@ namespace Service.Service
         {
         }
 
+        public IEnumerable<Course> GetByCreatedUser(int createdUser)
+        {
+            try
+            {
+                return GetAll(course => course.UserId == createdUser, courses => courses.OrderByDescending(course => course.Id));
+            }
+            catch (Exception ex)
+            {
+                return new List<Course>();
+            }
+        }
+
         public IEnumerable<Course> GetLastedCourse()
         {
             try

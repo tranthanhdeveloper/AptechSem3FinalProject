@@ -11,6 +11,7 @@ namespace Web.Models.Mapping
             CreateMap<CourseOutlineViewModel, Lecture>();
             CreateMap<CourseModuleViewModel, Lecture>();
             CreateMap<CourseLessonViewModel, Video>();
+            CreateMap<ApplyAuthorViewModel, User>();
         }
     }
 }
