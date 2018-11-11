@@ -21,6 +21,10 @@ namespace Web.Models
         public List<CourseItemViewModel> LastedCourses { get; set; }
     }
 
+    public class LoadMoreCourseViewModel
+    {
+        public List<CourseItemViewModel> CourseItemViewModels  { get; set; }
+    }
     public class CourseDetailViewModel
     {
         public CourseItemViewModel CourseListItemViewModel { get; set; }

@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div id="courseDisplayArea" class="row">
             @{
                 foreach (var courseItem in Model.PopularCourses)
                 {
@@ -62,7 +62,7 @@
             <div class="col col-md-5">
             </div>
             <div class="col col-md-3">
-                <a href="#" class="primary-btn text-uppercase mx-auto">Load More Courses</a>
+                <button href="#" id="loadMoreCourse" class="primary-btn text-uppercase mx-auto">Load More Courses</button>
             </div>
             <div class="col col-md-4">
             </div>

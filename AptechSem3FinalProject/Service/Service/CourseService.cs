@@ -28,7 +28,7 @@ namespace Service.Service
         {
             try
             {
-                return GetAll(null, courses => courses.OrderByDescending(course => course.Id)).Take(5);
+                return GetAll(null, courses => courses.OrderByDescending(course => course.Id)).Take(4);
             }
             catch (Exception e)
             {

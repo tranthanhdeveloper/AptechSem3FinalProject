@@ -237,6 +237,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Instructors\Controllers\BaseAuthorController.cs" />
     <Compile Include="Areas\Instructors\Controllers\CourseController.cs" />
     <Compile Include="Areas\Instructors\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Instructors\Controllers\LessonController.cs" />
@@ -249,6 +250,7 @@
     <Compile Include="Areas\Instructors\Models\Mapping\CourseAuthorProfile.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Helper\RenderHelper.cs" />
     <Compile Include="Models\ApplyAuthorViewModel.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -7530,6 +7532,7 @@
     <Content Include="Areas\Instructors\Views\Course\Details.cshtml" />
     <Content Include="Areas\Instructors\Views\Course\AddModule.cshtml" />
     <Content Include="Areas\Instructors\Views\Module\Details.cshtml" />
+    <Content Include="Areas\Instructors\Views\Lesson\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Instructor\author.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -7631,10 +7634,10 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Instructor\ApplySuccessful.cshtml" />
     <Content Include="Views\Instructor\Index.cshtml" />
+    <Content Include="Views\Course\LoadMore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Instructors\Views\Lesson\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

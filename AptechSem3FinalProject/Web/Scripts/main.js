@@ -288,3 +288,21 @@ $("#userLogoutLink").on("click", function () {
     var logoutForm = $("#userLogoutForm");
     logoutForm.submit();
 });
+
+
+// Load more course handle
+$(document).on('click', '#loadMoreCourse', function () {
+    var offset = $('#courseDisplayArea > div').length;
+    $.ajax({
+        url: "Course/LoadMore?offset=" + offset,
+        type: 'GET',
+        processData: false,
+        contentType: false,
+        success: function (result) {
+            $('#courseDisplayArea').append(result);
+        },
+        error: function () {
+            alert('Has error orcurred');
+        }
+    });
+});

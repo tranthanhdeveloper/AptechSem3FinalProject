@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
+using System.Web.UI;
 using AutoMapper;
 using Context.Database;
 using Model.Enum;
@@ -38,7 +41,7 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             var showCoursesViewModel = new ShowCoursesViewModel();
-            var popularCourses = _courseService.GetAll();
+            var popularCourses = _courseService.GetAll().Take(8);
             var lastedCourses = _courseService.GetLastedCourse();
             showCoursesViewModel.PopularCourses = Mapper.Map<List<CourseItemViewModel>>(popularCourses);
             showCoursesViewModel.LastedCourses = Mapper.Map<List<CourseItemViewModel>>(lastedCourses);
@@ -66,7 +69,7 @@ namespace Web.Controllers
             if (_courseService.ValidateCourseAccessible(loggedUserId, id))
             {
                 var course = _courseService.GetById(id);
-                if (!_orderService.GetOrderByCourseAndUser(course.Id, loggedUserId).Any())
+                if (!_orderService.GetOrderByCourseAndUser(course.Id, loggedUserId).Any() && course.UserId != loggedUserId)
                 {
                     _orderService.AddOrder(course, loggedUserId, (int)(PaymentType.FREE));
                 }
@@ -99,10 +102,16 @@ namespace Web.Controllers
 
         #region manipulate methods
 
-        
+
 
         #endregion
 
-
+        public string LoadMore(int offset)
+        {
+            var showCoursesViewModel = new LoadMoreCourseViewModel();
+            var courses = _courseService.GetAll().Skip(offset).Take(10);
+            showCoursesViewModel.CourseItemViewModels = Mapper.Map<List<CourseItemViewModel>>(courses);
+            return Helper.RenderHelper.RenderViewToString(ControllerContext, "LoadMore", showCoursesViewModel);
+        }
     }
 }
