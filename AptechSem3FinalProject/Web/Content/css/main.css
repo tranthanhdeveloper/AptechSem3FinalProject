@@ -24,7 +24,7 @@
   color: #777777;
   font-weight: 300;
 }
-::-ms-input-placeholder {
+:-ms-input-placeholder {
   color: #777777;
   font-weight: 300;
 }
@@ -2893,6 +2893,9 @@ dl.toggle.time-line:before {
 }
 .courses-page .single-popular-carusel {
   margin-bottom: 40px;
+}
+.single-popular-carusel.border-success:hover{
+    border-color:orangered !important;
 }
 .courses-page .primary-btn {
   border: 1px solid transparent;

@@ -46,7 +46,7 @@ namespace Service.Service
             else
             {
                 var userOrdered = courseToBeCheck.Orders;
-                if (!userOrdered.Any() & userOrdered.Last().Payment.PaymentStatus != 1)
+                if (!userOrdered.Any() || userOrdered.Last().Payment.PaymentStatus != 1)
                 {
                     return false;
                 }

@@ -15,6 +15,6 @@ namespace Model.Enum
 
     public enum PaymentType
     {
-        FREE = 8
+        FREE = 1
     }
 }

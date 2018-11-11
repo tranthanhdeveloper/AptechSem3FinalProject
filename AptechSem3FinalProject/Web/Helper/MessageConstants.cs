@@ -28,5 +28,7 @@ namespace Web.Helper
         public static string ImageRequired = "Course image is required";
 
         public static string EditCourseDeny = "Your do not have permistion to Edit this course";
+
+        public static string ModuleNotFound = "Your module not found to add lesson";
     }
 }
