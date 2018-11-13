@@ -29,6 +29,7 @@ namespace Web.Controllers
         #region Action methods
 
         // GET: Course
+        [Helper.Sercurity.Authorize]
         public ActionResult Index()
         {
             var showCoursesViewModel = new ShowCoursesViewModel();

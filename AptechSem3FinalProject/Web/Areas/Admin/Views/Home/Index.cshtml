@@ -1,0 +1,205 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    @Scripts.Url("~/Scripts/Admin/Index")
+}
+
+    <section class="content-header">
+        <h1>
+            Dashboard
+        </h1>
+    </section>
+    <section class="content reportChart"
+             data-id="0"
+             data-time="4"
+             data-month="-1">
+        <!-- Info boxes -->
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>11</h3>
+                        <p>User</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-cart-plus"></i>
+                    </div>
+                    @*<a href="@Url.Action("ManageDeal")" class="small-box-footer">Xem tất cả <i class="fa fa-arrow-circle-right"></i></a>*@
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>22</h3>
+                        <p>Course</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    @*<a href="@Url.Action("ManageAccount")" class="small-box-footer">Xem tất cả <i class="fa fa-arrow-circle-right"></i></a>*@
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>33</h3>
+                        <p>Video</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-building-o"></i>
+                    </div>
+                    @*<a href="@Url.Action("ManageProduct")" class="small-box-footer">Xem tất cả <i class="fa fa-arrow-circle-right"></i></a>*@
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>44</h3>
+                        <p>Deal</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-line-chart"></i>
+                    </div>
+                    @*<a href="@Url.Action("ReportByCompany")" class="small-box-footer">Xem tất cả <i class="fa fa-arrow-circle-right"></i></a>*@
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <!-- /.row -->
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Report Revenue Monthly</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body labeled-chart-container">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <p class="text-center">
+                                    <strong>From: <span class="start_date"></span> - <span class="end_date"></span></strong>
+                                </p>
+                                <div class="chart">
+                                    <!-- Sales Chart Canvas -->
+                                    <canvas class="salesChart" style="height: 250px;"></canvas>
+                                </div>
+                                <!-- /.chart-responsive -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-2">
+                                <div class="legend-container">
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- ./box-body -->
+                    <div class="box-footer">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-6">
+                                <div class="description-block border-right">
+                                    <h5 class="description-header total_House">0</h5>
+                                    <span class="description-text">Deal</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6 col-xs-6">
+                                <div class="description-block border-right">
+                                    <h5 class="description-header total_Subscribe">0</h5>
+                                    <span class="description-text">Course</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.box-footer -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <!-- Left col -->
+            <div class="col-md-8">
+                <!-- MAP & BOX PANE -->
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        @*<h3 class="box-title">Lượng booking trong tháng</h3>*@
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <p class="text-center">
+                            <strong>Deal từ: <span class="start_date"></span> - <span class="end_date"></span></strong>
+                        </p>
+                        <div class="chart">
+                            <!-- Sales Chart Canvas -->
+                            <canvas class="dealsChart" style="height: 250px;"></canvas>
+                        </div>
+                        <!-- /.chart-responsive -->
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+                @*<div class="Search_Result">
+                        @Html.Partial("_partial_Deal_Latest", lstDeals)
+                    </div>*@
+            </div>
+            <div class="col-md-4">
+                <!-- /.info-box -->
+                <div class="info-box bg-green">
+                    <span class="info-box-icon"><i class="fa fa-file-text-o"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Booking</span>
+                        <span class="info-box-number total_Booking">0</span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-description">
+                            Giao dịch từ: <span class="start_date"></span> - <span class="end_date"></span>
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+                <div class="info-box bg-blue">
+                    <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Tôi có hàng</span>
+                        <span class="info-box-number total_SubscribeHouse">0</span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-description">
+                            Giao dịch từ: <span class="start_date"></span> - <span class="end_date"></span>
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+                @*@Html.Partial("_partial_User_Latest", lstUsers)*@
+            </div>
+        </div>
+    </section>

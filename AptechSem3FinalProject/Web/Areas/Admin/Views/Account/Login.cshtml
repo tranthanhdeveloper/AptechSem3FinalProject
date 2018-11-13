@@ -1,0 +1,45 @@
+﻿@model Web.Areas.Admin.Models.LoginModel
+@{
+    
+    ViewBag.Title = "Login";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAccount.cshtml";
+}
+
+<p class="login-box-msg">
+   
+    <span>Login</span>
+    
+</p>
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m => m.ReturnUrl)
+   // @Html.Partial("../Error/_partialErrorHandle")
+ 
+    <div class="form-group has-feedback">
+        <label>Username</label>
+        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholder = "Input Username" })
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        @Html.ValidationMessageFor(model => model.UserName)
+    </div>
+
+    <div class="form-group has-feedback">
+        <label>Password</label>
+        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "InputPassword", type = "password" })
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        @Html.ValidationMessageFor(model => model.Password)
+    </div>
+
+    <div class="row">
+        @*<div class="col-xs-7">
+            <a href="@Url.GoAccountRecoverPassword()">@Html.GetResource("Account_Login__line35")</a>
+        </div>*@
+        <!-- /.col -->
+        <div class="col-xs-5" style="padding-left: 230px">
+            <input type="submit" class="btn btn-primary btn-block btn-flat" value="Đăng nhập" />
+        </div>
+        <!-- /.col -->
+    </div>
+}
+
+
+

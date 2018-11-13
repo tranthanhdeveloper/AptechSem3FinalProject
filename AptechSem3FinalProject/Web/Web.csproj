@@ -138,6 +138,12 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
       <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
     </Reference>
@@ -237,6 +243,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
@@ -267,6 +278,49 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAccount.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutHeader.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Content\Admin\Admin_NewDesign\AdminLTE.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\AdminLTE.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\bootstrap3-wysihtml5.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\font-awesome.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\font-awesome.min.css" />
+    <Content Include="Content\Admin\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Admin\Admin_NewDesign\ionicons.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\ionicons.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\jquery-jvectormap.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\morris.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-black-light.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-black-light.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-black.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-black.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-blue-light.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-blue-light.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-blue.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-blue.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-green-light.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-green-light.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-green.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-green.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-purple-light.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-purple-light.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-purple.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-purple.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-red-light.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-red-light.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-red.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-red.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-yellow-light.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-yellow-light.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-yellow.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\skin-yellow.min.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\_all-skins.css" />
+    <Content Include="Content\Admin\Admin_NewDesign\skins\_all-skins.min.css" />
+    <Content Include="Content\Admin\fonts\ionicons.svg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -291,6 +345,7 @@
     <Content Include="Content\css\plyr\dist\plyr.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\Linearicons-Free.svg" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -398,6 +453,23 @@
     <Content Include="img\search-bg.jpg" />
     <Content Include="img\top-banner.jpg" />
     <Content Include="img\video-bg.jpg" />
+    <Content Include="Scripts\Admin\adminlte.js" />
+    <Content Include="Scripts\Admin\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\Admin\bootstrap3-wysihtml5.all.min.js" />
+    <Content Include="Scripts\Admin\dashboard.js" />
+    <Content Include="Scripts\Admin\daterangepicker.js" />
+    <Content Include="Scripts\Admin\demo.js" />
+    <Content Include="Scripts\Admin\fastclick.js" />
+    <Content Include="Scripts\Admin\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="Scripts\Admin\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Scripts\Admin\jquery-ui.min.js" />
+    <Content Include="Scripts\Admin\jquery.knob.min.js" />
+    <Content Include="Scripts\Admin\jquery.min.js" />
+    <Content Include="Scripts\Admin\jquery.slimscroll.min.js" />
+    <Content Include="Scripts\Admin\jquery.sparkline.min.js" />
+    <Content Include="Scripts\Admin\moment.min.js" />
+    <Content Include="Scripts\Admin\morris.min.js" />
+    <Content Include="Scripts\Admin\raphael.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -540,6 +612,15 @@
     <Content Include="Content\scss\theme\_mixins.scss" />
     <Content Include="Content\scss\theme\_reset.scss" />
     <Content Include="Content\scss\theme\_variables.scss" />
+    <Content Include="Content\Admin\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Admin\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Admin\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Admin\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Admin\fonts\FontAwesome.otf" />
+    <Content Include="Content\Admin\fonts\ionicons.eot" />
+    <Content Include="Content\Admin\fonts\ionicons.ttf" />
+    <Content Include="Content\Admin\fonts\ionicons.woff" />
+    <Content Include="Areas\Admin\Views\User\ListUser.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -580,7 +661,9 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\video-hander.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
