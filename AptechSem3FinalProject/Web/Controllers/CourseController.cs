@@ -41,7 +41,7 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             var showCoursesViewModel = new ShowCoursesViewModel();
-            var popularCourses = _courseService.GetAll().Take(8);
+            var popularCourses = _courseService.GetPublished().Take(8);
             var lastedCourses = _courseService.GetLastedCourse();
             showCoursesViewModel.PopularCourses = Mapper.Map<List<CourseItemViewModel>>(popularCourses);
             showCoursesViewModel.LastedCourses = Mapper.Map<List<CourseItemViewModel>>(lastedCourses);
@@ -109,7 +109,7 @@ namespace Web.Controllers
         public string LoadMore(int offset)
         {
             var showCoursesViewModel = new LoadMoreCourseViewModel();
-            var courses = _courseService.GetAll().Skip(offset).Take(10);
+            var courses = _courseService.GetPublished().Skip(offset).Take(10);
             showCoursesViewModel.CourseItemViewModels = Mapper.Map<List<CourseItemViewModel>>(courses);
             return Helper.RenderHelper.RenderViewToString(ControllerContext, "LoadMore", showCoursesViewModel);
         }

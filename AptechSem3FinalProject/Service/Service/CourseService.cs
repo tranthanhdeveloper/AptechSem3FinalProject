@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Context.Database;
 using Context.Repository;
+using Model.Enum;
 
 namespace Service.Service
 {
     public class CourseService : Service<Course>, ICourseService
     {
+        
         public CourseService(IUow uow, IRepository<Course> repository) : base(uow, repository)
         {
         }
@@ -28,12 +30,17 @@ namespace Service.Service
         {
             try
             {
-                return GetAll(null, courses => courses.OrderByDescending(course => course.Id)).Take(4);
+                return GetAll(courses => courses.Status == (byte)CourseStatus.PUBLISHED, courses => courses.OrderByDescending(course => course.Id)).Take(4);
             }
             catch (Exception e)
             {
                 return new List<Course>();
             }
+        }
+
+        public IEnumerable<Course> GetPublished()
+        {
+            return GetAll(courses => courses.Status == (byte)CourseStatus.PUBLISHED);
         }
 
         public bool ValidateCourseAccessible(int userId, int id)

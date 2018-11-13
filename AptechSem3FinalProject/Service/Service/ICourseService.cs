@@ -7,6 +7,8 @@ namespace Service.Service
     {
         IEnumerable<Course> GetLastedCourse();
         IEnumerable<Course> GetByCreatedUser(int createdUser);
+        IEnumerable<Course> GetPublished();
         bool ValidateCourseAccessible(int userId, int id);
+
     }
 }

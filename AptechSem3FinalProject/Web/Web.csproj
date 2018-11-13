@@ -237,7 +237,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\Instructors\Controllers\BaseAuthorController.cs" />
     <Compile Include="Areas\Instructors\Controllers\CourseController.cs" />
     <Compile Include="Areas\Instructors\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Instructors\Controllers\LessonController.cs" />
@@ -7533,6 +7532,8 @@
     <Content Include="Areas\Instructors\Views\Course\AddModule.cshtml" />
     <Content Include="Areas\Instructors\Views\Module\Details.cshtml" />
     <Content Include="Areas\Instructors\Views\Lesson\Index.cshtml" />
+    <Content Include="Areas\Instructors\Views\Lesson\Create.cshtml" />
+    <Content Include="Areas\Instructors\Views\Course\Search.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Instructor\author.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
