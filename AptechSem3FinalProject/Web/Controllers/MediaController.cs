@@ -10,9 +10,10 @@ using System.Net.Http.Headers;
 using System.Net.Mime;
 using System.Web.Configuration;
 using System.Web.Http;
+using Service.Service;
 
 namespace Web.Controllers
-{
+{    
     public class MediaController : ApiController
     {
         public const int ReadStreamBufferSize = 1024 * 1024;
@@ -35,19 +36,18 @@ namespace Web.Controllers
 
             MimeNames = new ReadOnlyDictionary<string, string>(mimeNames);
             InvalidFileNameChars = Array.AsReadOnly(Path.GetInvalidFileNameChars());
-            InitialDirectory = WebConfigurationManager.AppSettings["DefaultFullHD"];
+            InitialDirectory = WebConfigurationManager.AppSettings["DefaultVideoDirectory"];
         }
 
         #region Actions method
-
+        [Helper.Sercurity.Authorize]
         public HttpResponseMessage Get(string f)
         {
             var response = new HttpResponseMessage();
-            // This can prevent some unnecessary accesses. These kind of file names won't be existing at all. 
             if (string.IsNullOrWhiteSpace(f) || AnyInvalidFileNameChars(f))
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            FileInfo fileInfo = new FileInfo(Path.Combine(@"D:\\MediaDirectory\", f));
+            FileInfo fileInfo = new FileInfo(Path.Combine(InitialDirectory, f));
 
             if (!fileInfo.Exists)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -56,14 +56,13 @@ namespace Web.Controllers
             var rangeHeader = Request.Headers.Range;
             response.Headers.AcceptRanges.Add("bytes");
 
-            // The request will be treated as normal request if there is no Range header.
             if (rangeHeader == null || !rangeHeader.Ranges.Any())
             {
                 response.StatusCode = HttpStatusCode.OK;
                 response.Content = new PushStreamContent((outputStream, httpContent, transContext)
                     =>
                 {
-                    using (outputStream) // Copy the file to output stream straightforward. 
+                    using (outputStream)
                     using (Stream inputStream = fileInfo.OpenRead())
                     {
                         try
@@ -87,7 +86,7 @@ namespace Web.Controllers
                 !TryReadRangeItem(rangeHeader.Ranges.First(), totalLength, out start, out end))
             {
                 response.StatusCode = HttpStatusCode.RequestedRangeNotSatisfiable;
-                response.Content = new StreamContent(Stream.Null); // No content for this status.
+                response.Content = new StreamContent(Stream.Null);
                 response.Content.Headers.ContentRange = new ContentRangeHeaderValue(totalLength);
                 response.Content.Headers.ContentType = GetMimeNameFromExt(fileInfo.Extension);
 
@@ -95,13 +94,11 @@ namespace Web.Controllers
             }
 
             var contentRange = new ContentRangeHeaderValue(start, end, totalLength);
-
-            // We are now ready to produce partial content.
             response.StatusCode = HttpStatusCode.PartialContent;
             response.Content = new PushStreamContent((outputStream, httpContent, transpContext)
                 =>
             {
-                using (outputStream) // Copy the file to output stream in indicated range.
+                using (outputStream)
                 using (Stream inputStream = fileInfo.OpenRead())
                 {
                     CreatePartialContent(inputStream, outputStream, start, end);

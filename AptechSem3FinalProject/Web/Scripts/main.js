@@ -264,18 +264,6 @@ $(document).ready(function() {
 
     });
 
-
-
-    //------- Header Scroll Class  js --------//  
-
-    /*$(window).scroll(function() {
-        if ($(this).scrollTop() > 100) {
-            $('#header').addClass('header-scrolled');
-        } else {
-            $('#header').removeClass('header-scrolled');
-        }
-    });*/
-
     //------- Mailchimp js --------//  
 
     $(document).ready(function() {
@@ -299,4 +287,22 @@ $("#userLogoutLink").on("click", function () {
     console.log($(this).text());
     var logoutForm = $("#userLogoutForm");
     logoutForm.submit();
+});
+
+
+// Load more course handle
+$(document).on('click', '#loadMoreCourse', function () {
+    var offset = $('#courseDisplayArea > div').length;
+    $.ajax({
+        url: "Course/LoadMore?offset=" + offset,
+        type: 'GET',
+        processData: false,
+        contentType: false,
+        success: function (result) {
+            $('#courseDisplayArea').append(result);
+        },
+        error: function () {
+            alert('Has error orcurred');
+        }
+    });
 });

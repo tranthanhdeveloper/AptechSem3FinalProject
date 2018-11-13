@@ -29,19 +29,19 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div id="courseDisplayArea" class="row">
             @{
                 foreach (var courseItem in Model.PopularCourses)
                 {
-                    <div class="single-popular-carusel col-lg-3 col-md-6">
+                    <div class="single-popular-carusel col-lg-3 col-md-6 border border-success">
                         <div class="thumb-wrap relative">
                             <div class="thumb relative">
                                 <div class="overlay overlay-bg"></div>
                                 <img class="img-fluid" src="@Url.Content("~/img/courses/"+courseItem.Image)" alt="">
                             </div>
                             <div class="meta d-flex justify-content-between">
-                                <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p>
-                                <h4>$150</h4>
+                                @*<p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p>*@
+                                <h4>$@courseItem.Price</h4>
                             </div>
                         </div>
                         <div class="details">
@@ -62,7 +62,7 @@
             <div class="col col-md-5">
             </div>
             <div class="col col-md-3">
-                <a href="#" class="primary-btn text-uppercase mx-auto">Load More Courses</a>
+                <button href="#" id="loadMoreCourse" class="primary-btn text-uppercase mx-auto">Load More Courses</button>
             </div>
             <div class="col col-md-4">
             </div>
@@ -85,15 +85,15 @@
             @{
                 foreach (var courseItem in Model.LastedCourses)
                 {
-                    <div class="single-popular-carusel col-lg-3 col-md-6">
+                    <div class="single-popular-carusel col-lg-3 col-md-6 border border-success">
                         <div class="thumb-wrap relative">
                             <div class="thumb relative">
                                 <div class="overlay overlay-bg"></div>
                                 <img class="img-fluid" src="@Url.Content("~/img/courses/"+courseItem.Image)" alt="">
                             </div>
                             <div class="meta d-flex justify-content-between">
-                                <p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p>
-                                <h4>$150</h4>
+                                @*<p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p>*@
+                                <h4>$@courseItem.Price</h4>
                             </div>
                         </div>
                         <div class="details">

@@ -35,16 +35,16 @@ namespace Web
 
             builder.RegisterType<AptechSem3FinalProjectEntities>().AsSelf().InstancePerRequest();
 
-            builder.RegisterAssemblyTypes(typeof(IRepository<>).Assembly)
-                .Where(t => t.GetTypeInfo()
-                    .ImplementedInterfaces.Any(
-                        i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IRepository<>)))
-                .AsImplementedInterfaces().InstancePerRequest();
-
             builder.RegisterAssemblyTypes(typeof(IService<>).Assembly)
                 .Where(t => t.GetTypeInfo()
                     .ImplementedInterfaces.Any(
                         i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IService<>)))
+                .AsImplementedInterfaces().InstancePerRequest();
+
+            builder.RegisterAssemblyTypes(typeof(IRepository<>).Assembly)
+                .Where(t => t.GetTypeInfo()
+                    .ImplementedInterfaces.Any(
+                        i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IRepository<>)))
                 .AsImplementedInterfaces().InstancePerRequest();
 
             Autofac.IContainer container = builder.Build();

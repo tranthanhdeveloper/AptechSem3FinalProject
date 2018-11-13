@@ -37,8 +37,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
       <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
@@ -54,17 +54,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Service\ICategoryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-
+    <Compile Include="Service\CategoryServices.cs" />
+    <Compile Include="Service\IVideoService.cs" />
+    <Compile Include="Service\PaymentMethodService.cs" />
+    <Compile Include="Service\IPaymentMethodService.cs" />
+    <Compile Include="Service\PaymentService.cs" />
     <Compile Include="Service\CourseService.cs" />
+    <Compile Include="Service\IPaymentService.cs" />
     <Compile Include="Service\ICourseService.cs" />
     <Compile Include="Service\ILectureService.cs" />
-
+    <Compile Include="Service\IOrderService.cs" />
     <Compile Include="Service\IService.cs" />
     <Compile Include="Service\LectureService.cs" />
+    <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\Payment\PaypalPaymentService.cs" />
     <Compile Include="Service\Service.cs" />
     <Compile Include="Service\ServiceAll.cs" />
+    <Compile Include="Service\VideoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Context\Context.csproj">
@@ -77,8 +85,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

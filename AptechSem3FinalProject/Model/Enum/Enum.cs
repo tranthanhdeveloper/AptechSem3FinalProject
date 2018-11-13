@@ -12,4 +12,16 @@ namespace Model.Enum
         Author = 2,
         Admin = 3
     }
+
+    public enum CourseStatus
+    {
+        CREATED = 1,
+        DELETED = 2,
+        PUBLISHED = 3
+    }
+
+    public enum PaymentType
+    {
+        FREE = 1
+    }
 }

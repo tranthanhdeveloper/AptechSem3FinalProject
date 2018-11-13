@@ -7,8 +7,11 @@ namespace Web.Models.Mapping
     {
         public CourseProfile()
         {
-            CreateMap<CourseListItemViewModel, Course>();
+            CreateMap<CourseItemViewModel, Course>();
             CreateMap<CourseOutlineViewModel, Lecture>();
+            CreateMap<CourseModuleViewModel, Lecture>();
+            CreateMap<CourseLessonViewModel, Video>();
+            CreateMap<ApplyAuthorViewModel, User>();
         }
     }
 }

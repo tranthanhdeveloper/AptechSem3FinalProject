@@ -24,5 +24,13 @@ namespace Web.Helper
         public static string OrderFail = "Order Fail";
 
         public static string AccountExist = "Identity or Phone is already existed";
+
+        public static string ImageRequired = "Course image is required";
+
+        public static string EditCourseDeny = "Your do not have permistion to Edit this course";
+
+        public static string PublishCourseDenied = "At least one module and video to publish a course";
+
+        public static string ModuleNotFound = "Your module not found to add lesson";
     }
 }

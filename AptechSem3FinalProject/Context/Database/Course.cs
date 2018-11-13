@@ -28,9 +28,10 @@ namespace Context.Database
         public string Comment { get; set; }
         public string Image { get; set; }
         public Nullable<long> Price { get; set; }
-        public Nullable<int> Status { get; set; }
+        public byte Status { get; set; }
         public int CategoryId { get; set; }
         public int UserId { get; set; }
+        public string Prerequisites { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual User User { get; set; }

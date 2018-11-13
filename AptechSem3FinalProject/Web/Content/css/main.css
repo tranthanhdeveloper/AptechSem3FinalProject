@@ -24,7 +24,7 @@
   color: #777777;
   font-weight: 300;
 }
-::-ms-input-placeholder {
+:-ms-input-placeholder {
   color: #777777;
   font-weight: 300;
 }
@@ -1880,7 +1880,7 @@ h6 {
   position: fixed;
   right: 15px;
   z-index: 999;
-  top: 62px;
+  top: 25px;
   border: 0;
   background: none;
   font-size: 24px;
@@ -1977,7 +1977,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: #fff;
 }
 .section-gap {
-  padding: 120px 0;
+  padding: 80px 0;
 }
 .alert-msg {
   color: #008000;
@@ -2570,7 +2570,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin-bottom: 0px;
 }
 .about-banner {
-  background: url(../img/top-banner.jpg) right no-repeat;
+  background: url(../../img/top-banner.jpg) right no-repeat;
   background-size: cover;
 }
 .about-content {
@@ -2876,7 +2876,7 @@ dl.toggle.time-line:before {
   border-top: none;
 }
 .video-right {
-  background: url(../img/video-bg.jpg) no-repeat center;
+  background: url(../../img/video-bg.jpg) no-repeat center;
   background-size: cover;
   height: 330px;
 }
@@ -2893,6 +2893,9 @@ dl.toggle.time-line:before {
 }
 .courses-page .single-popular-carusel {
   margin-bottom: 40px;
+}
+.single-popular-carusel.border-success:hover{
+    border-color:orangered !important;
 }
 .courses-page .primary-btn {
   border: 1px solid transparent;
@@ -3263,46 +3266,6 @@ dl.toggle.time-line:before {
 }
 .gallery-area .single-imgs:hover .overlay-bg {
   opacity: 1;
-}
-.blog-home-banner {
-  background: url(../img/blog/blog-home-banner.jpg) bottom;
-  background-size: cover;
-  padding: 130px 0px;
-}
-.blog-home-banner .primary-btn {
-  border-radius: 0px;
-  background: #fff;
-  color: #222;
-  font-weight: 600;
-  border: 1px solid transparent;
-  -webkit-transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-}
-.blog-home-banner .primary-btn:hover {
-  background: transparent;
-  border-color: #fff;
-  color: #fff;
-}
-.blog-home-banner .overlay-bg {
-  background: rgba(0, 0, 0, 0.5);
-}
-.blog-page {
-  background: #f9f9ff;
-}
-.blog-header-content h1 {
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-@media (max-width: 414px) {
-  .blog-header-content h1 {
-    font-size: 30px;
-  }
-}
-.blog-header-content p {
-  margin: 20px 0px;
 }
 .top-category-widget-area {
   background-color: #f9f9ff;
@@ -4194,6 +4157,9 @@ dl.toggle.time-line:before {
   height: 100%;
   background-color: #111;
 }
+#player {
+    max-height: 800px;
+}
 
 /* END OF scalling video properties */
 
@@ -4312,12 +4278,6 @@ left-contents .jq-tab-content-wrapper {
   font-weight: 300;
 }
 
-<<<<<<< HEAD
-/**/
-.user-logout-link {
-    color: #f7631b !important;
-}
-=======
 .left-contents #verticalTab .jq-tab-content-wrapper {
   border: 1px solid #eee;
 }
@@ -4523,5 +4483,9 @@ left-contents .jq-tab-content-wrapper {
     margin-top: 30px;
   }
 }
-
->>>>>>> master
+.course-detail-description {
+    max-height: 148px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}

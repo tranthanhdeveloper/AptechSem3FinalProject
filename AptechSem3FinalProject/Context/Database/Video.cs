@@ -15,12 +15,16 @@ namespace Context.Database
     public partial class Video
     {
         public int Id { get; set; }
+        public string Title { get; set; }
         public string ImageMain { get; set; }
         public string Path { get; set; }
-        public Nullable<int> TimeLimit { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> Status { get; set; }
         public int LectureId { get; set; }
+        public int CourseId { get; set; }
+        public byte IsPreview { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> TimeLimit { get; set; }
+        public byte IsEnable { get; set; }
     
         public virtual Lecture Lecture { get; set; }
     }
