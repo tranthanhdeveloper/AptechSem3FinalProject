@@ -99,7 +99,6 @@
           <Property Name="Address" Type="varchar" MaxLength="100" />
           <Property Name="Phone" Type="varchar" MaxLength="50" />
           <Property Name="Company" Type="nvarchar" MaxLength="250" />
-          <Property Name="Status" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="Video">
           <Key>
@@ -480,7 +479,6 @@
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Accounts" Relationship="AptechSem3FinalProjectV2Model.FK_Account_User" FromRole="User" ToRole="Account" />
           <NavigationProperty Name="Courses" Relationship="AptechSem3FinalProjectV2Model.FK_Course_User" FromRole="User" ToRole="Course" />
           <NavigationProperty Name="Orders" Relationship="AptechSem3FinalProjectV2Model.FK_Order_User" FromRole="User" ToRole="Order" />
@@ -738,7 +736,6 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Address" ColumnName="Address" />

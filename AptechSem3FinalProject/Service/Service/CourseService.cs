@@ -46,7 +46,7 @@ namespace Service.Service
         public bool ValidateCourseAccessible(int userId, int id)
         {
             var courseToBeCheck = GetById(id);
-            if (courseToBeCheck.Price <= 0 )
+            if (courseToBeCheck.Price <=0 )
             {
                 return true;
             }
@@ -61,18 +61,6 @@ namespace Service.Service
             }
 
             return true;
-        }
-
-        public bool ValidateCourseEditable(int userId, int id)
-        {
-            try
-            {
-                return GetById(id).UserId == userId;
-            }
-            catch
-            {
-                return false;
-            }
         }
     }
 }
