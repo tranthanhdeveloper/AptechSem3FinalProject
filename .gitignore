@@ -1,1 +1,19 @@
-﻿/AptechSem3FinalProject/.vs
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/AptechSem3FinalProject/.vs
+AptechSem3FinalProject/Model/bin
+AptechSem3FinalProject/Model/obj
+AptechSem3FinalProject/Web/bin
+AptechSem3FinalProject/Web/obj
+AptechSem3FinalProject/Context/bin
+AptechSem3FinalProject/Context/obj
+*.cache
+*.force
+/AptechSem3FinalProject/Api/bin
+/AptechSem3FinalProject/Service/bin/Debug
+/AptechSem3FinalProject/Api/obj/Release
+/AptechSem3FinalProject/Service/bin/Release
+/AptechSem3FinalProject/Service/obj/Debug
+/AptechSem3FinalProject
