@@ -1,0 +1,51 @@
+@model Web.Areas.Instructors.Models.ModuleViewModel
+
+<div class="box box-info" id="module_@Model.Id">
+    <div class="box-header with-border">
+        <div class="box-tools-left pull-left">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+
+        <h3 class="box-title">@Model.Name</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="table-responsive">
+            @if (Model.LessonViewModels.Count >=0 )
+            {
+                <table class="table no-margin">
+                    <thead>
+                        <tr>
+                            <th>Lesson title</th>
+                            <th>Creation date</th>
+                            <th>Is Preview</th>
+                            <th>Disable</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var lesson in Model.LessonViewModels)
+                        {
+                            @Html.Partial("../Lesson/Create", lesson)
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div>No lesson found</div>
+            }
+        </div>
+    </div>
+
+    <div class="box-footer clearfix">
+        <button type="button" class="btn btn-default add-lesson-modal" data-toggle="modal" data-target="#add-lesson-modal" data-backdrop="static" data-keyboard="true" data-module-id="@Model.Id">Create new lesson</button>
+</div>
+</div>

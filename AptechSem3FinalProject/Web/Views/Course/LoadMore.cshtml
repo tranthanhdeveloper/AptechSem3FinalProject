@@ -1,0 +1,29 @@
+@model Web.Models.LoadMoreCourseViewModel
+
+@{
+    foreach (var courseItem in Model.CourseItemViewModels)
+    {
+        <div class="single-popular-carusel col-lg-3 col-md-6 border border-success">
+            <div class="thumb-wrap relative">
+                <div class="thumb relative">
+                    <div class="overlay overlay-bg"></div>
+                    <img class="img-fluid" src="@Url.Content("~/img/courses/"+courseItem.Image)" alt="">
+                </div>
+                <div class="meta d-flex justify-content-between">
+                    @*<p><span class="lnr lnr-users"></span> 355 <span class="lnr lnr-bubble"></span>35</p>*@
+                    <h4>$@courseItem.Price</h4>
+                </div>
+            </div>
+            <div class="details">
+                <a href="@Url.Action("CourseDetail", "Course", new {id = courseItem.Id})">
+                    <h4>
+                        @courseItem.Title
+                    </h4>
+                </a>
+                <p class="course-detail-description">
+                    @courseItem.Description
+                </p>
+            </div>
+        </div>
+    }
+}
