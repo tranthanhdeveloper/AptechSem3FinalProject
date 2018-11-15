@@ -1,0 +1,50 @@
+﻿@model Web.Areas.Instructor.Models.AuthorDashboardViewModel
+<section class="content-header">
+    <h1>
+        Author dashboard
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Dashboard", new {area="Instructor"})"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+    </ol>
+</section>
+
+<section class="content">
+    <h2 class="page-header">Courses review</h2>
+    <!-- Begin Course view-->
+    <div class="row course-display-area">
+        <div class="col-md-12">
+            <form action="@Url.Action("Search", "Course")" id="AuthorCourseSearchForm" method="POST" class="form-inline" role="form">
+                <div class="form-group">
+                    <label class="sr-only" for="SearchCourse">Search</label>
+                    <input type="text" name="Title" class="form-control" id="SearchCourse" placeholder="Input field">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="SearchCourse">Category</label>
+                    <select name="CategoryId" class="form-control">
+                        <option value="">Test</option>
+                    </select>
+                </div>
+                <button id="authorCourseSearchSubmit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        @foreach (var course in Model.AuthorCoursesViewModels)
+        {
+            <div class="col-md-12 col-sm-6 col-xs-12">
+                <div class="info-box bg-aqua">
+                    <span class="info-box-icon"><img src="~/img/courses/@course.Image" alt="@course.Title"></span>
+
+                    <div class="info-box-content">
+                        <a href="@Url.Action("Details", "Course", new {id=course.Id})" style=""><span class="info-box-text"><strong>@course.Title</strong> </span></a>
+                        <span class="info-box-number">@course.CreateDate</span>
+                        <span class="progress-description">@course.Description</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+

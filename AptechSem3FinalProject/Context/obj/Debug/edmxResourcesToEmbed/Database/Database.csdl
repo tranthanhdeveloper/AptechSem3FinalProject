@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AptechSem3FinalProjectV2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="AptechSem3FinalProjectEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="AptechSem3FinalProjectV2Model.Account" />
+    <EntitySet Name="Categories" EntityType="AptechSem3FinalProjectV2Model.Category" />
+    <EntitySet Name="Courses" EntityType="AptechSem3FinalProjectV2Model.Course" />
+    <EntitySet Name="Lectures" EntityType="AptechSem3FinalProjectV2Model.Lecture" />
+    <EntitySet Name="Orders" EntityType="AptechSem3FinalProjectV2Model.Order" />
+    <EntitySet Name="Payments" EntityType="AptechSem3FinalProjectV2Model.Payment" />
+    <EntitySet Name="PaymentMethods" EntityType="AptechSem3FinalProjectV2Model.PaymentMethod" />
+    <EntitySet Name="Roles" EntityType="AptechSem3FinalProjectV2Model.Role" />
+    <EntitySet Name="Users" EntityType="AptechSem3FinalProjectV2Model.User" />
+    <EntitySet Name="Videos" EntityType="AptechSem3FinalProjectV2Model.Video" />
+    <AssociationSet Name="FK_Account_Role" Association="AptechSem3FinalProjectV2Model.FK_Account_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Account_User" Association="AptechSem3FinalProjectV2Model.FK_Account_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_Category" Association="AptechSem3FinalProjectV2Model.FK_Course_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Course" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_User" Association="AptechSem3FinalProjectV2Model.FK_Course_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Course" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lecture_Course" Association="AptechSem3FinalProjectV2Model.FK_Lecture_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Lecture" EntitySet="Lectures" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Course" Association="AptechSem3FinalProjectV2Model.FK_Order_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Video_Lecture" Association="AptechSem3FinalProjectV2Model.FK_Video_Lecture">
+      <End Role="Lecture" EntitySet="Lectures" />
+      <End Role="Video" EntitySet="Videos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Payment" Association="AptechSem3FinalProjectV2Model.FK_Order_Payment">
+      <End Role="Payment" EntitySet="Payments" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_User" Association="AptechSem3FinalProjectV2Model.FK_Order_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_PaymentMethod" Association="AptechSem3FinalProjectV2Model.FK_Payment_PaymentMethod">
+      <End Role="PaymentMethod" EntitySet="PaymentMethods" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_User" Association="AptechSem3FinalProjectV2Model.FK_Payment_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="AptechSem3FinalProjectV2Model.FK_Account_Role" FromRole="Account" ToRole="Role" />
+    <NavigationProperty Name="User" Relationship="AptechSem3FinalProjectV2Model.FK_Account_User" FromRole="Account" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Courses" Relationship="AptechSem3FinalProjectV2Model.FK_Course_Category" FromRole="Category" ToRole="Course" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Int64" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Prerequisites" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Category" Relationship="AptechSem3FinalProjectV2Model.FK_Course_Category" FromRole="Course" ToRole="Category" />
+    <NavigationProperty Name="User" Relationship="AptechSem3FinalProjectV2Model.FK_Course_User" FromRole="Course" ToRole="User" />
+    <NavigationProperty Name="Lectures" Relationship="AptechSem3FinalProjectV2Model.FK_Lecture_Course" FromRole="Course" ToRole="Lecture" />
+    <NavigationProperty Name="Orders" Relationship="AptechSem3FinalProjectV2Model.FK_Order_Course" FromRole="Course" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Lecture">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="CourseId" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CourseId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Byte" />
+    <NavigationProperty Name="Course" Relationship="AptechSem3FinalProjectV2Model.FK_Lecture_Course" FromRole="Lecture" ToRole="Course" />
+    <NavigationProperty Name="Videos" Relationship="AptechSem3FinalProjectV2Model.FK_Video_Lecture" FromRole="Lecture" ToRole="Video" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="PaymentId" Type="Int32" />
+    <Property Name="CourseId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Course" Relationship="AptechSem3FinalProjectV2Model.FK_Order_Course" FromRole="Order" ToRole="Course" />
+    <NavigationProperty Name="Payment" Relationship="AptechSem3FinalProjectV2Model.FK_Order_Payment" FromRole="Order" ToRole="Payment" />
+    <NavigationProperty Name="User" Relationship="AptechSem3FinalProjectV2Model.FK_Order_User" FromRole="Order" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="PaymentStatus" Type="Int32" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="PaymentMethodId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="AptechSem3FinalProjectV2Model.FK_Order_Payment" FromRole="Payment" ToRole="Order" />
+    <NavigationProperty Name="PaymentMethod" Relationship="AptechSem3FinalProjectV2Model.FK_Payment_PaymentMethod" FromRole="Payment" ToRole="PaymentMethod" />
+    <NavigationProperty Name="User" Relationship="AptechSem3FinalProjectV2Model.FK_Payment_User" FromRole="Payment" ToRole="User" />
+  </EntityType>
+  <EntityType Name="PaymentMethod">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Payments" Relationship="AptechSem3FinalProjectV2Model.FK_Payment_PaymentMethod" FromRole="PaymentMethod" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Accounts" Relationship="AptechSem3FinalProjectV2Model.FK_Account_Role" FromRole="Role" ToRole="Account" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="BirthDay" Type="DateTime" Precision="3" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Accounts" Relationship="AptechSem3FinalProjectV2Model.FK_Account_User" FromRole="User" ToRole="Account" />
+    <NavigationProperty Name="Courses" Relationship="AptechSem3FinalProjectV2Model.FK_Course_User" FromRole="User" ToRole="Course" />
+    <NavigationProperty Name="Orders" Relationship="AptechSem3FinalProjectV2Model.FK_Order_User" FromRole="User" ToRole="Order" />
+    <NavigationProperty Name="Payments" Relationship="AptechSem3FinalProjectV2Model.FK_Payment_User" FromRole="User" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="Video">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ImageMain" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Path" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="LectureId" Type="Int32" Nullable="false" />
+    <Property Name="CourseId" Type="Int32" Nullable="false" />
+    <Property Name="IsPreview" Type="Byte" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="TimeLimit" Type="Int32" />
+    <Property Name="IsEnable" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Lecture" Relationship="AptechSem3FinalProjectV2Model.FK_Video_Lecture" FromRole="Video" ToRole="Lecture" />
+  </EntityType>
+  <Association Name="FK_Account_Role">
+    <End Type="AptechSem3FinalProjectV2Model.Role" Role="Role" Multiplicity="1" />
+    <End Type="AptechSem3FinalProjectV2Model.Account" Role="Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Account_User">
+    <End Type="AptechSem3FinalProjectV2Model.User" Role="User" Multiplicity="1" />
+    <End Type="AptechSem3FinalProjectV2Model.Account" Role="Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Course_Category">
+    <End Type="AptechSem3FinalProjectV2Model.Category" Role="Category" Multiplicity="1" />
+    <End Type="AptechSem3FinalProjectV2Model.Course" Role="Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Course_User">
+    <End Type="AptechSem3FinalProjectV2Model.User" Role="User" Multiplicity="1" />
+    <End Type="AptechSem3FinalProjectV2Model.Course" Role="Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lecture_Course">
+    <End Type="AptechSem3FinalProjectV2Model.Course" Role="Course" Multiplicity="1" />
+    <End Type="AptechSem3FinalProjectV2Model.Lecture" Role="Lecture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lecture">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Course">
+    <End Type="AptechSem3FinalProjectV2Model.Course" Role="Course" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="AptechSem3FinalProjectV2Model.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Video_Lecture">
+    <End Type="AptechSem3FinalProjectV2Model.Lecture" Role="Lecture" Multiplicity="1" />
+    <End Type="AptechSem3FinalProjectV2Model.Video" Role="Video" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lecture">
+        <PropertyRef Name="Id" />
+        <PropertyRef Name="CourseId" />
+      </Principal>
+      <Dependent Role="Video">
+        <PropertyRef Name="LectureId" />
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Payment">
+    <End Type="AptechSem3FinalProjectV2Model.Payment" Role="Payment" Multiplicity="0..1" />
+    <End Type="AptechSem3FinalProjectV2Model.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="PaymentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_User">
+    <End Type="AptechSem3FinalProjectV2Model.User" Role="User" Multiplicity="1" />
+    <End Type="AptechSem3FinalProjectV2Model.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_PaymentMethod">
+    <End Type="AptechSem3FinalProjectV2Model.PaymentMethod" Role="PaymentMethod" Multiplicity="1" />
+    <End Type="AptechSem3FinalProjectV2Model.Payment" Role="Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentMethod">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="PaymentMethodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_User">
+    <End Type="AptechSem3FinalProjectV2Model.User" Role="User" Multiplicity="1" />
+    <End Type="AptechSem3FinalProjectV2Model.Payment" Role="Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

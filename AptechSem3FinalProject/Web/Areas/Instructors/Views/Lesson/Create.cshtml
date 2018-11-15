@@ -1,0 +1,28 @@
+﻿@model Web.Areas.Instructors.Models.LessonViewModel
+
+<tr data-lesson-id="@Model.">
+    <td><a href="@Url.Action("CoursePlay","Course", new {id=ViewBag.CourseId, area="", video=Model.Id})" target="_blank">@Model.Title</a></td>
+    <td><span>@Model.CreatedDate</span></td>
+    <td>
+        @if (Model.IsPreview==0)
+        {
+            <input type="checkbox" name="IsPreview" checked class="flat-red" disabled>
+        }
+        else
+        {
+            <input type="checkbox" name="IsPreview" class="flat-red" disabled>
+        }
+
+    </td>
+    <td>
+        <input type="checkbox" name="r3" class="flat-red" checked="">
+    </td>
+    <td>
+        <div class="margin">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">Update</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </div>                        
+        </div>
+    </td>
+</tr>

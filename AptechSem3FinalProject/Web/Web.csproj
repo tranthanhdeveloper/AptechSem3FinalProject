@@ -243,7 +243,8 @@
     <Compile Include="Areas\Instructors\Controllers\ModuleController.cs" />
     <Compile Include="Areas\Instructors\InstructorAreaRegistration.cs" />
     <Compile Include="Areas\Instructors\Models\AuthorDashboardViewModel.cs" />
-    <Compile Include="Areas\Instructors\Models\AuthorModuleViewModels.cs" />
+    <Compile Include="Areas\Instructors\Models\LessonViewModel.cs" />
+    <Compile Include="Areas\Instructors\Models\ModuleViewModels.cs" />
     <Compile Include="Areas\Instructors\Models\FileMimeTypes.cs" />
     <Compile Include="Areas\Instructors\Models\InstructorCourseViewModel.cs" />
     <Compile Include="Areas\Instructors\Models\Mapping\CourseAuthorProfile.cs" />

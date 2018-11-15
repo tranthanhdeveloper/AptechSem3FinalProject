@@ -1,0 +1,15 @@
+﻿@model Web.Areas.Instructor.Models.CourseSearchResultViewModel
+@foreach (var course in Model.AuthorCoursesViewModels)
+{
+    <div class="col-md-12 col-sm-6 col-xs-12">
+        <div class="info-box bg-aqua">
+            <span class="info-box-icon"><img src="~/img/courses/@course.Image" alt="@course.Title"></span>
+
+            <div class="info-box-content">
+                <a href="@Url.Action("Details", "Course", new {id=course.Id})" style=""><span class="info-box-text"><strong>@course.Title</strong> </span></a>
+                <span class="info-box-number">@course.CreateDate</span>
+                <span class="progress-description">@course.Description</span>
+            </div>
+        </div>
+    </div>
+}

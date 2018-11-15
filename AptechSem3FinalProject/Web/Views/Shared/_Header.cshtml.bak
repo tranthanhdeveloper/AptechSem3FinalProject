@@ -1,0 +1,64 @@
+﻿@using Web.Helper.Sercurity
+<header id="header" class="header-scrolled">
+    <div class="container main-menu">
+        <div class="row align-items-center justify-content-between d-flex">
+            <div id="logo">
+                <a href="@Url.Action("index", "Home")">
+                    <img src="@Url.Content("~/img/logo.png")" alt="" title="" />
+                </a>
+            </div>
+            <nav id="nav-menu-container">
+                <form action="#" class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </nav>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li>
+                        <a href="@Url.Action("Index", "Course")">Courses</a>
+                    </li>
+                    @{
+                        ViewBag.Title = "Contact";
+                        if (SessionPersister.AccountInformation == null)
+                        {
+                            <li>
+                                <a href="@Url.Action("Login", "Account")">Login</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Register", "Account")" class="user-logout-link">Register</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="menu-has-children">
+                                <a href="#">Account</a>
+                                <ul>
+                                    <li>
+                                        <a href="course-details.html">History</a>
+                                    </li>
+                                    <li>
+                                        <a href="event-details.html">Billing History</a>
+                                    </li>
+                                    <li>
+                                        <div class="clearfix"></div>
+                                    </li>
+                                    <li>
+                                        <a href="elements.html">Become an instructor</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:document.getElementById('userLogoutForm').submit()" id="userLogoutLink">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                    }
+
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
