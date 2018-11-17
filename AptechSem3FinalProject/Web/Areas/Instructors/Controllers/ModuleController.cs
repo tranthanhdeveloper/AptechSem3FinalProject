@@ -38,7 +38,7 @@ namespace Web.Areas.Instructors.Controllers
         // POST: Instructors/Module/Create
         [Helper.Sercurity.Authorize]
         [HttpPost]
-        public ActionResult Create(CreateModuleViewModule formData)
+        public ActionResult Create(CreateModuleViewModel formData)
         {
             var loggedUser = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
             if (!ModelState.IsValid)
@@ -53,55 +53,50 @@ namespace Web.Areas.Instructors.Controllers
             }
             var moduleToBeSaved = new Lecture
             {
-                Name = formData.Title,
+                Name = formData.Name,
                 Status = (byte)1,
                 CourseId = formData.CourseId
             };
             var savedModule = lectureService.Add(moduleToBeSaved);
-            return Content(Helper.RenderHelper.RenderViewToString( ControllerContext, "Create", Mapper.Map<ModuleViewModel>(savedModule)));
-        }
-
-        // GET: Instructors/Module/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
+            return Content(Helper.RenderHelper.RenderViewToString( ControllerContext, "Create", Mapper.Map<ModuleItemViewModel>(savedModule)));
         }
 
         // POST: Instructors/Module/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(EditModuleViewModel formData)
         {
-            try
+            var loggedUser = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
+            if (!lectureService.IsEditable(loggedUser, formData.Id))
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            catch
+            if (!ModelState.IsValid)
             {
-                return View();
+                new HttpStatusCodeResult(HttpStatusCode.NotAcceptable);
             }
+            var moduleToBeUpdated = lectureService.Get(formData.Id);
+            moduleToBeUpdated.Name = formData.Name;
+            lectureService.Update(moduleToBeUpdated);
+            return Json(Newtonsoft.Json.JsonConvert.SerializeObject( Mapper.Map<ModuleItemViewModel>(lectureService.Get(formData.Id))));
         }
 
-        // GET: Instructors/Module/Delete/5
+        [HttpPost]
         public ActionResult Delete(int id)
         {
-            return View();
-        }
-
-        // POST: Instructors/Module/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
             try
             {
-                // TODO: Add delete logic here
+                var loggedUser = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
+                if (!lectureService.IsEditable(loggedUser, id))
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                }
+                lectureService.Delete(id);
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
 
-                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
         }
     }

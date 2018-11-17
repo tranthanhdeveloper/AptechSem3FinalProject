@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
 using Web.Areas.Instructor.Models;
+//using Web.Areas.Instructor.Models;
 using Web.Models.Mapping;
 
 namespace Web

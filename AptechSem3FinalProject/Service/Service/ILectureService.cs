@@ -6,5 +6,9 @@ namespace Service.Service
     public interface ILectureService : IService<Lecture>
     {
         IEnumerable<Lecture> GetByCourseId(int courseId);
+
+        bool IsEditable(int userId, int id);
+
+        Lecture Get(int id);
     }
 }

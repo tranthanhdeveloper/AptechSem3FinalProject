@@ -44,7 +44,7 @@
         </div>
     }
 
-    @foreach (var module in Model.ModuleViewModels)
+    @foreach (var module in Model.ModuleItemViewModels)
     {
         @Html.Partial("../Module/Create", module)
     }
@@ -109,6 +109,32 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="SaveChangeModuleLesson">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="updateModule" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    <h4 class="modal-title add-lesson-modal-title">Update module</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="updateModuleForm" action="@Url.Action("Edit","Module")" method="post" role="form">
+                        <input type="hidden" name="Id" value="" required />
+                        <div class="form-group">
+                            <label for="moduleName">Name</label>
+                            <input type="text" name="Name" class="form-control" id="moduleName" placeholder="Module name">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="SaveUpdateModule">Update</button>
                 </div>
             </div>
         </div>

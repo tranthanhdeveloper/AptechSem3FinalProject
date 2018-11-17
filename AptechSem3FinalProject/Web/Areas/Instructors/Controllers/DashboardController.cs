@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using Web.Areas.Instructor.Models;
+using Web.Areas.Instructors.Models;
 
 namespace Web.Areas.Instructors.Controllers
 {
@@ -26,12 +27,13 @@ namespace Web.Areas.Instructors.Controllers
         {
             var loggedUser = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
             var createdCourses = courseService.GetByCreatedUser(loggedUser).Take(10);
-            var authorDashboardViewModel = new AuthorDashboardViewModel
+            var authorDashboardViewModel = new DashboardViewModels
             {
                 AuthorSummaryInfoViewModel = new AuthorSummaryInfoViewModel(),
-                AuthorCoursesViewModels = Mapper.Map<List<AuthorCoursesListItemViewModel>>(createdCourses)
+                AuthorCoursesViewModels = Mapper.Map<List<CourseItemViewModel>>(createdCourses)
             };
-            foreach(var course in createdCourses)
+
+            foreach (var course in createdCourses)
             {
                 authorDashboardViewModel.AuthorSummaryInfoViewModel.TotalUserEnrolled += course.Orders.Count();
             }
@@ -39,11 +41,11 @@ namespace Web.Areas.Instructors.Controllers
             return View(authorDashboardViewModel);
         }
 
-        public ActionResult UserEnrollment()
-        {
-            UserEnrollmentViewModel userEnrollmentViewModel = new UserEnrollmentViewModel();
-            return View(userEnrollmentViewModel);
-        }
+        //public ActionResult UserEnrollment()
+        //{
+        //    UserEnrollmentViewModel userEnrollmentViewModel = new UserEnrollmentViewModel();
+        //    return View(userEnrollmentViewModel);
+        //}
         
     }
 }

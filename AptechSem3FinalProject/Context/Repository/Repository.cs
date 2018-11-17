@@ -124,6 +124,7 @@ namespace Context.Repository
 
     public interface ILectureRepository : IRepository<Lecture>
     {
+        Lecture GetById(int id);
 
     }
 
@@ -132,6 +133,11 @@ namespace Context.Repository
         public LectureRepository(IDbFactory context) : base(context)
         {
 
+        }
+
+        public Lecture GetById(int id)
+        {
+            return GetAll(module => module.Id == id).First();
         }
     }
 

@@ -78,7 +78,7 @@ namespace Web.Areas.Instructors.Controllers
                     };
                     videoService.Insert(lessonToBeSaved);
                     ViewBag.CourseId = module.CourseId;
-                    return Content(Helper.RenderHelper.RenderViewToString(ControllerContext, "Create", Mapper.Map<LessonViewModel>(lessonToBeSaved)));
+                    return Content(Helper.RenderHelper.RenderViewToString(ControllerContext, "Create", Mapper.Map<LessonItemViewModel>(lessonToBeSaved)));
                 }
             }
             return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
@@ -105,7 +105,7 @@ namespace Web.Areas.Instructors.Controllers
             oldLesson.IsEnable = formData.IsEnable ? (byte)1 : (byte)0;
             oldLesson.IsPreview = formData.IsPreview ? (byte)1 : (byte)0;
             videoService.Update(oldLesson);
-            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(Mapper.Map<LessonViewModel>(videoService.GetById(id))));
+            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(Mapper.Map<LessonItemViewModel>(videoService.GetById(id))));
         }    
 
         // GET: Instructors/Lesson/Delete/5

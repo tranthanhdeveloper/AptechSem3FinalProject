@@ -40,9 +40,9 @@ namespace Web.Areas.Instructors.Controllers
         {
             var loggedUser = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
             var createdCourses = courseService.GetByCreatedUser(loggedUser);
-            var authorDashboardViewModel = new AuthorDashboardViewModel
+            var authorDashboardViewModel = new DashboardViewModels
             {
-                AuthorCoursesViewModels = Mapper.Map<List<AuthorCoursesListItemViewModel>>(createdCourses)
+                AuthorCoursesViewModels = Mapper.Map<List<CourseItemViewModel>>(createdCourses)
             };
             return View(authorDashboardViewModel);
         }
@@ -50,25 +50,25 @@ namespace Web.Areas.Instructors.Controllers
         [Helper.Sercurity.Authorize]
         public ActionResult Details(int id)
         {
-            var instructorCourseViewModel = new CourseItemViewModel { ModuleViewModels = new List<ModuleViewModel>() };
+            var courseItemView = new CourseItemViewModel { ModuleItemViewModels = new List<ModuleItemViewModel>() };
             var loggedUserId = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
             if (!courseService.ValidateCourseEditable(loggedUserId, id))
             {
                 ViewData["EditCourseError"] = MessageConstants.EditCourseDeny;
-                return View(instructorCourseViewModel);
+                return View(courseItemView);
             }
             var course = courseService.GetById(id);
-            instructorCourseViewModel = Mapper.Map<CourseItemViewModel>(course);
-            instructorCourseViewModel.ModuleViewModels = new List<ModuleViewModel>();
+            courseItemView = Mapper.Map<CourseItemViewModel>(course);
+            courseItemView.ModuleItemViewModels = new List<ModuleItemViewModel>();
             foreach (var module in course.Lectures)
             {
-                var lesson = Mapper.Map<List<LessonViewModel>>(module.Videos);
-                var moduleMapped = Mapper.Map<ModuleViewModel>(module);
-                moduleMapped.LessonViewModels = lesson;
-                instructorCourseViewModel.ModuleViewModels.Add(moduleMapped);
+                var lesson = Mapper.Map<List<LessonItemViewModel>>(module.Videos);
+                var moduleMapped = Mapper.Map<ModuleItemViewModel>(module);
+                moduleMapped.LessonItemViewModels = lesson;
+                courseItemView.ModuleItemViewModels.Add(moduleMapped);
             }
             ViewBag.PublishErrorMessage = TempData["PublishCourseDenied"] != null ? TempData["PublishCourseDenied"].ToString():"";
-            return View(instructorCourseViewModel);
+            return View(courseItemView);
         }
 
 
@@ -199,9 +199,9 @@ namespace Web.Areas.Instructors.Controllers
                 createdCourses = courseService.GetAll(course => course.Title.Contains(searchOption.Title));
             }
 
-            var courseSearchResultView = new CourseSearchResultViewModel
+            var courseSearchResultView = new CourseItemViewModel
             {
-                AuthorCoursesViewModels = Mapper.Map<List<AuthorCoursesListItemViewModel>>(createdCourses)
+                ModuleItemViewModels = Mapper.Map<List<ModuleItemViewModel>>(createdCourses)
             };
 
             return Content(Helper.RenderHelper.RenderViewToString(ControllerContext, "Search", courseSearchResultView));

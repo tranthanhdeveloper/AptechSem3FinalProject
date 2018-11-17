@@ -110,6 +110,37 @@ $(function () {
         previewEle.css({ "display": "block" });
     });
 
+    $(document).on("click", '.edit-module-title', function (event) {
+        event.preventDefault();
+        $(this).css({ 'color': 'green' });
+        var updateModal = $('#updateModule');
+        updateModal.find('input').val($(this).data('title'));
+        updateModal.find("form >input[name='Id']").val($(this).data('id'));
+        updateModal.modal({ backdrop: 'static', keyboard: false }).modal('show');
 
+    });
 
+    $(document).on("click", '#SaveUpdateModule', function (event) {
+        event.preventDefault;
+        var formElement = $('#updateModuleForm');
+        var formData = new FormData(formElement[0]);
+        var postUrl = formElement.attr('action');
+        $.ajax({
+            url: postUrl,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                var parsedJson = JSON.parse(result);
+                $('#module_' + parsedJson.Id).find('h3.box-title:first').html(parsedJson.Name);
+                formElement.trigger('reset');
+                $('#updateModule').modal('hide');
+            },
+            error: function (error) {
+                console.log(error);
+                alert('Has error orcurred when trying to update module name');
+            }
+        });
+    });
 });

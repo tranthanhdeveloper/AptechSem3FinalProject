@@ -1,14 +1,13 @@
-@model Web.Areas.Instructors.Models.ModuleViewModel
+@model Web.Areas.Instructors.Models.ModuleItemViewModel
 
 <div class="box box-info" id="module_@Model.Id">
     <div class="box-header with-border">
-        <div class="box-tools-left pull-left">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                <i class="fa fa-minus"></i>
-            </button>
-        </div>
-
         <h3 class="box-title">@Model.Name</h3>
+        <h3 class="box-title">
+            <button type="button" class="btn btn-box-tool edit-module-title" data-id="@Model.Id" data-title="@Model.Name">
+                <i class="fa fa-edit fa-2x"></i>
+            </button>
+        </h3>
 
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse">
@@ -18,7 +17,7 @@
     </div>
     <div class="box-body">
         <div class="table-responsive">
-            @if (Model.LessonViewModels.Count >=0 )
+            @if (Model.LessonItemViewModels.Count >=0 )
             {
                 <table class="table no-margin">
                     <thead>
@@ -31,7 +30,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var lesson in Model.LessonViewModels)
+                        @foreach (var lesson in Model.LessonItemViewModels)
                         {
                             @Html.Partial("../Lesson/Create", lesson)
                         }
