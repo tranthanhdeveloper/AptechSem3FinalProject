@@ -1,5 +1,6 @@
 using AutoMapper;
 using Context.Database;
+using Model.Enum;
 using Service.Service;
 using System;
 using System.Collections.Generic;
@@ -11,19 +12,23 @@ using Web.Areas.Instructors.Models;
 
 namespace Web.Areas.Instructors.Controllers
 {
+    [Helper.Sercurity.Authorize(RoleEnum.Author)]
     public class ModuleController : Controller
     {
         private readonly IUserService userService;
         private readonly ILectureService lectureService;
         private readonly ICourseService courseService;
+        private readonly IVideoService videoService; 
 
-        public ModuleController(IUserService userService, ILectureService lectureService, ICourseService courseService)
+        public ModuleController(IUserService userService, ILectureService lectureService, ICourseService courseService, IVideoService videoService)
         {
             this.userService = userService;
             this.lectureService = lectureService;
             this.courseService = courseService;
+            this.videoService = videoService;
         }
         // GET: Instructors/Module
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         public ActionResult Index()
         {
             return new HttpStatusCodeResult(HttpStatusCode.NotFound);
@@ -36,7 +41,7 @@ namespace Web.Areas.Instructors.Controllers
         }
 
         // POST: Instructors/Module/Create
-        [Helper.Sercurity.Authorize]
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         [HttpPost]
         public ActionResult Create(CreateModuleViewModel formData)
         {
@@ -62,6 +67,7 @@ namespace Web.Areas.Instructors.Controllers
         }
 
         // POST: Instructors/Module/Edit/5
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         [HttpPost]
         public ActionResult Edit(EditModuleViewModel formData)
         {
@@ -80,7 +86,7 @@ namespace Web.Areas.Instructors.Controllers
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject( Mapper.Map<ModuleItemViewModel>(lectureService.Get(formData.Id))));
         }
 
-        [HttpPost]
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         public ActionResult Delete(int id)
         {
             try
@@ -90,8 +96,13 @@ namespace Web.Areas.Instructors.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
                 }
-                lectureService.Delete(id);
-                return new HttpStatusCodeResult(HttpStatusCode.OK);
+                var module = lectureService.Get(id);
+                foreach(var lesson in module.Videos)
+                {
+                    videoService.Delete(lesson);
+                }
+                lectureService.Delete(module);
+                return RedirectToAction("Details", "Course", new {id=module.CourseId});
 
             }
             catch

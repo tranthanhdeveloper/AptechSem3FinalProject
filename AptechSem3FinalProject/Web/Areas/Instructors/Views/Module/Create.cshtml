@@ -8,6 +8,11 @@
                 <i class="fa fa-edit fa-2x"></i>
             </button>
         </h3>
+        <h3 class="box-title">
+            <a onclick="return confirm('Are you sure?')" href="@Url.Action("Delete", "Module", new { Model.Id})" class="btn btn-box-tool delete-module" data-id="@Model.Id">
+                <i class="fa fa-trash fa-2x"></i>
+            </a>
+        </h3>
 
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse">
@@ -17,7 +22,7 @@
     </div>
     <div class="box-body">
         <div class="table-responsive">
-            @if (Model.LessonItemViewModels.Count >=0 )
+            @if (Model.LessonItemViewModels.Count >= 0)
             {
                 <table class="table no-margin">
                     <thead>
@@ -46,5 +51,5 @@
 
     <div class="box-footer clearfix">
         <button type="button" class="btn btn-default add-lesson-modal" data-toggle="modal" data-target="#add-lesson-modal" data-backdrop="static" data-keyboard="true" data-module-id="@Model.Id">Create new lesson</button>
-</div>
+    </div>
 </div>

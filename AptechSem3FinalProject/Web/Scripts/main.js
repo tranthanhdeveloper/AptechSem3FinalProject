@@ -299,7 +299,11 @@ $(document).on('click', '#loadMoreCourse', function () {
         processData: false,
         contentType: false,
         success: function (result) {
-            $('#courseDisplayArea').append(result);
+            if (result.length <= 0) {
+                alert("All course have been loaded");
+            } else {
+                $('#courseDisplayArea').append(result);
+            }            
         },
         error: function () {
             alert('Has error orcurred');

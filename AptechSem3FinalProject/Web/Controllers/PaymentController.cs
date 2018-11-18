@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using Context.Database;
+using Model.Enum;
 using PayPal.Api;
 using Service.Service;
 using Service.Service.Payment;
@@ -55,8 +57,8 @@ namespace Web.Controllers
             }
             catch (Exception exception)
             {
-                throw exception;
-                //return View("PaymentPaypalFailure");
+                Debug.WriteLine(exception.Message);
+                return View("PaymentPaypalFailure");
             }
         }
 
@@ -75,22 +77,21 @@ namespace Web.Controllers
                 }
 
                 var payment = new Context.Database.Payment();
-                payment.PaymentMethod = _paymentMethodService.GetById(1); // Hard code for test this controller
+                payment.PaymentMethod = _paymentMethodService.GetById((int)PaymentMethods.PAYPAL);
                 payment.PaymentStatus = 1;
                 payment.CreatedDate = DateTime.Now;
                 payment.UserId = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
                 var savedPayment = _paymentService.Add(payment);
 
-                var paidCourse =
-                    _courseService.GetById(int.Parse(executedPayment.transactions.First().item_list.items.First().sku));
+                var paidCourse = _courseService.GetById(int.Parse(executedPayment.transactions.First().item_list.items.First().sku));
                 var payeeId = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
                 _orderService.AddOrder(paidCourse, payeeId, payment.Id);
                 return View("PaymentPaypalSuccess");
             }
             catch (Exception exception)
             {
-                throw exception;
-                //return View("PaymentPaypalFailure");
+                Debug.WriteLine(exception.Message);
+                return View("PaymentPaypalFailure");
             }
         }
 

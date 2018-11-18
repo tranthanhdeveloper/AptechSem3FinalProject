@@ -13,7 +13,7 @@ using Web.Helper;
 
 namespace Web.Areas.Instructors.Controllers
 {
-    [Helper.Sercurity.Authorize]
+    [Helper.Sercurity.Authorize(RoleEnum.Author)]
     public class CourseController : Controller
     {
         public const string STORED_IMAGES_DIRECTORY = "~/img/courses";
@@ -35,7 +35,7 @@ namespace Web.Areas.Instructors.Controllers
         }
 
         // GET: Instructors/Course
-        [Helper.Sercurity.Authorize]
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         public ActionResult Index()
         {
             var loggedUser = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
@@ -44,10 +44,12 @@ namespace Web.Areas.Instructors.Controllers
             {
                 AuthorCoursesViewModels = Mapper.Map<List<CourseItemViewModel>>(createdCourses)
             };
+
+            ViewBag.Category = categoryService.GetAll();
             return View(authorDashboardViewModel);
         }
 
-        [Helper.Sercurity.Authorize]
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         public ActionResult Details(int id)
         {
             var courseItemView = new CourseItemViewModel { ModuleItemViewModels = new List<ModuleItemViewModel>() };
@@ -72,7 +74,7 @@ namespace Web.Areas.Instructors.Controllers
         }
 
 
-        [Helper.Sercurity.Authorize]
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         public ActionResult Create()
         {
             ViewBag.Category = categoryService.GetAll();
@@ -80,7 +82,7 @@ namespace Web.Areas.Instructors.Controllers
         }
 
 
-        [Helper.Sercurity.Authorize]
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         [HttpPost]
         public ActionResult Create(CreateCourseViewModel createCourseViewModel, HttpPostedFileBase image)
         {
@@ -109,7 +111,7 @@ namespace Web.Areas.Instructors.Controllers
             return View(createCourseViewModel);
         }
 
-        [Helper.Sercurity.Authorize]
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         public ActionResult Edit(int id)
         {
             var loggedUser = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
@@ -122,7 +124,7 @@ namespace Web.Areas.Instructors.Controllers
             return View(new EditCourseViewModel { Id = id });
         }
 
-        [Helper.Sercurity.Authorize]
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         [HttpPost]
         public ActionResult Edit(EditCourseViewModel editCourseViewModel, HttpPostedFileBase image)
         {
@@ -159,7 +161,7 @@ namespace Web.Areas.Instructors.Controllers
             return View(editCourseViewModel);
         }
 
-        [Helper.Sercurity.Authorize]
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         public ActionResult Publish(int id)
         {
             var loggedUser = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
@@ -185,7 +187,7 @@ namespace Web.Areas.Instructors.Controllers
         }
 
         [HttpPost]
-        [Helper.Sercurity.Authorize]
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         public ActionResult Search(CourseSearchViewModel searchOption)
         {
             var loggedUser = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
@@ -198,13 +200,8 @@ namespace Web.Areas.Instructors.Controllers
             {
                 createdCourses = courseService.GetAll(course => course.Title.Contains(searchOption.Title));
             }
-
-            var courseSearchResultView = new CourseItemViewModel
-            {
-                ModuleItemViewModels = Mapper.Map<List<ModuleItemViewModel>>(createdCourses)
-            };
-
-            return Content(Helper.RenderHelper.RenderViewToString(ControllerContext, "Search", courseSearchResultView));
+            var courseSearchResultView = Mapper.Map<List<CourseItemViewModel>>(createdCourses);
+            return Content(RenderHelper.RenderViewToString(ControllerContext, "Search", courseSearchResultView));
         }
     }
 }

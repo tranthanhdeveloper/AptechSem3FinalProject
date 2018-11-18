@@ -1,4 +1,8 @@
 @model Web.Areas.Instructors.Models.DashboardViewModels
+
+@{
+    var categories = ViewBag.Category;
+}
 <section class="content-header">
     <h1>
         Author dashboard
@@ -22,7 +26,10 @@
                 <div class="form-group">
                     <label class="sr-only" for="SearchCourse">Category</label>
                     <select name="CategoryId" class="form-control">
-                        <option value="">Test</option>
+                        @foreach (var cate in categories)
+                        {
+                            <option value="@cate.id">@cate.CategoryName</option>                        
+                        }
                     </select>
                 </div>
                 <button id="authorCourseSearchSubmit" class="btn btn-primary">Search</button>
@@ -35,7 +42,7 @@
         {
             <div class="col-md-12 col-sm-6 col-xs-12">
                 <div class="info-box bg-aqua">
-                    <span class="info-box-icon"><img src="~/img/courses/@course.Image" alt="@course.Title"></span>
+                    <span class="info-box-icon"><img onerror="this.src='http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg'" src="~/img/courses/@course.Image" alt=""></span>
 
                     <div class="info-box-content">
                         <a href="@Url.Action("Details", "Course", new {id=course.Id})" style=""><span class="info-box-text"><strong>@course.Title</strong> </span></a>

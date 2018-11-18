@@ -12,7 +12,7 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IUserService _serviceUser;
+        private readonly IUserService _serviceUser;
 
         public HomeController(IUserService serviceUser)
         {
@@ -20,16 +20,7 @@ namespace Web.Controllers
         }
         public ActionResult Index()
         {
-
-            
-            //var a = _serviceUser.GetAll();
-            //var u = _serviceUser.GetById(3);
-            //u.Address = "456";
-            //_serviceUser.Update(u);
-           // _serviceUser.Save();
             return View();
-
-
         }
     }
 }

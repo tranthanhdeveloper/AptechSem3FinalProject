@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Model.Enum
 {
-    public enum PaymentMethod
+    public enum PaymentMethods
     {
-        PAYPAL
+        PAYPAL = 1,
+        CASH = 2,
+        EARD=3,
     }
 }

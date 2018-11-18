@@ -1,6 +1,7 @@
 ﻿using Context.Database;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -24,13 +25,24 @@ namespace Web.Areas.Instructors.Models
 
     public class CreateCourseViewModel
     {
+        [Required]
         public string Title { get; set; }
+
+        [Required]
         public string Description { get; set; }
         public string Comment { get; set; }
+
+        [Required]
         public string Image { get; set; }
+
+        [Required]
         public long Price { get; set; }
         public byte Status { get; set; }
+
+        [Required]
         public int CategoryId { get; set; }
+
+        [Required]
         public string Prerequisites { get; set; }
 
     }

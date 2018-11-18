@@ -5,10 +5,11 @@ using System.Web.Mvc;
 using AutoMapper;
 using Web.Areas.Instructor.Models;
 using Web.Areas.Instructors.Models;
+using Model.Enum;
 
 namespace Web.Areas.Instructors.Controllers
 {
-    [Helper.Sercurity.Authorize]
+    [Helper.Sercurity.Authorize(RoleEnum.Author)]
     public class DashboardController : Controller
     {
         private ICourseService courseService;
@@ -22,7 +23,7 @@ namespace Web.Areas.Instructors.Controllers
         }
 
         // GET: Instructor/Dashboard
-        [Helper.Sercurity.Authorize]
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         public ActionResult Index()
         {
             var loggedUser = Helper.Sercurity.SessionPersister.AccountInformation.UserId;

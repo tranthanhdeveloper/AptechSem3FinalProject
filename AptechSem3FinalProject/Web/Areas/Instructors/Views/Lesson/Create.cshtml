@@ -1,6 +1,6 @@
 @model Web.Areas.Instructors.Models.LessonItemViewModel
 
-<tr data-lesson-id="@Model.">
+<tr data-lesson-id="@Model.Id">
     <td><a href="@Url.Action("CoursePlay","Course", new {id=Model.CourseId, area="", video=Model.Id})" target="_blank">@Model.Title</a></td>
     <td><span>@Model.CreatedDate</span></td>
     <td>
@@ -15,13 +15,20 @@
 
     </td>
     <td>
-        <input type="checkbox" name="r3" class="flat-red" checked="">
+        @if (Model.IsEnable)
+        {
+            <input type="checkbox" name="IsEnable" checked class="flat-red" disabled>
+        }
+        else
+        {
+            <input type="checkbox" name="IsEnable" class="flat-red" disabled>
+        }
     </td>
     <td>
-        <div class="margin">
+        <div>
             <div class="btn-group">
-                <button type="button" class="btn btn-default">Update</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <button data-id="@Model.Id" type="button" class="update-lesson btn btn-default">Update</button>
+                <button data-id="@Model.Id" type="button" class="delete-lesson btn btn-danger">Delete</button>
             </div>                        
         </div>
     </td>

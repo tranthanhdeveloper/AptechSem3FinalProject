@@ -1,8 +1,10 @@
 using AutoMapper;
 using Context.Database;
+using Model.Enum;
 using Service.Service;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -10,10 +12,11 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using Web.Areas.Instructors.Models;
+using static System.Net.WebRequestMethods;
 
 namespace Web.Areas.Instructors.Controllers
 {
-    [Helper.Sercurity.Authorize]
+    [Helper.Sercurity.Authorize(RoleEnum.Author)]
     public class LessonController : Controller
     {
         private readonly FileMimeTypes fileMimeTypes = new FileMimeTypes();
@@ -28,12 +31,14 @@ namespace Web.Areas.Instructors.Controllers
             this.lectureService = lectureService;
         }
         // GET: Instructors/Lesson
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         public ActionResult Index()
         {
             return View();
         }
 
         // GET: Instructors/Lesson/Details/5
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         public ActionResult Details(int id)
         {
             ViewBag.CourseId = videoService.GetById(id).Lecture.CourseId;
@@ -42,7 +47,7 @@ namespace Web.Areas.Instructors.Controllers
 
         // POST: Instructors/Lesson/Create
         [HttpPost]
-        [Helper.Sercurity.Authorize]
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         public ActionResult Create(CreateLessonViewModel formData, HttpPostedFileBase uploadVideo)
         {
             var loggedUser = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
@@ -85,12 +90,14 @@ namespace Web.Areas.Instructors.Controllers
         }
 
         // GET: Instructors/Lesson/Edit/5
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         public ActionResult Edit(int id)
         {
-            return View();
+            return Content(Helper.RenderHelper.RenderViewToString(ControllerContext, "Edit", Mapper.Map<LessonItemViewModel>(videoService.GetById(id))));
         }
 
         // POST: Instructors/Lesson/Edit/5
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
         [HttpPost]
         public ActionResult Edit(int id, EditLessonViewModel formData, HttpPostedFileBase uploadVideo)
         {
@@ -104,30 +111,56 @@ namespace Web.Areas.Instructors.Controllers
             oldLesson.Title = formData.Title;
             oldLesson.IsEnable = formData.IsEnable ? (byte)1 : (byte)0;
             oldLesson.IsPreview = formData.IsPreview ? (byte)1 : (byte)0;
-            videoService.Update(oldLesson);
-            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(Mapper.Map<LessonItemViewModel>(videoService.GetById(id))));
-        }    
 
-        // GET: Instructors/Lesson/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+            // begin checking if user has put a video to update lesson
+            if (uploadVideo != null && fileMimeTypes.AcceptedFileType.ContainsValue(uploadVideo.ContentType))
+            {
+                var uidFileName = Guid.NewGuid().ToString() + Path.GetExtension(uploadVideo.FileName);
+                string fileSavePath = "";
+                try
+                {
+                    fileSavePath = Path.Combine(WebConfigurationManager.AppSettings["DefaultVideoDirectory"], uidFileName);
+                    uploadVideo.SaveAs(fileSavePath);
+                }
+                catch
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                }
+                
+                // delete video
+                if (System.IO.File.Exists(Path.Combine(WebConfigurationManager.AppSettings["DefaultVideoDirectory"], oldLesson.Path)))
+                {
+                    System.IO.File.Delete(fileSavePath);
+                    ViewBag.deleteSuccess = "true";
+                }
+                oldLesson.Path = uidFileName;
+            }
+            videoService.Update(oldLesson);
+            var updatedLesson = Mapper.Map<LessonItemViewModel>(videoService.GetById(id));
+            return Content(Helper.RenderHelper.RenderViewToString(ControllerContext, "Create", updatedLesson));
         }
 
-        // POST: Instructors/Lesson/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        // GET: Instructors/Lesson/Delete/5
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
+        public ActionResult Delete(int id)
         {
+            var loggedUser = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
+            var lessonToDelete = videoService.GetById(id);
+            if (lessonToDelete.Lecture.Course.UserId != loggedUser)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotAcceptable);
+            }
+
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                videoService.Delete(lessonToDelete);
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
+            
         }
     }
 }

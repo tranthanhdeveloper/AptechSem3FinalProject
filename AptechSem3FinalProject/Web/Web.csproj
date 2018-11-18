@@ -7543,6 +7543,7 @@
     <Content Include="Content\Instructor\dist\css\adminlte.min.css.map" />
     <Content Include="Content\Instructor\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Content\Instructor\plugins\input-mask\phone-codes\phone-codes.json" />
+    <Content Include="Areas\Instructors\Views\Lesson\Edit.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Instructor\author.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

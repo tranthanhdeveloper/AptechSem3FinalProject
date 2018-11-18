@@ -1,5 +1,10 @@
 $(function () {
-    'use strict'
+    'use strict';
+
+    // display when no image load
+    $('img').on("error", function () {
+        $(this).attr('src', 'http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg');
+    });
 
     $(document).on('click', '#coursePublish', function () {
         var mainCreateCourseForm = $('#creationCourseForm');
@@ -78,7 +83,7 @@ $(function () {
     });
 
     $(document).on('click', '#authorCourseSearchSubmit', function (event) {
-        event.preventDefault;
+        //event.preventDefault;
         var formElement = $('#AuthorCourseSearchForm');
         var formData = new FormData(formElement[0]);
         var postUrl = formElement.attr('action');
@@ -91,7 +96,6 @@ $(function () {
             contentType: false,
             success: function (result) {
                 moduleBoxTbl.html(result);
-                location.reload();
             },
             error: function () {
                 alert('Has error orcurred');
@@ -102,7 +106,7 @@ $(function () {
     $(document).on("change", '.video-input', function (event) {
         var previewEle = $('.video-preview');
         var videoEl = previewEle.find("video");
-        var files = !!this.files ? this.files : [];
+        var files = !this.files ? this.files : [];
         if (!files.length || !window.FileReader) return;
 
         videoEl[0].src = URL.createObjectURL(this.files[0]);
@@ -140,6 +144,64 @@ $(function () {
             error: function (error) {
                 console.log(error);
                 alert('Has error orcurred when trying to update module name');
+            }
+        });
+    });
+
+    $(document).on("click", ".update-lesson", function () {
+        var updateModal = $('#updateLesson');
+        $.ajax({
+            url: UPDATE_LESSON_URL+"/"+$(this).data("id"),
+            type: 'GET',
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                $('#updateLesson .modal-body').html(result);
+                updateModal.modal({ backdrop: 'static', keyboard: false }).modal('show');
+            },
+            error: function () {
+                alert('Has error orcurred');
+            }
+        });      
+    });
+
+    $(document).on("click", ".delete-lesson", function () {
+        var updateModal = $('#updateLesson');
+        var lessonId = $(this).data("id");
+        $.ajax({
+            url: DELETE_LESSON_URL + "/" +lessonId,
+            type: 'GET',
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                $("tr[data-lesson-id="+lessonId+"]").remove();
+            },
+            error: function () {
+                alert('Has error orcurred during try to delete lesson');
+            }
+        });
+    });
+
+    $(document).on('click', "#SaveLessonModule", function () {
+        var lessonRowEl = $(this);
+        var formElement = $('#UpdateLessonForm');
+        var formData = new FormData(formElement[0]);
+        var updatedRowId = $("tr[data-lesson-id=" + formElement.find("input[name=id]").val()+"]");
+        var postUrl = formElement.attr('action');
+        $.ajax({
+            url: postUrl,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                console.log(result);
+                updatedRowId.replaceWith(result);
+                $('#updateLesson').modal('hide');
+                formElement.trigger('reset');
+            },
+            error: function () {
+                alert('Has error orcurred during update lesson information!');
             }
         });
     });

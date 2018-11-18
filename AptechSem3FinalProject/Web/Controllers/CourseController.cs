@@ -56,7 +56,7 @@ namespace Web.Controllers
             courseDetailViewModel.CourseListItemViewModel = Mapper.Map<CourseItemViewModel>(course);
             courseDetailViewModel.Author = _userService.GetById(course.UserId);
             courseDetailViewModel.CourseOutline = Mapper.Map< List<CourseOutlineViewModel>>(_lectureService.GetByCourseId(course.Id));
-            courseDetailViewModel.RelatedCourses =Mapper.Map<List<CourseItemViewModel>>(course.Category.Courses
+            courseDetailViewModel.RelatedCourses = Mapper.Map<List<CourseItemViewModel>>(course.Category.Courses
                     .OrderByDescending(relCourse => relCourse.Id).Take(5));
             courseDetailViewModel.IsPaid = _courseService.ValidateCourseAccessible(loggedUserId, id);
             return View(courseDetailViewModel);

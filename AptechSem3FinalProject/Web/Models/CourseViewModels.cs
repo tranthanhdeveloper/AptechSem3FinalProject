@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Context.Database;
@@ -13,6 +14,10 @@ namespace Web.Models
         public string Description { get; set; }
         public string Image { get; set; }
         public long Price { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        public DateTime CreateDate { get; set; }
+        public User Author { get; set; }
     }
 
     public class ShowCoursesViewModel
