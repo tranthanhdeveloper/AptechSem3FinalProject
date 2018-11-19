@@ -49,14 +49,23 @@ namespace Web.Areas.Instructors.Models
     public class EditCourseViewModel
     {
         public int Id { get; set; }
+
+        [Required]
         public string Title { get; set; }
+
+        [Required]
         public string Description { get; set; }
         public string Comment { get; set; }
-        public string Image { get; set; }
+
+        [Required]
         public long Price { get; set; }
-        public bool Status { get; set; }
+        public byte Status { get; set; }
+
+        [Required]
         public int CategoryId { get; set; }
-        public string Prerequisites { get; set; }        
+
+        [Required]
+        public string Prerequisites { get; set; }
     }
 
     public class CourseSearchViewModel

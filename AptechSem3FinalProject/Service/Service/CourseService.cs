@@ -18,9 +18,9 @@ namespace Service.Service
         {
             try
             {
-                return GetAll(course => course.UserId == createdUser, courses => courses.OrderByDescending(course => course.Id));
+                return GetAll(course => course.UserId == createdUser && course.Status != (byte)CourseStatus.DELETED, courses => courses.OrderByDescending(course => course.Id));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new List<Course>();
             }
@@ -61,6 +61,11 @@ namespace Service.Service
             }
 
             return true;
+        }
+
+        public bool ValidateCourseDeletable(int userId, int id)
+        {
+            throw new NotImplementedException();
         }
 
         public bool ValidateCourseEditable(int userId, int id)

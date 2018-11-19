@@ -54,12 +54,12 @@ namespace Web.Areas.Instructors.Controllers
         {
             var courseItemView = new CourseItemViewModel { ModuleItemViewModels = new List<ModuleItemViewModel>() };
             var loggedUserId = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
-            if (!courseService.ValidateCourseEditable(loggedUserId, id))
+            var course = courseService.GetById(id);
+            if (!courseService.ValidateCourseEditable(loggedUserId, id) || course.Status == (byte)CourseStatus.DELETED)
             {
                 ViewData["EditCourseError"] = MessageConstants.EditCourseDeny;
                 return View(courseItemView);
-            }
-            var course = courseService.GetById(id);
+            }           
             courseItemView = Mapper.Map<CourseItemViewModel>(course);
             courseItemView.ModuleItemViewModels = new List<ModuleItemViewModel>();
             foreach (var module in course.Lectures)
@@ -121,19 +121,20 @@ namespace Web.Areas.Instructors.Controllers
                 return View();
             }
             ViewBag.Category = categoryService.GetAll();
-            return View(new EditCourseViewModel { Id = id });
+            var editCourse = Mapper.Map<EditCourseViewModel>(courseService.GetById(id));
+            return View(editCourse);
         }
 
         [Helper.Sercurity.Authorize(RoleEnum.Author)]
         [HttpPost]
         public ActionResult Edit(EditCourseViewModel editCourseViewModel, HttpPostedFileBase image)
-        {
-            ViewBag.Category = categoryService.GetAll();
+        {            
             var loggedUser = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
             if (!courseService.ValidateCourseEditable(loggedUser, editCourseViewModel.Id))
             {
+                ViewBag.Category = categoryService.GetAll();
                 ViewData["EditCourseError"] = MessageConstants.EditCourseDeny;
-                return View("Edit");
+                return View();
             }
 
             if (ModelState.IsValid)
@@ -152,12 +153,17 @@ namespace Web.Areas.Instructors.Controllers
                     }
                     course.Image = filenameUpdate;
                 }
-                course = Mapper.Map<Course>(editCourseViewModel);
-                course.Status = editCourseViewModel.Status ? (byte)1 : (byte)0;
+                course.Title = editCourseViewModel.Title;
+                course.Description = editCourseViewModel.Description;
+                course.Comment = editCourseViewModel.Comment;
+                course.Price = editCourseViewModel.Price;
+                course.CategoryId = editCourseViewModel.CategoryId;
+                course.Prerequisites = editCourseViewModel.Prerequisites;
                 courseService.Update(course);
 
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Details", "Course", new {course.Id});
             }
+            ViewBag.Category = categoryService.GetAll();
             return View(editCourseViewModel);
         }
 
@@ -202,6 +208,28 @@ namespace Web.Areas.Instructors.Controllers
             }
             var courseSearchResultView = Mapper.Map<List<CourseItemViewModel>>(createdCourses);
             return Content(RenderHelper.RenderViewToString(ControllerContext, "Search", courseSearchResultView));
+        }
+
+        [Helper.Sercurity.Authorize(RoleEnum.Author)]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                var loggedUser = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
+                if (!courseService.ValidateCourseEditable(loggedUser, id))
+                {
+                    TempData["EditCourseError"] = MessageConstants.EditCourseDeny;
+                    return RedirectToAction("Details", new { id });
+                }
+                var courseToBeDelete = courseService.GetById(id);
+                courseToBeDelete.Status = (byte)CourseStatus.DELETED;
+                courseService.Update(courseToBeDelete);
+                return RedirectToAction("Index", new { courseToBeDelete.Id });
+            }
+            catch
+            {
+                return RedirectToAction("Index", new { id });
+            }
         }
     }
 }

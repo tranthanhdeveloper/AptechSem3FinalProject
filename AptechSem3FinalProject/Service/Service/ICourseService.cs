@@ -10,6 +10,7 @@ namespace Service.Service
         IEnumerable<Course> GetPublished();
         bool ValidateCourseAccessible(int userId, int id);
         bool ValidateCourseEditable(int userId, int id);
+        bool ValidateCourseDeletable(int userId, int id);
 
     }
 }
