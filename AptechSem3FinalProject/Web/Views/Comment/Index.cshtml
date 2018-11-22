@@ -1,0 +1,43 @@
+﻿@model List<Context.Database.Comment>
+<h4>@Model.Count Comments</h4>
+@foreach (var comment in Model)
+{
+    <div class="comment-list">
+        <div class="single-comment justify-content-between d-flex">
+            <div class="user justify-content-between d-flex">
+                <div class="thumb">
+                    @*<img src="img/blog/c1.jpg" alt="">*@
+                </div>
+                <div class="desc">
+                    <h5><a href="#">@comment.User.Name</a></h5>
+                    <p class="date">@comment.CreationDate</p>
+                    <p class="comment">
+                        @comment.Content
+                    </p>
+                </div>
+            </div>
+            <div class="reply-btn">
+                <a href="" class="btn-reply text-uppercase">reply</a>
+            </div>
+        </div>
+    </div>
+    foreach (var reply in comment.Comment1)
+    {
+        <div class="comment-list left-padding">
+            <div class="single-comment justify-content-between d-flex">
+                <div class="user justify-content-between d-flex">
+                    <div class="thumb">
+                        @*<img src="img/blog/c2.jpg" alt="">*@
+                    </div>
+                    <div class="desc">
+                        <h5><a href="#">@reply.User.Name</a></h5>
+                        <p class="date">@reply.CreationDate </p>
+                        <p class="comment">
+                            @reply.Content
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

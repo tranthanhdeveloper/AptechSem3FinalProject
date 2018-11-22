@@ -144,12 +144,17 @@ namespace Web.Areas.Instructors.Controllers
                 if (image != null)
                 {
 
-                    var filenameUpdate = Guid.NewGuid().ToString() + image.ContentType;
+                    var filenameUpdate = Guid.NewGuid().ToString()+Path.GetExtension(image.FileName);
                     FileHelper.StoreFile(Server.MapPath(STORED_IMAGES_DIRECTORY), filenameUpdate, image);
-
-                    if (System.IO.File.Exists(Path.Combine(Server.MapPath(STORED_IMAGES_DIRECTORY), course.Image)))
+                    try
                     {
-                        System.IO.File.Delete(Path.Combine(Server.MapPath(STORED_IMAGES_DIRECTORY), course.Image));
+                        if (System.IO.File.Exists(Path.Combine(Server.MapPath(STORED_IMAGES_DIRECTORY), course.Image)))
+                        {
+                            System.IO.File.Delete(Path.Combine(Server.MapPath(STORED_IMAGES_DIRECTORY), course.Image));
+                        }
+                    }catch(Exception e)
+                    {
+
                     }
                     course.Image = filenameUpdate;
                 }
@@ -207,7 +212,7 @@ namespace Web.Areas.Instructors.Controllers
                 createdCourses = courseService.GetAll(course => course.Title.Contains(searchOption.Title));
             }
             var courseSearchResultView = Mapper.Map<List<CourseItemViewModel>>(createdCourses);
-            return Content(RenderHelper.RenderViewToString(ControllerContext, "Search", courseSearchResultView));
+            return PartialView("Search", courseSearchResultView);
         }
 
         [Helper.Sercurity.Authorize(RoleEnum.Author)]

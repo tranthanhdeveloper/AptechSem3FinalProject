@@ -8,20 +8,19 @@
         <div class="row">
             <div class="col-lg-8 left-contents">
                 <div class="main-image">
-                    <img onerror="this.src='http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg'"  class="img-fluid" src="@Url.Content("~/img/courses/"+Model.CourseListItemViewModel.Image)" alt="">
+                    <img onerror="this.src='http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg'" class="img-fluid" src="@Url.Content("~/img/courses/"+Model.CourseListItemViewModel.Image)" alt="">
                 </div>
                 <div class="jq-tab-wrapper" id="horizontalTab">
                     <div class="jq-tab-menu">
                         <div class="jq-tab-title active" data-tab="1">Objectives</div>
                         <div class="jq-tab-title" data-tab="2">Prerequisites</div>
                         <div class="jq-tab-title" data-tab="3">Course Outline</div>
-                        <div class="jq-tab-title" data-tab="4">Comments</div>
-                        <div class="jq-tab-title" data-tab="5">Reviews</div>
+                        <div class="jq-tab-title" data-tab="4" data-tab-name="comment">Comments</div>
                     </div>
                     <div class="jq-tab-content-wrapper">
-                    <div class="jq-tab-content active" data-tab="1">
-                        @Model.CourseListItemViewModel.Description
-                    </div>
+                        <div class="jq-tab-content active" data-tab="1">
+                            @Model.CourseListItemViewModel.Description
+                        </div>
                         <div class="jq-tab-content" data-tab="2">
                             @Model.CourseListItemViewModel.Description
                         </div>
@@ -39,165 +38,17 @@
                             </ul>
                         </div>
                         <div class="jq-tab-content comment-wrap" data-tab="4">
-                            <div id="disqus_thread"></div>
-                            <script>
-                                (function () { // DON'T EDIT BELOW THIS LINE
-                                    var d = document, s = d.createElement('script');
-                                    s.src = 'https://aptechsem3finalproject.disqus.com/embed.js';
-                                    s.setAttribute('data-timestamp', +new Date());
-                                    (d.head || d.body).appendChild(s);
-                                })();
-                            </script>
-                            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                        </div>
-                        <div class="jq-tab-content" data-tab="5">
-                            <div class="review-top row pt-40">
-                                <div class="col-lg-3">
-                                    <div class="avg-review">
-                                        Average <br>
-                                        <span>5.0</span> <br>
-                                        (3 Ratings)
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <h4 class="mb-20">Provide Your Rating</h4>
-                                    <div class="d-flex flex-row reviews">
-                                        <span>Quality</span>
-                                        <div class="star">
-                                            <i class="fa fa-star checked"></i>
-                                            <i class="fa fa-star checked"></i>
-                                            <i class="fa fa-star checked"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <span>Outstanding</span>
-                                    </div>
-                                    <div class="d-flex flex-row reviews">
-                                        <span>Puncuality</span>
-                                        <div class="star">
-                                            <i class="fa fa-star checked"></i>
-                                            <i class="fa fa-star checked"></i>
-                                            <i class="fa fa-star checked"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <span>Outstanding</span>
-                                    </div>
-                                    <div class="d-flex flex-row reviews">
-                                        <span>Quality</span>
-                                        <div class="star">
-                                            <i class="fa fa-star checked"></i>
-                                            <i class="fa fa-star checked"></i>
-                                            <i class="fa fa-star checked"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <span>Outstanding</span>
-                                    </div>
-                                </div>
+                            <div class="comments-area">
+
                             </div>
-                            <div class="feedeback">
-                                <h4 class="pb-20">Your Feedback</h4>
-                                <textarea name="feedback" class="form-control" cols="10" rows="10"></textarea>
-                                <a href="#" class="mt-20 primary-btn text-right text-uppercase">Submit</a>
-                            </div>
-                            <div class="comments-area mb-30">
-                                <div class="comment-list">
-                                    <div class="single-comment single-reviews justify-content-between d-flex">
-                                        <div class="user justify-content-between d-flex">
-                                            <div class="thumb">
-                                                <img src="@Url.Content("~/img/blog/c1.jpg")" alt="">
-                                            </div>
-                                            <div class="desc">
-                                                <h5>
-                                                    <a href="#">Emilly Blunt</a>
-                                                    <div class="star">
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star"></span>
-                                                        <span class="fa fa-star"></span>
-                                                    </div>
-                                                </h5>
-                                                <p class="comment">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ut sed, dolorum asperiores perspiciatis provident, odit maxime doloremque aliquam.
-                                                </p>
-                                            </div>
-                                        </div>
+                            <div class="comment-form">
+                                <h4>Leave a Comment</h4>
+                                <form id="CommentForm" class="form form-horizontal" method="post" action="@Url.Action("Create","Comment", new { Id=Model.CourseListItemViewModel.Id})">
+                                    <div class="form-group">
+                                        <textarea class="form-control mb-10" rows="5" name="Content" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
                                     </div>
-                                </div>
-                                <div class="comment-list">
-                                    <div class="single-comment single-reviews justify-content-between d-flex">
-                                        <div class="user justify-content-between d-flex">
-                                            <div class="thumb">
-                                                <img src="@Url.Content("~/img/blog/c2.jpg")" alt="">
-                                            </div>
-                                            <div class="desc">
-                                                <h5>
-                                                    <a href="#">Elsie Cunningham</a>
-                                                    <div class="star">
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star"></span>
-                                                        <span class="fa fa-star"></span>
-                                                    </div>
-                                                </h5>
-                                                <p class="comment">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ut sed, dolorum asperiores perspiciatis provident, odit maxime doloremque aliquam.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="comment-list">
-                                    <div class="single-comment single-reviews justify-content-between d-flex">
-                                        <div class="user justify-content-between d-flex">
-                                            <div class="thumb">
-                                                <img src="@Url.Content("~/img/blog/c3.jpg")" alt="">
-                                            </div>
-                                            <div class="desc">
-                                                <h5>
-                                                    <a href="#">Maria Luna</a>
-                                                    <div class="star">
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star"></span>
-                                                        <span class="fa fa-star"></span>
-                                                    </div>
-                                                </h5>
-                                                <p class="comment">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ut sed, dolorum asperiores perspiciatis provident, odit maxime doloremque aliquam.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="comment-list">
-                                    <div class="single-comment single-reviews justify-content-between d-flex">
-                                        <div class="user justify-content-between d-flex">
-                                            <div class="thumb">
-                                                <img src="@Url.Content("~/img/blog/c4.jpg")" alt="">
-                                            </div>
-                                            <div class="desc">
-                                                <h5>
-                                                    <a href="#">Maria Luna</a>
-                                                    <div class="star">
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star"></span>
-                                                        <span class="fa fa-star"></span>
-                                                    </div>
-                                                </h5>
-                                                <p class="comment">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ut sed, dolorum asperiores perspiciatis provident, odit maxime doloremque aliquam.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <button id="PostCommentBtn" class="mt-40 text-uppercase genric-btn primary text-center">Post Comment</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -227,18 +78,6 @@
 
                         </a>
                     </li>
-                    @*<li>
-                <a class="justify-content-between d-flex" href="#">
-                    <p>Available Seats </p>
-                    <span>15</span>
-                </a>
-            </li>
-            <li>
-                <a class="justify-content-between d-flex" href="#">
-                    <p>Schedule </p>
-                    <span>2.00 pm to 4.00 pm</span>
-                </a>
-            </li>*@
                 </ul>
                 @{
                     if (Model.CourseListItemViewModel.Price == 0)
@@ -263,3 +102,56 @@
         </div>
     </div>
 </section>
+
+@section Scripts
+{
+<script>
+
+    $(document).ready(function () {
+
+        var isCommmentClicked = false;
+        $(document).on('click', "[data-tab-name='comment']", function () {
+            if (!isCommmentClicked) {
+                var POST_CMT_URL = '@Url.Action("Index", "Comment", new {Id=Model.CourseListItemViewModel.Id})';
+
+                $.ajax({
+                    url: POST_CMT_URL,
+                    type: 'GET',
+                    processData: false,
+                    contentType: false,
+                    success: function (result) {
+                        $(".comments-area").append(result);
+                    },
+                    error: function () {
+                        alert('Has error orcurred');
+                    }
+                });
+            }
+            isCommmentClicked = true;
+        });
+
+        $(document).on('click', "#PostCommentBtn", function () {
+            event.preventDefault();
+            var formElement = $('#CommentForm');
+            var formData = new FormData(formElement[0]);
+            var postUrl = formElement.attr('action');
+            var commentDisplayArea = $('.comments-area');
+            $.ajax({
+                url: postUrl,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                    commentDisplayArea.append(result);
+                    $('.comments-area').find('h4').text($('.comments-area .comment-list').length+ " comments");
+                    formElement.trigger('reset');
+                },
+                error: function () {
+                    alert('Has error orcurred when posting your comment');
+                }
+            });
+        });
+    });
+</script>
+}

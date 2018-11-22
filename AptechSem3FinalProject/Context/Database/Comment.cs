@@ -12,26 +12,25 @@ namespace Context.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Payment
+    public partial class Comment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Payment()
+        public Comment()
         {
-            this.Orders = new HashSet<Order>();
+            this.Comment1 = new HashSet<Comment>();
         }
     
         public int Id { get; set; }
-        public string PaymentName { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<int> PaymentStatus { get; set; }
         public int UserId { get; set; }
-        public int PaymentMethodId { get; set; }
-        public Nullable<int> PayerId { get; set; }
+        public int CourseId { get; set; }
+        public string Content { get; set; }
+        public System.DateTime CreationDate { get; set; }
+        public Nullable<int> parentId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
-        public virtual PaymentMethod PaymentMethod { get; set; }
+        public virtual ICollection<Comment> Comment1 { get; set; }
+        public virtual Comment Comment2 { get; set; }
+        public virtual Course Course { get; set; }
         public virtual User User { get; set; }
-        public virtual Payer Payer { get; set; }
     }
 }

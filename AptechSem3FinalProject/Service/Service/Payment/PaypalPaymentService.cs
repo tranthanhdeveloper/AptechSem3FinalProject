@@ -34,7 +34,7 @@ namespace Service.Service.Payment
                 itemList.items.Add(item);
             }                
 
-            var payer = new Payer {payment_method = "paypal"};
+            var payer = new PayPal.Api.Payer { payment_method = "paypal"};
 
             // Configure Redirect Urls here with RedirectUrls object
             var redirectUrls = new RedirectUrls
@@ -42,21 +42,11 @@ namespace Service.Service.Payment
                 cancel_url = redirectUrl + "&Cancel=true",
                 return_url = redirectUrl
             };
-
-            // Adding Tax, shipping and Subtotal details
-            var details = new Details
-            {
-                tax = "1",
-                shipping = "1",
-                subtotal = "1"
-            };
-
-            //Final amount with details
+            
             var amount = new Amount
             {
                 currency = _currency,
                 total = totalPrice.ToString()
-                //details = details
             };
 
             var transactionList = new List<Transaction>

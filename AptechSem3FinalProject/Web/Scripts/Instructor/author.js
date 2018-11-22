@@ -83,7 +83,7 @@ $(function () {
     });
 
     $(document).on('click', '#authorCourseSearchSubmit', function (event) {
-        //event.preventDefault;
+        event.preventDefault;
         var formElement = $('#AuthorCourseSearchForm');
         var formData = new FormData(formElement[0]);
         var postUrl = formElement.attr('action');
@@ -106,11 +106,9 @@ $(function () {
     $(document).on("change", '.video-input', function (event) {
         var previewEle = $('.video-preview');
         var videoEl = previewEle.find("video");
-        var files = !this.files ? this.files : [];
+        var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) return;
-
-        videoEl[0].src = URL.createObjectURL(this.files[0]);
-               
+        videoEl[0].src = URL.createObjectURL(this.files[0]);               
         previewEle.css({ "display": "block" });
     });
 

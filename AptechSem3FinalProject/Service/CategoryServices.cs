@@ -6,9 +6,9 @@ using Context.Repository;
 
 namespace Service.Service
 {
-    public class CategoryService : Service<Category>, ICategoryService
+    public class CategoryServices : Service<Category>, ICategoryService
     {
-        public CategoryService(IUow uow, IRepository<Category> repository) : base(uow, repository)
+        public CategoryServices(IUow uow, IRepository<Category> repository) : base(uow, repository)
         {
         }
     }

@@ -26,9 +26,10 @@
                 <div class="form-group">
                     <label class="sr-only" for="SearchCourse">Category</label>
                     <select name="CategoryId" class="form-control">
+                        <option value="">All</option>
                         @foreach (var cate in categories)
                         {
-                            <option value="@cate.id">@cate.CategoryName</option>                        
+                            <option value="@cate.id">@cate.CategoryName</option>
                         }
                     </select>
                 </div>
@@ -37,20 +38,12 @@
         </div>
     </div>
     <hr />
+   
     <div class="row">
         @foreach (var course in Model.AuthorCoursesViewModels)
         {
-            <div class="col-md-12 col-sm-6 col-xs-12">
-                <div class="info-box bg-aqua">
-                    <span class="info-box-icon"><img onerror="this.src='http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg'" src="~/img/courses/@course.Image" alt=""></span>
-
-                    <div class="info-box-content">
-                        <a href="@Url.Action("Details", "Course", new {id=course.Id})" style=""><span class="info-box-text"><strong>@course.Title</strong> </span></a>
-                        <span class="info-box-number">@course.CreateDate</span>
-                        <span class="progress-description">@course.Description</span>
-                    </div>
-                </div>
-            </div>
+            @Html.Partial("CourseItem",course)
         }
     </div>
+
 </section>

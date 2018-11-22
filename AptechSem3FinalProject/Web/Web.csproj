@@ -248,6 +248,7 @@
     <Compile Include="Areas\Instructors\Models\LessonViewModel.cs" />
     <Compile Include="Areas\Instructors\Models\Mapping\CourseAuthorProfile.cs" />
     <Compile Include="Areas\Instructors\Models\ModuleViewModels.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\RenderHelper.cs" />
@@ -299,6 +300,7 @@
     <Content Include="Areas\Instructors\Views\Shared\_LeftSidebar.cshtml" />
     <Content Include="Areas\Instructors\Views\web.config" />
     <Content Include="Areas\Instructors\Views\_ViewStart.cshtml" />
+    <Content Include="Content\css\simplebar.min.css" />
     <Content Include="Content\Instructor\authorsite.css" />
     <Content Include="Content\Instructor\bower_components\bootstrap-colorpicker\dist\css\bootstrap-colorpicker.css" />
     <Content Include="Content\Instructor\bower_components\bootstrap-colorpicker\dist\css\bootstrap-colorpicker.min.css" />
@@ -7544,6 +7546,7 @@
     <Content Include="Content\Instructor\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Content\Instructor\plugins\input-mask\phone-codes\phone-codes.json" />
     <Content Include="Areas\Instructors\Views\Lesson\Edit.cshtml" />
+    <Content Include="Areas\Instructors\Views\Course\CourseItem.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Instructor\author.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -7564,6 +7567,7 @@
     <Content Include="Scripts\js\jquery.tabs.min.js" />
     <Content Include="Scripts\js\mail-script.js" />
     <Content Include="Scripts\js\owl.carousel.min.js" />
+    <Content Include="Scripts\js\simplebar.min.js" />
     <Content Include="Scripts\js\superfish.min.js" />
     <Content Include="Scripts\js\vendor\bootstrap.min.js" />
     <Content Include="Scripts\js\vendor\jquery-2.2.4.min.js" />
@@ -7646,6 +7650,8 @@
     <Content Include="Views\Instructor\ApplySuccessful.cshtml" />
     <Content Include="Views\Instructor\Index.cshtml" />
     <Content Include="Views\Course\LoadMore.cshtml" />
+    <Content Include="Views\Comment\Index.cshtml" />
+    <Content Include="Views\Comment\CommentItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

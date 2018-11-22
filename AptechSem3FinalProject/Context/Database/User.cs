@@ -21,6 +21,7 @@ namespace Context.Database
             this.Courses = new HashSet<Course>();
             this.Orders = new HashSet<Order>();
             this.Payments = new HashSet<Payment>();
+            this.Comments = new HashSet<Comment>();
         }
     
         public int Id { get; set; }
@@ -40,5 +41,7 @@ namespace Context.Database
         public virtual ICollection<Order> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payment> Payments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

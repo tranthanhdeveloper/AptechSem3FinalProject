@@ -4353,7 +4353,7 @@ left-contents .jq-tab-content-wrapper {
 
 @media (max-width: 414px) {
   .left-contents .comments-area .comment-list .single-comment h5 {
-    font-size: 12px;
+    font-size: 10px;
   }
 }
 
@@ -4362,7 +4362,7 @@ left-contents .jq-tab-content-wrapper {
 }
 
 .left-contents .comments-area .comment-list .single-comment .comment {
-  font-size: 10px;
+  font-size: 20px;
 }
 
 .left-contents .comments-area .thumb {

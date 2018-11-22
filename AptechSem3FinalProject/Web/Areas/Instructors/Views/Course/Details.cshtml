@@ -13,7 +13,6 @@
 <section class="content" id="courseDetailSection">
     @if (errorMessage != null && (string)errorMessage != "")
     {
-
         if (publishErrorMsg != null)
         {
             <div class="box box-warning">
@@ -39,159 +38,161 @@
                 </div>
             </div>
         }
-        else
+        else { }
+    }
+    else
+    {
+        if (errorMessage != null)
         {
-            if (errorMessage != null)
-            {
-                <div class="callout callout-warning">
-                    <h4>Warning</h4>
-                    <p>
-                        @errorMessage
-                    </p>
-                </div>
-            }
-            <!-- Begin Form Modal to be update Module and Lesson -->
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">@Model.Title</h3>
-                    <div class="box-tools pull-right">
-                        @if (Model.Status == (byte)CourseStatus.PUBLISHED)
-                        {
-                            <a href="@Url.Action("Publish", "Course", new { Model.Id })" id="coursePublish" class="pull-right btn btn-large btn-warning">UnPublish</a>
-                        }
-                        else
-                        {
-                            <a href="@Url.Action("Publish", "Course", new { Model.Id })" id="coursePublish" class="pull-right btn btn-large btn-info">Publish</a>
-                        }
-
-                        <a href="@Url.Action("Edit", "Course", new { Model.Id })" class="pull-right btn btn-large btn-success">Edit</a>
-                        <a onclick="return confirm('Are you sure to delete this course?')" href="@Url.Action("Delete", "Course", new { Model.Id })" class="pull-right btn btn-large btn-danger">Delete</a>
-                    </div>
-                </div>
-                <div class="box-body">
-                    @foreach (var module in Model.ModuleItemViewModels)
-                    {
-                        @Html.Partial("../Module/Create", module)
-                    }
-                </div>
-
-                <div class="box-footer clearfix">
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#add-module-modal" data-backdrop="static" data-keyboard="false">
-                        Create new module
-                    </button>
-                </div>
-            </div>
-
-            <div class="modal" id="add-module-modal" style="display: none;">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">x</span>
-                            </button>
-                            <h4 class="modal-title">Module Information</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form id="AddModuleForm" action="@Url.Action("Create", "Module")" method="post" role="form">
-                                <input type="hidden" name="CourseId" value="@Model.Id" required />
-                                <div class="form-group">
-                                    <label for="moduleTitle">Title</label>
-                                    <input type="text" name="Name" class="form-control" id="moduleTitle" placeholder="Module title">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="btnCreateNewModule">Create</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="addLessonModal" style="display: none;">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">x</span>
-                            </button>
-                            <h4 class="modal-title add-lesson-modal-title">Add new lesson</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form id="AddModuleLessonForm" action="@Url.Action("Create", "Lesson")" method="post" role="form" enctype="multipart/form-data">
-                                <input type="hidden" name="ModuleId" value="" required />
-                                <div class="form-group">
-                                    <label for="lessonTitle">Title</label>
-                                    <input type="text" name="Title" class="form-control" id="lessonTitle" placeholder="Lesson title">
-                                </div>
-
-                                <div class="form-check">
-                                    <input type="checkbox" name="IsPreview" value="false" id="isPreview">
-                                    <label class="form-check-label" for="isPreview">Preview lesson</label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="btn btn-default btn-file">
-                                        Choose Video<input class="video-input" type="file" name="uploadVideo" accept="video/*" required style="display: none;">
-                                    </label>
-                                    <div class="video-preview container" style="display:none;">
-                                        <video class="pull-left" autoplay preload="auto" controls="controls" height="180" width="320"></video>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="SaveChangeModuleLesson">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="updateModule" style="display: none;">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">x</span>
-                            </button>
-                            <h4 class="modal-title add-lesson-modal-title">Update module</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form id="updateModuleForm" action="@Url.Action("Edit", "Module")" method="post" role="form">
-                                <input type="hidden" name="Id" value="" required />
-                                <div class="form-group">
-                                    <label for="moduleName">Name</label>
-                                    <input type="text" name="Name" class="form-control" id="moduleName" placeholder="Module name">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="SaveUpdateModule">Update</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="updateLesson" style="display: none;">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">x</span>
-                            </button>
-                            <h4 class="modal-title add-lesson-modal-title">Update module</h4>
-                        </div>
-                        <div class="modal-body">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="SaveLessonModule">Update</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="callout callout-warning">
+                <h4>Warning</h4>
+                <p>
+                    @errorMessage
+                </p>
             </div>
         }
+        <!-- Begin Form Modal to be update Module and Lesson -->
+        <div class="box box-danger">
+            <div class="box-header with-border">
+                <h3 class="box-title">@Model.Title</h3>
+                <div class="box-tools pull-right">
+                    @if (Model.Status == (byte)CourseStatus.PUBLISHED)
+                    {
+                        <a href="@Url.Action("Publish", "Course", new { Model.Id })" id="coursePublish" class="pull-right btn btn-large btn-warning">UnPublish</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Publish", "Course", new { Model.Id })" id="coursePublish" class="pull-right btn btn-large btn-info">Publish</a>
+                    }
+
+                    <a href="@Url.Action("Edit", "Course", new { Model.Id })" class="pull-right btn btn-large btn-success">Edit</a>
+                    <a onclick="return confirm('Are you sure to delete this course?')" href="@Url.Action("Delete", "Course", new { Model.Id })" class="pull-right btn btn-large btn-danger">Delete</a>
+                </div>
+            </div>
+            <div class="box-body">
+                @foreach (var module in Model.ModuleItemViewModels)
+                {
+                    @Html.Partial("../Module/Create", module)
+                }
+            </div>
+
+            <div class="box-footer clearfix">
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#add-module-modal" data-backdrop="static" data-keyboard="false">
+                    Create new module
+                </button>
+            </div>
+        </div>
+
+        <div class="modal" id="add-module-modal" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                        <h4 class="modal-title">Module Information</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="AddModuleForm" action="@Url.Action("Create", "Module")" method="post" role="form">
+                            <input type="hidden" name="CourseId" value="@Model.Id" required />
+                            <div class="form-group">
+                                <label for="moduleTitle">Title</label>
+                                <input type="text" name="Name" class="form-control" id="moduleTitle" placeholder="Module title">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnCreateNewModule">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addLessonModal" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                        <h4 class="modal-title add-lesson-modal-title">Add new lesson</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="AddModuleLessonForm" action="@Url.Action("Create", "Lesson")" method="post" role="form" enctype="multipart/form-data">
+                            <input type="hidden" name="ModuleId" value="" required />
+                            <div class="form-group">
+                                <label for="lessonTitle">Title</label>
+                                <input type="text" name="Title" class="form-control" id="lessonTitle" placeholder="Lesson title">
+                            </div>
+
+                            <div class="form-check">
+                                <input type="checkbox" name="IsPreview" value="false" id="isPreview">
+                                <label class="form-check-label" for="isPreview">Preview lesson</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="btn btn-default btn-file">
+                                    Choose Video<input class="video-input" type="file" name="uploadVideo" accept="video/*" required style="display: none;">
+                                </label>
+                                <div class="video-preview container" style="display:none;">
+                                    <video class="pull-left" autoplay preload="auto" controls="controls" height="180" width="320"></video>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="SaveChangeModuleLesson">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="updateModule" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                        <h4 class="modal-title add-lesson-modal-title">Update module</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="updateModuleForm" action="@Url.Action("Edit", "Module")" method="post" role="form">
+                            <input type="hidden" name="Id" value="" required />
+                            <div class="form-group">
+                                <label for="moduleName">Name</label>
+                                <input type="text" name="Name" class="form-control" id="moduleName" placeholder="Module name">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="SaveUpdateModule">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="updateLesson" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                        <h4 class="modal-title add-lesson-modal-title">Update module</h4>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="SaveLessonModule">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
 </section>
 

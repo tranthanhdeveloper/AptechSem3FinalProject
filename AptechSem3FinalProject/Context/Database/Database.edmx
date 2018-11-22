@@ -24,6 +24,17 @@
           <Property Name="ParentId" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
         </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="CreationDate" Type="date" Nullable="false" />
+          <Property Name="parentId" Type="int" />
+        </EntityType>
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="Id" />
@@ -61,6 +72,18 @@
           <Property Name="PaymentId" Type="int" />
           <Property Name="CourseId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Payer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+          <Property Name="Phone" Type="nchar" MaxLength="13" Nullable="false" />
+          <Property Name="LastName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MiddleName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="FirstName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="Payment">
           <Key>
             <PropertyRef Name="Id" />
@@ -71,6 +94,7 @@
           <Property Name="PaymentStatus" Type="int" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="PaymentMethodId" Type="int" Nullable="false" />
+          <Property Name="PayerId" Type="int" />
         </EntityType>
         <EntityType Name="PaymentMethod">
           <Key>
@@ -137,6 +161,42 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Account">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Comment">
+          <End Role="Comment" Type="Self.Comment" Multiplicity="0..1" />
+          <End Role="Comment1" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment1">
+              <PropertyRef Name="parentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -215,6 +275,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Payment_Payer">
+          <End Role="Payer" Type="Self.Payer" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Payment_PaymentMethod">
           <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="1" />
           <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
@@ -256,9 +328,11 @@
         <EntityContainer Name="AptechSem3FinalProjectV2ModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lecture" EntityType="Self.Lecture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payer" EntityType="Self.Payer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentMethod" EntityType="Self.PaymentMethod" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
@@ -271,6 +345,18 @@
           <AssociationSet Name="FK_Account_User" Association="Self.FK_Account_User">
             <End Role="User" EntitySet="User" />
             <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Comment" Association="Self.FK_Comment_Comment">
+            <End Role="Comment" EntitySet="Comment" />
+            <End Role="Comment1" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Course" Association="Self.FK_Comment_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_User" Association="Self.FK_Comment_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
           <AssociationSet Name="FK_Course_Category" Association="Self.FK_Course_Category">
             <End Role="Category" EntitySet="Category" />
@@ -295,6 +381,10 @@
           <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Payer" Association="Self.FK_Payment_Payer">
+            <End Role="Payer" EntitySet="Payer" />
+            <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
           <AssociationSet Name="FK_Payment_PaymentMethod" Association="Self.FK_Payment_PaymentMethod">
             <End Role="PaymentMethod" EntitySet="PaymentMethod" />
@@ -368,7 +458,25 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Comments" EntityType="AptechSem3FinalProjectV2Model.Comment" />
+          <AssociationSet Name="FK_Comment_Comment" Association="AptechSem3FinalProjectV2Model.FK_Comment_Comment">
+            <End Role="Comment" EntitySet="Comments" />
+            <End Role="Comment1" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Course" Association="AptechSem3FinalProjectV2Model.FK_Comment_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_User" Association="AptechSem3FinalProjectV2Model.FK_Comment_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <EntitySet Name="Payers" EntityType="AptechSem3FinalProjectV2Model.Payer" />
+          <AssociationSet Name="FK_Payment_Payer" Association="AptechSem3FinalProjectV2Model.FK_Payment_Payer">
+            <End Role="Payer" EntitySet="Payers" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
@@ -410,6 +518,7 @@
           <NavigationProperty Name="User" Relationship="AptechSem3FinalProjectV2Model.FK_Course_User" FromRole="Course" ToRole="User" />
           <NavigationProperty Name="Lectures" Relationship="AptechSem3FinalProjectV2Model.FK_Lecture_Course" FromRole="Course" ToRole="Lecture" />
           <NavigationProperty Name="Orders" Relationship="AptechSem3FinalProjectV2Model.FK_Order_Course" FromRole="Course" ToRole="Order" />
+          <NavigationProperty Name="Comments" Relationship="AptechSem3FinalProjectV2Model.FK_Comment_Course" FromRole="Course" ToRole="Comment" />
         </EntityType>
         <EntityType Name="Lecture">
           <Key>
@@ -450,6 +559,8 @@
           <NavigationProperty Name="Orders" Relationship="AptechSem3FinalProjectV2Model.FK_Order_Payment" FromRole="Payment" ToRole="Order" />
           <NavigationProperty Name="PaymentMethod" Relationship="AptechSem3FinalProjectV2Model.FK_Payment_PaymentMethod" FromRole="Payment" ToRole="PaymentMethod" />
           <NavigationProperty Name="User" Relationship="AptechSem3FinalProjectV2Model.FK_Payment_User" FromRole="Payment" ToRole="User" />
+          <Property Name="PayerId" Type="Int32" />
+          <NavigationProperty Name="Payer" Relationship="AptechSem3FinalProjectV2Model.FK_Payment_Payer" FromRole="Payment" ToRole="Payer" />
         </EntityType>
         <EntityType Name="PaymentMethod">
           <Key>
@@ -485,6 +596,7 @@
           <NavigationProperty Name="Courses" Relationship="AptechSem3FinalProjectV2Model.FK_Course_User" FromRole="User" ToRole="Course" />
           <NavigationProperty Name="Orders" Relationship="AptechSem3FinalProjectV2Model.FK_Order_User" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="Payments" Relationship="AptechSem3FinalProjectV2Model.FK_Payment_User" FromRole="User" ToRole="Payment" />
+          <NavigationProperty Name="Comments" Relationship="AptechSem3FinalProjectV2Model.FK_Comment_User" FromRole="User" ToRole="Comment" />
         </EntityType>
         <EntityType Name="Video">
           <Key>
@@ -639,6 +751,82 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="parentId" Type="Int32" />
+          <NavigationProperty Name="Comment1" Relationship="AptechSem3FinalProjectV2Model.FK_Comment_Comment" FromRole="Comment" ToRole="Comment1" />
+          <NavigationProperty Name="Comment2" Relationship="AptechSem3FinalProjectV2Model.FK_Comment_Comment" FromRole="Comment1" ToRole="Comment" />
+          <NavigationProperty Name="Course" Relationship="AptechSem3FinalProjectV2Model.FK_Comment_Course" FromRole="Comment" ToRole="Course" />
+          <NavigationProperty Name="User" Relationship="AptechSem3FinalProjectV2Model.FK_Comment_User" FromRole="Comment" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Comment_Comment">
+          <End Type="AptechSem3FinalProjectV2Model.Comment" Role="Comment" Multiplicity="0..1" />
+          <End Type="AptechSem3FinalProjectV2Model.Comment" Role="Comment1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment1">
+              <PropertyRef Name="parentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Course">
+          <End Type="AptechSem3FinalProjectV2Model.Course" Role="Course" Multiplicity="1" />
+          <End Type="AptechSem3FinalProjectV2Model.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_User">
+          <End Type="AptechSem3FinalProjectV2Model.User" Role="User" Multiplicity="1" />
+          <End Type="AptechSem3FinalProjectV2Model.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Payer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="MiddleName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Payments" Relationship="AptechSem3FinalProjectV2Model.FK_Payment_Payer" FromRole="Payer" ToRole="Payment" />
+        </EntityType>
+        <Association Name="FK_Payment_Payer">
+          <End Type="AptechSem3FinalProjectV2Model.Payer" Role="Payer" Multiplicity="0..1" />
+          <End Type="AptechSem3FinalProjectV2Model.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -708,6 +896,7 @@
           <EntitySetMapping Name="Payments">
             <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.Payment">
               <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="PayerId" ColumnName="PayerId" />
                 <ScalarProperty Name="PaymentMethodId" ColumnName="PaymentMethodId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
@@ -762,6 +951,31 @@
                 <ScalarProperty Name="Path" ColumnName="Path" />
                 <ScalarProperty Name="ImageMain" ColumnName="ImageMain" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="parentId" ColumnName="parentId" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payers">
+            <EntityTypeMapping TypeName="AptechSem3FinalProjectV2Model.Payer">
+              <MappingFragment StoreEntitySet="Payer">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

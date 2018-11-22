@@ -281,7 +281,6 @@ $(document).ready(function() {
     $('.panel-group').on('hidden.bs.collapse', toggleIcon);
     $('.panel-group').on('shown.bs.collapse', toggleIcon);
 
-});
 
 $("#userLogoutLink").on("click", function () {
     console.log($(this).text());
@@ -309,4 +308,6 @@ $(document).on('click', '#loadMoreCourse', function () {
             alert('Has error orcurred');
         }
     });
+    });
+
 });

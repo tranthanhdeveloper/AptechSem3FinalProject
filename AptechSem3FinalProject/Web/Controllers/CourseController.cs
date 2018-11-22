@@ -23,14 +23,16 @@ namespace Web.Controllers
         private ILectureService _lectureService;
         private IVideoService _videoService;
         private IOrderService _orderService;
+        private ICommentService _commentService;
 
-        public CourseController(ICourseService courseService, IUserService userService, ILectureService lectureService, IVideoService videoService, IOrderService orderService)
+        public CourseController(ICourseService courseService, IUserService userService, ILectureService lectureService, IVideoService videoService, IOrderService orderService, ICommentService commentService)
         {
             _courseService = courseService;
             _userService = userService;
             _lectureService = lectureService;
             _videoService = videoService;
             _orderService = orderService;
+            _commentService = commentService;
         }
 
         #endregion
@@ -49,8 +51,7 @@ namespace Web.Controllers
         }
 
         public ActionResult CourseDetail(int id)
-        {
-            var loggedUserId = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
+        {            
             var courseDetailViewModel = new CourseDetailViewModel();
             var course = _courseService.GetById(id);
             courseDetailViewModel.CourseListItemViewModel = Mapper.Map<CourseItemViewModel>(course);
@@ -58,7 +59,11 @@ namespace Web.Controllers
             courseDetailViewModel.CourseOutline = Mapper.Map< List<CourseOutlineViewModel>>(_lectureService.GetByCourseId(course.Id));
             courseDetailViewModel.RelatedCourses = Mapper.Map<List<CourseItemViewModel>>(course.Category.Courses
                     .OrderByDescending(relCourse => relCourse.Id).Take(5));
-            courseDetailViewModel.IsPaid = _courseService.ValidateCourseAccessible(loggedUserId, id);
+            if(Helper.Sercurity.SessionPersister.AccountInformation != null)
+            {
+                var loggedUserId = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
+                courseDetailViewModel.IsPaid = _courseService.ValidateCourseAccessible(loggedUserId, id);
+            }
             return View(courseDetailViewModel);
         }
 

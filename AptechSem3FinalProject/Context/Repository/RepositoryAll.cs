@@ -45,4 +45,17 @@ namespace Context.Repository
 
         }
     }
+
+    public interface ICommentRepository : IRepository<Comment>
+    {
+
+    }
+
+    public class CommentRepository : Repository<Comment>, ICommentRepository
+    {
+        public CommentRepository(IDbFactory context) : base(context)
+        {
+
+        }
+    }
 }

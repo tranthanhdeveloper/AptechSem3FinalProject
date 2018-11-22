@@ -1,0 +1,20 @@
+﻿@model Context.Database.Comment
+
+<div class="comment-list">
+    <div class="single-comment justify-content-between d-flex">
+        <div class="user justify-content-between d-flex">
+            <div class="thumb">
+            </div>
+            <div class="desc">
+                <h5><a href="#">@Model.User.Name</a></h5>
+                <p class="date">@Model.CreationDate</p>
+                <p class="comment">
+                    @Model.Content
+                </p>
+            </div>
+        </div>
+        <div class="reply-btn">
+            <a href="" class="btn-reply text-uppercase">reply</a>
+        </div>
+    </div>
+</div>
