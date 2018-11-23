@@ -15,6 +15,7 @@ namespace Web.Areas.Instructors.Models
     {
         public int TotalUserEnrolled { get; set; }
         public int TotalCourses { get; set; }
+        public long TotalPricePaid { get; set; }
 
     }
 }

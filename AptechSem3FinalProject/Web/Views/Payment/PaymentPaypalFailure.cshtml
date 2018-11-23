@@ -1,8 +1,15 @@
-﻿
-@{
-    ViewBag.Title = "PaymentPaypalFailure";
-}
-
-<h2>The payment transaction was failure</h2>
-<p>Please contact support team for resolve this issue</p>
-
+﻿<section class="cta-one-area relative section-gap">
+    <div class="container">
+        <div class="overlay overlay-bg"></div>
+        <div class="row justify-content-center">
+            <div class="wrap">
+                <h1 class="text-white">Payments declined</h1>
+                <p>
+                    Oh no, we weren't able to process your payment for the course. We just tried to process a charge for your payment, and it didn't go through.
+                    Please ensure that, your payment information is correctly and try again or contact us if you need any support
+                </p>
+                <a class="primary-btn wh" href="@Url.Action("Index","Home")">Back to home</a>
+            </div>
+        </div>
+    </div>
+</section>

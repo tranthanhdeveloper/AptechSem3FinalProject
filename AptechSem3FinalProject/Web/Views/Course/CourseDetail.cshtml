@@ -1,4 +1,5 @@
 ﻿@model Web.Models.CourseDetailViewModel
+@using AuthenticationManager = Web.Helper.Sercurity.AuthenticationManager
 @{
     ViewBag.Title = "Course Detail";
 }
@@ -31,7 +32,7 @@
                                     {
                                         <li class="justify-content-between d-flex">
                                             <p>@courseOutline.Name</p>
-                                            <a class="primary-btn text-uppercase" href="#">View Details</a>
+                                            @*<a class="primary-btn text-uppercase" href="#">View Details</a>*@
                                         </li>
                                     }
                                 }
@@ -43,12 +44,19 @@
                             </div>
                             <div class="comment-form">
                                 <h4>Leave a Comment</h4>
-                                <form id="CommentForm" class="form form-horizontal" method="post" action="@Url.Action("Create","Comment", new { Id=Model.CourseListItemViewModel.Id})">
-                                    <div class="form-group">
-                                        <textarea class="form-control mb-10" rows="5" name="Content" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-                                    </div>
-                                    <button id="PostCommentBtn" class="mt-40 text-uppercase genric-btn primary text-center">Post Comment</button>
-                                </form>
+                                @if (AuthenticationManager.IsAuthenticated)
+                                {
+                                    <form id="CommentForm" class="form form-horizontal" method="post" action="@Url.Action("Create", "Comment", new { Id = Model.CourseListItemViewModel.Id })">
+                                        <div class="form-group">
+                                            <textarea class="form-control mb-10" rows="5" name="Content" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                                        </div>
+                                        <button id="PostCommentBtn" class="mt-40 text-uppercase genric-btn primary text-center">Post Comment</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <div>You must be logged to post a comment</div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -105,12 +113,13 @@
 
 @section Scripts
 {
-<script>
+    <script>
 
     $(document).ready(function () {
-
+        const loadingGif = '<div id="fountainG"><div id = "fountainG_1" class="fountainG" ></div><div id="fountainG_2" class="fountainG"></div><div id="fountainG_3" class="fountainG"></div><div id="fountainG_4" class="fountainG"></div><div id="fountainG_5" class="fountainG"></div><div id="fountainG_6" class="fountainG"></div><div id="fountainG_7" class="fountainG"></div><div id="fountainG_8" class="fountainG"></div>"</div>';
         var isCommmentClicked = false;
         $(document).on('click', "[data-tab-name='comment']", function () {
+            $(".comments-area").append(loadingGif);
             if (!isCommmentClicked) {
                 var POST_CMT_URL = '@Url.Action("Index", "Comment", new {Id=Model.CourseListItemViewModel.Id})';
 
@@ -120,6 +129,7 @@
                     processData: false,
                     contentType: false,
                     success: function (result) {
+                        $(".comments-area").empty();
                         $(".comments-area").append(result);
                     },
                     error: function () {
@@ -153,5 +163,5 @@
             });
         });
     });
-</script>
+    </script>
 }

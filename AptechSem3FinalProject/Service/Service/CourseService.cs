@@ -52,14 +52,12 @@ namespace Service.Service
             }
             else
             {
-                var userOrdered = courseToBeCheck.Orders;
-                if (!userOrdered.Any() || userOrdered.Last().Payment.PaymentStatus != 1)
+                var userOrdered = courseToBeCheck.Orders.Where(c => c.CourseId == id && c.UserId == userId);
+                if (userOrdered.Count() == 0 || userOrdered.First().Payment.PaymentStatus != 1)
                 {
                     return false;
-                }
-                 
+                }                 
             }
-
             return true;
         }
 

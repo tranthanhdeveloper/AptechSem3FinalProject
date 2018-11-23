@@ -6,6 +6,7 @@ using AutoMapper;
 using Web.Areas.Instructor.Models;
 using Web.Areas.Instructors.Models;
 using Model.Enum;
+using Context.Database;
 
 namespace Web.Areas.Instructors.Controllers
 {
@@ -30,23 +31,26 @@ namespace Web.Areas.Instructors.Controllers
             var createdCourses = courseService.GetByCreatedUser(loggedUser).Take(10);
             var authorDashboardViewModel = new DashboardViewModels
             {
-                AuthorSummaryInfoViewModel = new AuthorSummaryInfoViewModel(),
+                AuthorSummaryInfoViewModel = CalculateSummaryInfo(createdCourses.ToList()),
                 AuthorCoursesViewModels = Mapper.Map<List<CourseItemViewModel>>(createdCourses)
-            };
-
-            foreach (var course in createdCourses)
-            {
-                authorDashboardViewModel.AuthorSummaryInfoViewModel.TotalUserEnrolled += course.Orders.Count();
-            }
-            authorDashboardViewModel.AuthorSummaryInfoViewModel.TotalCourses = createdCourses.Count();
+            };           
             return View(authorDashboardViewModel);
         }
 
-        //public ActionResult UserEnrollment()
-        //{
-        //    UserEnrollmentViewModel userEnrollmentViewModel = new UserEnrollmentViewModel();
-        //    return View(userEnrollmentViewModel);
-        //}
-        
+        private AuthorSummaryInfoViewModel CalculateSummaryInfo(List<Course> courses) {
+            var returnedValue = new AuthorSummaryInfoViewModel();
+            returnedValue.TotalPricePaid = 0;
+            foreach (var course in courses)
+            {
+                returnedValue.TotalUserEnrolled += course.Orders.Count();
+                if(course.Orders.Count > 0)
+                {
+                    returnedValue.TotalPricePaid += course.Price?? 0;
+                }
+            }
+            returnedValue.TotalCourses = courses.Count();
+
+            return returnedValue;
+        }
     }
 }
