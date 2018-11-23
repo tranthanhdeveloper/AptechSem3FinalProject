@@ -58,4 +58,18 @@ namespace Context.Repository
 
         }
     }
+
+
+    public interface IPayerRepository : IRepository<Payer>
+    {
+
+    }
+
+    public class PayerRepository : Repository<Payer>, IPayerRepository
+    {
+        public PayerRepository(IDbFactory context) : base(context)
+        {
+
+        }
+    }
 }

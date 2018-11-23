@@ -77,12 +77,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BirthDate" Type="date" Nullable="false" />
-          <Property Name="Phone" Type="nchar" MaxLength="13" Nullable="false" />
-          <Property Name="LastName" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="MiddleName" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="FirstName" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Email" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="Phone" Type="nchar" MaxLength="13" />
+          <Property Name="LastName" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="MiddleName" Type="nchar" MaxLength="100" />
+          <Property Name="FirstName" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -807,12 +807,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="MiddleName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="Phone" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Payments" Relationship="AptechSem3FinalProjectV2Model.FK_Payment_Payer" FromRole="Payer" ToRole="Payment" />
         </EntityType>
         <Association Name="FK_Payment_Payer">

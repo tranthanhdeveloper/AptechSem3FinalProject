@@ -17,6 +17,18 @@ namespace Service.Service.Payment
             return _payment.Execute(apiContext, paymentExecution);
         }
 
+        public Context.Database.Payer GetPayorInfor(PayPal.Api.Payment excutedPayment)
+        {
+            var retPayor = new Context.Database.Payer();
+            retPayor.Email = excutedPayment.payer.payer_info.email;
+            retPayor.LastName = excutedPayment.payer.payer_info.last_name;
+            retPayor.FirstName = excutedPayment.payer.payer_info.first_name;
+            retPayor.MiddleName = excutedPayment.payer.payer_info.middle_name;
+            retPayor.Phone = excutedPayment.payer.payer_info.phone;
+            //retPayor.BirthDate = DateTime.ParseExact(excutedPayment.payer.payer_info.birth_date, "yyyy-mm-dd", System.Globalization.CultureInfo.InvariantCulture);
+
+            return retPayor;
+        }
         public PayPal.Api.Payment CreatePayment(APIContext apiContext, string redirectUrl, List<Course> courses, string currencyCode)
         {
             long? totalPrice = 0;

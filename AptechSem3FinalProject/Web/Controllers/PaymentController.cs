@@ -19,17 +19,19 @@ namespace Web.Controllers
         private IOrderService _orderService;
         private IPaymentService _paymentService;
         private IPaymentMethodService _paymentMethodService;
+        private IPayerService payerService;
         private PaypalPaymentService _paypalPaymentService = new PaypalPaymentService();
         private APIContext _apiContext = PaypalConfiguration.GetAPIContext();
 
         // Constructor to inject services
         public PaymentController(ICourseService courseService, IOrderService orderService,
-            IPaymentService paymentService, IPaymentMethodService paymentMethodService)
+            IPaymentService paymentService, IPaymentMethodService paymentMethodService, IPayerService payerService)
         {
             _courseService = courseService;
             _orderService = orderService;
             _paymentService = paymentService;
             _paymentMethodService = paymentMethodService;
+            this.payerService = payerService;
         }
 
         [Helper.Sercurity.Authorize]
@@ -69,18 +71,22 @@ namespace Web.Controllers
             {
                 string payerId = Request.Params["PayerID"];
                 var guid = Request.Params["guid"];
-                var executedPayment =
-                    _paypalPaymentService.ExecutePayment(_apiContext, payerId, Session[guid] as string);
+                var executedPayment = _paypalPaymentService.ExecutePayment(_apiContext, payerId, Session[guid] as string);
                 if (executedPayment.state.ToLower() != "approved")
                 {
                     return View("PaymentPaypalFailure");
                 }
+
+                var payer = _paypalPaymentService.GetPayorInfor(executedPayment);
+                var paidPayer = payerService.Add(payer);
 
                 var payment = new Context.Database.Payment();
                 payment.PaymentMethod = _paymentMethodService.GetById((int)PaymentMethods.PAYPAL);
                 payment.PaymentStatus = 1;
                 payment.CreatedDate = DateTime.Now;
                 payment.UserId = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
+                payment.PayerId = paidPayer.Id;
+
                 var savedPayment = _paymentService.Add(payment);
 
                 var paidCourse = _courseService.GetById(int.Parse(executedPayment.transactions.First().item_list.items.First().sku));

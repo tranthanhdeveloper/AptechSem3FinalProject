@@ -60,7 +60,9 @@
     <Compile Include="Service\ICategoryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\CategoryServices.cs" />
+    <Compile Include="Service\IPayerService.cs" />
     <Compile Include="Service\IVideoService.cs" />
+    <Compile Include="Service\PayerService.cs" />
     <Compile Include="Service\PaymentMethodService.cs" />
     <Compile Include="Service\IPaymentMethodService.cs" />
     <Compile Include="Service\PaymentService.cs" />

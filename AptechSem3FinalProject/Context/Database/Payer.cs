@@ -21,7 +21,7 @@ namespace Context.Database
         }
     
         public int Id { get; set; }
-        public System.DateTime BirthDate { get; set; }
+        public Nullable<System.DateTime> BirthDate { get; set; }
         public string Phone { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
