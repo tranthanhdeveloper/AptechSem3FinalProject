@@ -1,0 +1,37 @@
+﻿@model List<Context.Database.Order>
+
+<section class="event-details-area section-gap">
+    <div class="container">
+        <div class="row">            
+            <div class="col-lg-12 event-details-left">
+                <h2>Your order history</h2>
+                <table class="table table-hover">
+                    <thead style="background-color: #152929; color: #f0f8ff;">
+                        <tr>
+                            <th>#</th>
+                            <th>Order date</th>
+                            <th>Course</th>
+                            <th>Payment Method</th>
+                            <th>Fee</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model)
+                        {
+                        <tr>
+                            <td>@order.Id</td>
+                            <td>@order.CreatedDate</td>
+                            <td>@order.Course.Title</td>
+                            <td>@order.Payment.PaymentMethod.Name</td>
+                            <td>@order.Course.Price</td>
+                            <td><a href="#">Details</a></td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

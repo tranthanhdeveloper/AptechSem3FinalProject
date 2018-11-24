@@ -77,5 +77,21 @@ namespace Service.Service
                 return false;
             }
         }
+
+        public bool ValidatePublishState(int id)
+        {
+            var courseToCheck = GetById(id);
+            if(courseToCheck.Lectures.Count() == 0)
+            {
+                return false;
+            }
+
+            int lessonCounter = 0;
+            foreach(var module in courseToCheck.Lectures)
+            {
+                lessonCounter += module.Videos.Count();
+            }
+            return lessonCounter > 0;
+        }
     }
 }

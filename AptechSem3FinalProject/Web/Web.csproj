@@ -250,6 +250,7 @@
     <Compile Include="Areas\Instructors\Models\ModuleViewModels.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\RenderHelper.cs" />
     <Compile Include="Models\ApplyAuthorViewModel.cs" />
@@ -7549,6 +7550,7 @@
     <Content Include="Areas\Instructors\Views\Course\CourseItem.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Instructor\author.js" />
+    <Content Include="Scripts\Instructor\TaskHandle.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -7652,6 +7654,7 @@
     <Content Include="Views\Course\LoadMore.cshtml" />
     <Content Include="Views\Comment\Index.cshtml" />
     <Content Include="Views\Comment\CommentItem.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

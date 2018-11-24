@@ -11,13 +11,11 @@
 </script>
 
 <section class="content" id="courseDetailSection">
-    @if (errorMessage != null && (string)errorMessage != "")
+    @if ((errorMessage != null && (string)errorMessage != "") ||(publishErrorMsg != null && publishErrorMsg !=""))
     {
-        if (publishErrorMsg != null)
+        if (publishErrorMsg != null || publishErrorMsg != "")
         {
             <div class="box box-warning">
-
-                }
                 <div class="box-header with-border">
                     <h3 class="box-title">Error Message</h3>
 
@@ -58,7 +56,7 @@
                 <div class="box-tools pull-right">
                     @if (Model.Status == (byte)CourseStatus.PUBLISHED)
                     {
-                        <a href="@Url.Action("Publish", "Course", new { Model.Id })" id="coursePublish" class="pull-right btn btn-large btn-warning">UnPublish</a>
+                        <a href="@Url.Action("UnPublish", "Course", new { Model.Id })" id="coursePublish" class="pull-right btn btn-large btn-warning">UnPublish</a>
                     }
                     else
                     {

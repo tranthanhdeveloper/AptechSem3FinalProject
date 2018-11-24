@@ -19,6 +19,11 @@ namespace Service.Service
             this.Insert(new Order { Course = course, CreatedDate = DateTime.Now, PaymentId = paymentId, UserId = userId });
         }
 
+        public IEnumerable<Order> GetByUser(int userId)
+        {
+            return GetAll(o => o.UserId == userId);
+        }
+
         public IEnumerable<Order> GetOrderByCourseAndUser(int courseId, int userId)
         {
             return GetAll(order => order.CourseId == courseId & order.UserId == userId);

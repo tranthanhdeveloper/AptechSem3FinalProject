@@ -11,5 +11,7 @@ namespace Service.Service
     {
         void AddOrder(Course course, int userId, int payment);
         IEnumerable<Order> GetOrderByCourseAndUser(int courseId, int userId);
+        IEnumerable<Order> GetByUser(int userId);
+
     }
 }

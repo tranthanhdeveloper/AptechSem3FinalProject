@@ -96,14 +96,21 @@ namespace Web.Areas.Instructors.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
                 }
+
                 var module = lectureService.Get(id);
                 foreach(var lesson in module.Videos)
                 {
                     videoService.Delete(lesson);
                 }
                 lectureService.Delete(module);
-                return RedirectToAction("Details", "Course", new {id=module.CourseId});
 
+                if (!courseService.ValidatePublishState(module.CourseId))
+                {
+                    var course = module.Course;
+                    course.Status = (byte)CourseStatus.CREATED;
+                    courseService.Update(course);
+                }
+                return RedirectToAction("Details", "Course", new {id=module.CourseId});
             }
             catch
             {

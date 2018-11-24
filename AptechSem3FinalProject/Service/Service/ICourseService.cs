@@ -11,6 +11,7 @@ namespace Service.Service
         bool ValidateCourseAccessible(int userId, int id);
         bool ValidateCourseEditable(int userId, int id);
         bool ValidateCourseDeletable(int userId, int id);
+        bool ValidatePublishState(int id);
 
     }
 }

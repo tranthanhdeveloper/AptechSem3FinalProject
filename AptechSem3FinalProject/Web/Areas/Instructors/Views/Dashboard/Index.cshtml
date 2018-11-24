@@ -24,11 +24,11 @@
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
+                <span class="info-box-icon bg-red"><i class="ion ion-social-usd"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">$</span>
-                    <span class="info-box-number">@Model.AuthorSummaryInfoViewModel.TotalPricePaid</span>
+                    <span class="info-box-text">Total revenue</span>
+                    <span class="info-box-number">$@Model.AuthorSummaryInfoViewModel.TotalPricePaid</span>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
                 <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Sales</span>
+                    <span class="info-box-text">Total enrollments</span>
                     <span class="info-box-number">@Model.AuthorSummaryInfoViewModel.TotalUserEnrolled</span>
                 </div>
             </div>
@@ -62,7 +62,7 @@
         @foreach (var course in Model.AuthorCoursesViewModels)
         {
             <div class="col-md-12 col-sm-6 col-xs-12">
-                <div class="info-box bg-aqua">
+                <div class="info-box bg-teal">
                     <span class="info-box-icon"><img onerror="this.src='http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg'" src="~/img/courses/@course.Image" alt="@course.Title"></span>
 
                     <div class="info-box-content">

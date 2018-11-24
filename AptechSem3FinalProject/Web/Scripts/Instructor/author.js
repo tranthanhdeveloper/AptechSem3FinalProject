@@ -26,11 +26,12 @@ $(function () {
 
 
     $(document).on('click', '#SaveChangeModuleLesson', function () {
-        event.preventDefault();
+        event.preventDefault();        
         var formElement = $('#AddModuleLessonForm');
         var formData = new FormData(formElement[0]);
         var postUrl = formElement.attr('action');
-        var moduleBoxTbl = $('#module_'+formElement.find("input[name='ModuleId']").val()).find('table tbody');
+        var moduleBoxTbl = $('#module_' + formElement.find("input[name='ModuleId']").val()).find('table tbody');
+        var taskId = TaskProcess.addTask(formElement.find("input[name='Title']").val());
         $.ajax({
             url: postUrl,
             type: 'POST',
@@ -38,10 +39,11 @@ $(function () {
             processData: false,
             contentType: false,
             success: function (result) {
+                TaskProcess.updateTask(formElement.find("input[name='Title']").val(), taskId);
                 moduleBoxTbl.append(result);
                 formElement.trigger('reset');
                 $('#addLessonModal').modal('hide');
-                window.location.reload();
+                formElement.find('video').attr('src', "");                
             },
             error: function () {
                 alert('Has error orcurred');
@@ -202,5 +204,9 @@ $(function () {
                 alert('Has error orcurred during update lesson information!');
             }
         });
+    });
+
+    $(document).on("click", "#hiddenAllTask", function () {
+        TaskProcess.deleteAll();
     });
 });
