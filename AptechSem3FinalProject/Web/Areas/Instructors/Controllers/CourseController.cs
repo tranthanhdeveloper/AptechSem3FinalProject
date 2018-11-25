@@ -206,17 +206,7 @@ namespace Web.Areas.Instructors.Controllers
             {
                 TempData["EditCourseError"] = MessageConstants.EditCourseDeny;
                 return View();
-            }
-            var lessonCounter = 0;
-            foreach (var module in courseToPublished.Lectures)
-            {
-                lessonCounter += module.Videos.Count;
-            }
-            if (courseToPublished.Lectures.Count <= 0 || lessonCounter <= 0)
-            {
-                TempData["PublishCourseDenied"] = MessageConstants.PublishCourseDenied;
-                return RedirectToAction("Details", new { id });
-            }
+            }            
             courseToPublished.Status = (byte)CourseStatus.CREATED;
             courseService.Update(courseToPublished);
             return RedirectToAction("Index");

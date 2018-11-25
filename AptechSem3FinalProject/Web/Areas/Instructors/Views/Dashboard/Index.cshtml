@@ -56,22 +56,34 @@
         </div>
     </div>
 
-    <!-- Begin Course view-->
-    <h2 class="page-header">Courses review</h2>
-    <div class="row">
-        @foreach (var course in Model.AuthorCoursesViewModels)
-        {
-            <div class="col-md-12 col-sm-6 col-xs-12">
-                <div class="info-box bg-teal">
-                    <span class="info-box-icon"><img onerror="this.src='http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg'" src="~/img/courses/@course.Image" alt="@course.Title"></span>
-
-                    <div class="info-box-content">
-                        <span class="info-box-text">@course.Title</span>
-                        <span class="info-box-number">@course.CreateDate</span>
-                        <span class="progress-description">@course.Description</span>
-                    </div>
-                </div>
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Lasted Created courses</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-plus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
             </div>
-        }
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+                @foreach (var course in Model.AuthorCoursesViewModels)
+                {
+                    <div class="col-md-12 col-sm-6 col-xs-12">
+                        <div class="info-box bg-teal">
+                            <span class="info-box-icon"><img onerror="this.src='http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg'" src="~/img/courses/@course.Image" alt="@course.Title"></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">@course.Title</span>
+                                <span class="info-box-number">@course.CreateDate</span>
+                                <span class="progress-description">@course.Description</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
     </div>
 </section>

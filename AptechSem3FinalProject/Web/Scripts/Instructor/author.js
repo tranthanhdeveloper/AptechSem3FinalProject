@@ -26,7 +26,7 @@ $(function () {
 
 
     $(document).on('click', '#SaveChangeModuleLesson', function () {
-        event.preventDefault();        
+        //event.preventDefault();        
         var formElement = $('#AddModuleLessonForm');
         var formData = new FormData(formElement[0]);
         var postUrl = formElement.attr('action');

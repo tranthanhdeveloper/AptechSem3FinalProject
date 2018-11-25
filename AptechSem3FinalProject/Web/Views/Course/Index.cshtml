@@ -37,7 +37,7 @@
                     <div class="thumb">
                         <img onerror="this.src='http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg'" class="img-fluid" src="@Url.Content("~/img/courses/"+courseItem.Image)" alt="Course image">
                     </div>
-                    <p class="meta">@Html.DisplayFor(item => courseItem.CreateDate) |  By <a href="#">@courseItem.Author.Name</a></p>
+                    <p class="meta">@Html.DisplayFor(item => courseItem.CreateDate) |  By <a href="@Url.Action("Details","Author", new {Id=1})">@courseItem.Author.Name</a></p>
                     <a href="@Url.Action("CourseDetail", "Course", new { id = courseItem.Id })">
                         <h5> @courseItem.Title</h5>
                     </a>

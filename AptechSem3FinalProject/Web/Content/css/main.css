@@ -4490,6 +4490,12 @@ left-contents .jq-tab-content-wrapper {
     white-space: normal;
 }
 
+/*.tableOfContent #accordion {
+  height: 300px;
+  width: 400px;
+  overflow: hidden;
+}*/
+
 /*BEGIN OF LOADING COMMENT*/
 
 #fountainG{
