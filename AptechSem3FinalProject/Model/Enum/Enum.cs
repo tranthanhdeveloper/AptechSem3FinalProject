@@ -24,4 +24,10 @@ namespace Model.Enum
     {
         FREE = 1
     }
+
+    public enum EntityStatus
+    {
+        Visible = 0,
+        Invisible = 1
+    }
 }

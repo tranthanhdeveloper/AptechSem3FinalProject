@@ -1,0 +1,28 @@
+﻿
+
+
+@using Context
+
+@model Context.Database.Lecture
+
+@if (Model != null)
+{
+    <input type="hidden" value="@Model.Id" name="Id">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Title</label>
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Input Name" })
+
+            </div>
+            @*<div class="form-group">
+                <label>Description</label>
+                @Html.TextAreaFor(model => model., new { @class = "form-control", placeholder = "Input Description", style = "width:570px; height:150px;" })
+
+            </div>*@
+
+
+
+        </div>
+    </div>
+}

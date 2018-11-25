@@ -1,0 +1,149 @@
+﻿
+@{
+    var totalOrder = ViewBag.TotalOrder ;
+    var totalCourse = ViewBag.TotalCourse;
+    var totalUser = ViewBag.TotalUser;
+    var totalMoney = ViewBag.TotalMoney;
+
+    var title = "Dashboard";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/Admin/DashBoard.js")
+}
+
+<section class="content-header">
+    <h1>
+        @title
+</h1>
+</section>
+<section class="content reportChart"
+         data-id="0"
+         data-time="4"
+         data-month="-1">
+    <!-- Info boxes -->
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>@totalOrder</h3>
+                    <p>Total Order</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-cart-plus"></i>
+                </div>
+                @*<a href="@Url.Action("ManageDeal")" class="small-box-footer">Xem tất cả <i class="fa fa-arrow-circle-right"></i></a>*@
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>@totalUser</h3>
+                    <p>Total User</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-users"></i>
+                </div>
+                @*<a href="@Url.Action("ManageAccount")" class="small-box-footer">Xem tất cả <i class="fa fa-arrow-circle-right"></i></a>*@
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>@totalCourse</h3>
+                    <p>Total Course</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-building-o"></i>
+                </div>
+                @*<a href="@Url.Action("ManageProduct")" class="small-box-footer">Xem tất cả <i class="fa fa-arrow-circle-right"></i></a>*@
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3>@totalMoney</h3>
+                    <p>Total Money</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-dollar"></i>
+                </div>
+                @*<a href="@Url.Action("ReportByCompany")" class="small-box-footer">Xem tất cả <i class="fa fa-arrow-circle-right"></i></a>*@
+            </div>
+        </div>
+        <!-- ./col -->
+    </div>
+    <!-- /.row -->
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title"></h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body labeled-chart-container">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <p class="text-center">
+                                <strong> <span class="start_date"></span> - <span class="end_date"></span></strong>
+                            </p>
+                            <div class="chart">
+                                <!-- Sales Chart Canvas -->
+                                <canvas class="salesChart" style="height: 250px;"></canvas>
+                            </div>
+                            <!-- /.chart-responsive -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-2">
+                            <div class="legend-container">
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- ./box-body -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-6">
+                            <div class="description-block border-right">
+
+                                <h5 class="description-header total_House"></h5>
+                                <span class="description-text">Course</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-6 col-xs-6">
+                            <div class="description-block border-right">
+                                <h5 class="description-header total_Subscribe"></h5>
+                                <span class="description-text">Order</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-footer -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    
+</section>
+
