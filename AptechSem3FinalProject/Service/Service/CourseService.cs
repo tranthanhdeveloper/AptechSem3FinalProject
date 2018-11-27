@@ -25,7 +25,7 @@ namespace Service.Service
                 return new List<Course>();
             }
         }
-
+       
         public IEnumerable<Course> GetLastedCourse()
         {
             try
@@ -93,5 +93,18 @@ namespace Service.Service
             }
             return lessonCounter > 0;
         }
+
+        public IEnumerable<Course> GetInteractiveCourses()
+        {
+            try
+            {
+                return GetAll(null, courses => courses.OrderByDescending(course => course.Comments.Count())).Take(4);
+            }
+            catch (Exception)
+            {
+                return new List<Course>();
+            }
+        }
+
     }
 }

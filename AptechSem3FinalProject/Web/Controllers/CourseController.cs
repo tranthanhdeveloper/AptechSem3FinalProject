@@ -24,8 +24,9 @@ namespace Web.Controllers
         private IVideoService _videoService;
         private IOrderService _orderService;
         private ICommentService _commentService;
+        private ICategoryService _categoryService;
 
-        public CourseController(ICourseService courseService, IUserService userService, ILectureService lectureService, IVideoService videoService, IOrderService orderService, ICommentService commentService)
+        public CourseController(ICourseService courseService, IUserService userService, ILectureService lectureService, IVideoService videoService, IOrderService orderService, ICommentService commentService, ICategoryService categoryService)
         {
             _courseService = courseService;
             _userService = userService;
@@ -33,6 +34,7 @@ namespace Web.Controllers
             _videoService = videoService;
             _orderService = orderService;
             _commentService = commentService;
+            _categoryService = categoryService;
         }
 
         #endregion
@@ -47,19 +49,21 @@ namespace Web.Controllers
             var lastedCourses = _courseService.GetLastedCourse();
             showCoursesViewModel.PopularCourses = Mapper.Map<List<CourseItemViewModel>>(popularCourses);
             showCoursesViewModel.LastedCourses = Mapper.Map<List<CourseItemViewModel>>(lastedCourses);
+
+            ViewBag.Category = _categoryService.GetAll();
             return View(showCoursesViewModel);
         }
 
         public ActionResult CourseDetail(int id)
-        {            
+        {
             var courseDetailViewModel = new CourseDetailViewModel();
             var course = _courseService.GetById(id);
             courseDetailViewModel.CourseListItemViewModel = Mapper.Map<CourseItemViewModel>(course);
             courseDetailViewModel.Author = _userService.GetById(course.UserId);
-            courseDetailViewModel.CourseOutline = Mapper.Map< List<CourseOutlineViewModel>>(_lectureService.GetByCourseId(course.Id));
+            courseDetailViewModel.CourseOutline = Mapper.Map<List<CourseOutlineViewModel>>(_lectureService.GetByCourseId(course.Id));
             courseDetailViewModel.RelatedCourses = Mapper.Map<List<CourseItemViewModel>>(course.Category.Courses
                     .OrderByDescending(relCourse => relCourse.Id).Take(5));
-            if(Helper.Sercurity.SessionPersister.AccountInformation != null)
+            if (Helper.Sercurity.SessionPersister.AccountInformation != null)
             {
                 var loggedUserId = Helper.Sercurity.SessionPersister.AccountInformation.UserId;
                 courseDetailViewModel.IsPaid = _courseService.ValidateCourseAccessible(loggedUserId, id);
@@ -97,9 +101,9 @@ namespace Web.Controllers
 
                 coursePlayViewModel.CurrentLesson = video != null ? Mapper.Map<CourseLessonViewModel>(_videoService.GetById(video)) : coursePlayViewModel.CourseModuleViewModels.First().CourseLessonViewModels.First();
                 return View(coursePlayViewModel);
-            }else
+            } else
             {
-                return RedirectToAction("PaymentWithPaypal","Payment", new {id=id});
+                return RedirectToAction("PaymentWithPaypal", "Payment", new { id = id });
             }
 
         }
@@ -117,6 +121,25 @@ namespace Web.Controllers
             var courses = _courseService.GetPublished().Skip(offset).Take(10);
             showCoursesViewModel.CourseItemViewModels = Mapper.Map<List<CourseItemViewModel>>(courses);
             return Helper.RenderHelper.RenderViewToString(ControllerContext, "LoadMore", showCoursesViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Search(FormCollection formData)
+        {
+            IEnumerable<Course> createdCourses = new List<Course>();
+            int cateId = 0;
+            Int32.TryParse(Convert.ToString(formData["category"]), out cateId);
+            string courseTitle = Convert.ToString(formData["title"]);
+            if (cateId != 0)
+            {
+                createdCourses = _courseService.GetAll(course => course.Title.Contains(courseTitle) && course.CategoryId == cateId);
+            }
+            else
+            {
+                createdCourses = _courseService.GetAll(course => course.Title.Contains(courseTitle));
+            }
+            var returnModel = Mapper.Map<List<CourseItemViewModel>>(createdCourses);
+            return Content(Helper.RenderHelper.RenderViewToString(ControllerContext, "~/Views/Course/Search.cshtml", returnModel));
         }
     }
 }

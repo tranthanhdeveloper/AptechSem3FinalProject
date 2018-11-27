@@ -1,16 +1,13 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
-
-@{
-    ViewBag.Title = "Error";
-}
-<section class="banner-area relative about-banner" id="home">
+﻿<section class="banner-area relative about-banner" id="home">
     <div class="overlay overlay-bg"></div>
     <div class="container">
         <div class="row d-flex align-items-center justify-content-center">
             <div class="about-content col-lg-12">
-                <h3 class="text-white">
-                    Oh, has an error orrcured
-                </h3>
+                <h2 class="text-white">
+                    Oops!
+                    <br />
+                    Request not found
+                </h2>
                 <p class="text-white link-nav"><a href="@Url.Action("Index","Home")">Back to home </a></p>
             </div>
         </div>

@@ -8,6 +8,7 @@ namespace Service.Service
         IEnumerable<Course> GetLastedCourse();
         IEnumerable<Course> GetByCreatedUser(int createdUser);
         IEnumerable<Course> GetPublished();
+        IEnumerable<Course> GetInteractiveCourses();
         bool ValidateCourseAccessible(int userId, int id);
         bool ValidateCourseEditable(int userId, int id);
         bool ValidateCourseDeletable(int userId, int id);

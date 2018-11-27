@@ -1,0 +1,15 @@
+﻿@model Web.Models.CourseItemViewModel
+
+<div class="col-lg-3 col-md-6 single-blog">
+    <div class="thumb">
+        <img onerror="this.src='@Url.Content("~/img/image-not-found.jpg")'" class="img-fluid" src="@Url.Content("~/img/courses/"+Model.Image)" alt="Course image">
+    </div>
+    <p class="meta">@Html.DisplayFor(item => Model.CreateDate) |  By <a href="@Url.Action("Details","Author", new {Model.Author.Id})">@Model.Author.Name</a></p>
+    <a href="@Url.Action("CourseDetail", "Course", new { Model.Id })">
+        <h5> @Model.Title</h5>
+    </a>
+    <p class="course-description">
+        @Model.Description
+    </p>
+    <a href="@Url.Action("CourseDetail", "Course", new { Model.Id })" class="details-btn d-flex justify-content-center align-items-center"><span class="details">Details</span><span class="lnr lnr-arrow-right"></span></a>
+</div>

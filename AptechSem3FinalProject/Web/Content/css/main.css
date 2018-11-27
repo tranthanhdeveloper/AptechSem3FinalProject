@@ -2444,6 +2444,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 .single-blog .thumb {
   overflow: hidden;
+  height:192px;
 }
 .single-blog .thumb img {
   width: 100%;
@@ -4677,3 +4678,14 @@ left-contents .jq-tab-content-wrapper {
 	}
 }
 /*END   OF LOADING COMMENT*/
+
+.section-course-search{
+    padding: 25px 0;
+}
+
+.single-blog .course-description{
+    height: 88px;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+}

@@ -1,3 +1,4 @@
+
 $(function () {
     'use strict';
 
@@ -85,11 +86,11 @@ $(function () {
     });
 
     $(document).on('click', '#authorCourseSearchSubmit', function (event) {
-        event.preventDefault;
+        event.preventDefault();
         var formElement = $('#AuthorCourseSearchForm');
         var formData = new FormData(formElement[0]);
         var postUrl = formElement.attr('action');
-        var moduleBoxTbl = $('.course-display-area')[0];
+        var moduleBoxTbl = $("#createdCourseArea .course-item-display");
         $.ajax({
             url: postUrl,
             type: 'POST',
@@ -125,7 +126,7 @@ $(function () {
     });
 
     $(document).on("click", '#SaveUpdateModule', function (event) {
-        event.preventDefault;
+        event.preventDefault();
         var formElement = $('#updateModuleForm');
         var formData = new FormData(formElement[0]);
         var postUrl = formElement.attr('action');
@@ -148,7 +149,8 @@ $(function () {
         });
     });
 
-    $(document).on("click", ".update-lesson", function () {
+    $(document).on("click", ".update-lesson", function (event) {
+        event.preventDefault();
         var updateModal = $('#updateLesson');
         $.ajax({
             url: UPDATE_LESSON_URL+"/"+$(this).data("id"),
@@ -165,7 +167,8 @@ $(function () {
         });      
     });
 
-    $(document).on("click", ".delete-lesson", function () {
+    $(document).on("click", ".delete-lesson", function (event) {
+        event.preventDefault();
         var updateModal = $('#updateLesson');
         var lessonId = $(this).data("id");
         $.ajax({

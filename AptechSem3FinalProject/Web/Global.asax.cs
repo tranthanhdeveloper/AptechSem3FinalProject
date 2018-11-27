@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
 using Web.Areas.Instructor.Models;
+using Web.Controllers;
 //using Web.Areas.Instructor.Models;
 using Web.Models.Mapping;
 
@@ -28,6 +29,23 @@ namespace Web
                 cfg.AddProfile<CourseAuthorProfile>();
             });
 
+        }
+
+        protected void Application_EndRequest()
+        {
+            if (Context.Response.StatusCode == 404)
+            {
+                Response.Clear();
+
+                var rd = new RouteData();
+                rd.DataTokens["area"] = ""; // In case controller is in another area
+                rd.Values["controller"] = "Errors";
+                rd.Values["action"] = "NotFound";
+
+                var rc = new RequestContext(new HttpContextWrapper(Context), rd);
+                var c = ControllerBuilder.Current.GetControllerFactory().CreateController(rc, "Errors");
+                c.Execute(rc);
+            }
         }
     }
 }

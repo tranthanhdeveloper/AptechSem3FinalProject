@@ -13,7 +13,7 @@
     </ol>
 </section>
 
-<section class="content">
+<section class="content" id="createdCourseArea">
     <h2 class="page-header">Courses review</h2>
     <!-- Begin Course view-->
     <div class="row course-display-area">
@@ -39,7 +39,7 @@
     </div>
     <hr />
    
-    <div class="row">
+    <div class="row course-item-display">
         @foreach (var course in Model.AuthorCoursesViewModels)
         {
             @Html.Partial("CourseItem",course)

@@ -1,0 +1,6 @@
+﻿@model List<Web.Models.CourseItemViewModel>
+
+@foreach (var course in Model)
+{
+    @Html.Partial("CourseItem", course)
+}

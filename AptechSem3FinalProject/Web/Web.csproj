@@ -256,6 +256,7 @@
     <Compile Include="Areas\Instructors\Models\ModuleViewModels.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Helper\FileHelper.cs" />
@@ -281,6 +282,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AuthorViewModels.cs" />
     <Compile Include="Models\CourseViewModels.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Mapping\CourseProfile.cs" />
@@ -6931,6 +6933,7 @@
     <Content Include="img\gallery\g5.jpg" />
     <Content Include="img\gallery\g6.jpg" />
     <Content Include="img\gallery\g7.jpg" />
+    <Content Include="img\image-not-found.jpg" />
     <Content Include="img\logo.png" />
     <Content Include="img\m-img.jpg" />
     <Content Include="img\p1.jpg" />
@@ -6948,6 +6951,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Client\Client.js" />
     <Content Include="Scripts\Client\Register.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
@@ -7650,7 +7654,6 @@
     <Content Include="Scripts\plyr\dist\plyr.polyfilled.min.js.map" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\WebCustom.config" />
     <Content Include="Views\Course\CourseDetail.cshtml" />
     <Content Include="Views\Course\CoursePlay.cshtml" />
     <Content Include="Views\Course\Index.cshtml" />
@@ -7664,9 +7667,13 @@
     <Content Include="Views\Comment\CommentItem.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Author\Details.cshtml" />
+    <Content Include="Views\Course\CourseItem.cshtml" />
+    <Content Include="Views\Course\Search.cshtml" />
+    <Content Include="Views\Errors\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ErrorPages\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
