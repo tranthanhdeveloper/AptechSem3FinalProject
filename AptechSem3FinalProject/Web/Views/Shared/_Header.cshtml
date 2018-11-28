@@ -17,16 +17,10 @@
                 <ul class="nav-menu">
                     <li>@Html.ActionLink("Home", "index", "Home")</li>
                     <li>
-                        <a href="about.html">About</a>
-                    </li>
-                    <li>
                         <a href="@Url.Action("Index", "Course")">Courses</a>
                     </li>                    
-                    <li>
-                        <a href="gallery.html">Gallery</a>
-                    </li>
                     <li class="menu-has-children">
-                        <a href="">Blog</a>
+                        <a href="">Categories</a>
                         <ul>
                             <li><a href="blog-home.html">Blog Home</a></li>
                             <li><a href="blog-single.html">Blog Single</a></li>
@@ -77,9 +71,7 @@
                                 </ul>
                             </li>
                         }
-                    }
-                    
-                    <li><a href="contact.html">Contact</a></li>
+                    }                   
                 </ul>
             </nav>
         </div>

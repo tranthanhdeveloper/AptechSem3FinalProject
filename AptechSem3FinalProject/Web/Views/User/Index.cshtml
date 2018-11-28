@@ -23,7 +23,15 @@
                             <td>@order.Id</td>
                             <td>@order.CreatedDate</td>
                             <td>@order.Course.Title</td>
-                            <td>@order.Payment.PaymentMethod.Name</td>
+                            @if (@order.Course.Price == 0)
+                            {
+                                <td>No payment</td>
+                            }
+                            else
+                            {
+                                <td>@order.Payment.PaymentMethod.Name</td>
+                            }
+
                             <td>@order.Course.Price</td>
                             <td><a href="#">Details</a></td>
                         </tr>

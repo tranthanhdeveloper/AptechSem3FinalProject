@@ -14,9 +14,16 @@ namespace Web.Controllers
         {
             this.userService = userService;
         }
+
         public ActionResult Details(int id)
         {
             return View(userService.GetById(id));
         }
+
+        public ActionResult PaymentDetail(int id)
+        {
+            return View(userService.GetById(id));
+        }
+
     }
 }

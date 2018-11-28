@@ -7670,6 +7670,7 @@
     <Content Include="Views\Course\CourseItem.cshtml" />
     <Content Include="Views\Course\Search.cshtml" />
     <Content Include="Views\Errors\NotFound.cshtml" />
+    <Content Include="Views\Author\PaymentDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
