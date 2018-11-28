@@ -29,12 +29,12 @@ namespace Web.Helper.Sercurity
             {
                 return _types.Any(AuthenticationManager.Is) || AuthenticationManager.IsAdmin;
             }
-           
             return AuthenticationManager.IsAuthenticated;
         }
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
+            string area = filterContext.RouteData.DataTokens["area"].ToString();
             if (filterContext.HttpContext.Request.IsAuthenticated)
             {
                 var urlHelper = new UrlHelper(filterContext.RequestContext);
@@ -52,13 +52,21 @@ namespace Web.Helper.Sercurity
             }
             else
             {
-                filterContext.Result = RedirectToAction("home", "index", HttpContext.Current.Request.RawUrl);
+                if (area == "Admin")
+                {
+                    filterContext.Result = RedirectToAction("Account", "login", area, HttpContext.Current.Request.RawUrl);
+                }
+                else if(area == "Client")
+                {
+                    filterContext.Result = RedirectToAction("home", "index", area, HttpContext.Current.Request.RawUrl);
+                }
             }
         }
 
-        private ActionResult RedirectToAction(string controller, string action, string returnurl = "")
+        private ActionResult RedirectToAction(string controller, string action, string area, string returnurl = "")
         {
-            return new RedirectToRouteResult(new RouteValueDictionary(new { controller = controller, action = action, returnurl = returnurl }));
+            
+            return new RedirectToRouteResult(new RouteValueDictionary(new { controller = controller, action = action, returnurl = returnurl, area = area }));
         }
     }
 }

@@ -37,6 +37,11 @@ namespace Web
                 "~/Content/css/*.css"));
 
             bundles.Add(new ScriptBundle("~/Scripts/Client/Register").Include("~/Scripts/Client/Register.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/Admin/User").Include(
+                "~/Scripts/Admin/User.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/Admin")
+                .Include("~/Scripts/Admin/layout.js"));
         }
     }
 }

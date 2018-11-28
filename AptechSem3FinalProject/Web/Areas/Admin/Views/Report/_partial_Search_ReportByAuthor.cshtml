@@ -1,0 +1,54 @@
+﻿
+
+
+
+@using Context.Database
+@using PagedList.Mvc
+@model PagedList.IPagedList<User>
+@{
+
+    var listUser = Model.ToList() as List<User>;
+}
+
+<div class="box">
+    <div class="box-body no-padding">
+
+        <table class="table table-bordered table-hover dataTable">
+            <thead>
+                <tr>
+                    
+                    <th>Name</th>
+                    <th>Total Course</th>
+                    <th>Total Order</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in listUser)
+                {
+
+                    <tr id="item-@item.Id">
+                       
+                        
+                        
+                        
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="box-footer clearfix">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="dataTables_info" role="status" aria-live="polite">Total: <b>@Model.TotalItemCount</b> data</div>
+            </div>
+            <div class="col-sm-8">
+                @Html.PagedListPager(Model, page => "#" + page)
+            </div>
+        </div>
+    </div>
+</div>

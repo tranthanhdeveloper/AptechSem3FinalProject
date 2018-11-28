@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
-using Web.Areas.Instructor.Models;
+//using Web.Areas.Instructor.Models;
 using Web.Models.Mapping;
 
 namespace Web
@@ -24,7 +24,7 @@ namespace Web
 
             Mapper.Initialize(cfg => {
                 cfg.AddProfile<CourseProfile>();
-                cfg.AddProfile<CourseAuthorProfile>();
+                //cfg.AddProfile<CourseAuthorProfile>();
             });
 
         }

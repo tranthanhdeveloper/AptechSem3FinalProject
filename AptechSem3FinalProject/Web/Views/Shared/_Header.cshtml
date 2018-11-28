@@ -1,4 +1,4 @@
-﻿@using Web.Areas.Instructor
+﻿@*@using Web.Areas.Instructor*@
 @using Model.Enum;
 @using AuthenticationManager = Web.Helper.Sercurity.AuthenticationManager
 <header id="header" class="header-scrolled">
@@ -58,14 +58,14 @@
                                         <div class="clearfix"></div>
                                     </li>
                                     <li>
-                                        @if (!AuthenticationManager.Is(RoleEnum.Author))
+                                        @*@if (!AuthenticationManager.Is(RoleEnum.Author))
                                         {
                                             <a href="@Url.Action("Index","Instructor")">Become an instructor</a>
                                         }
                                         else
                                         {
                                             <a href="@Url.Action("Index", "Dashboard", new {area="Instructors"})">Instructor dashboard</a>
-                                        }
+                                        }*@
                                     </li>
                                     <li>
                                         <a href="@Url.Action("ResetPassword","Account")">ResetPassword</a>

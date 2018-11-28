@@ -1,0 +1,93 @@
+﻿
+
+
+
+@using Context.Database
+@using PagedList.Mvc
+@model PagedList.IPagedList<Order>
+@{
+
+    var listUser = Model.ToList() as List<Order>;
+}
+
+<div class="box">
+    <div class="box-body no-padding">
+
+        <table class="table table-bordered table-hover dataTable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>User buy</th>
+                   
+                    <th>Course title</th>
+                    <th>Course price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in listUser)
+                {
+
+                    <tr id="item-@item.Id">
+                        <td class="notranslate">@item.Id</td>
+                        <td>@item.User.Name</td>
+                        
+                        <td>@item.Course.Title</td>
+                        <td>@item.Course.Price</td>
+                        <td>@*@item.*@</td>
+
+                        @*<td class="options">
+                            <div class="btn-group pull-left">
+                                <a class="btn btn-default"
+                                   data-toggle="modal"
+                                   data-target="#myModaledit-@item.Id"
+                                   data-api="/Course/EditCourse"
+                                   title="Edit">
+                                    <i class="fa fa-edit fa-fw"></i>
+                                </a>
+                                <a class="btn btn-danger btn-admin-action"
+                                   data-id="@item.Id"
+                                   data-action="Delete"
+                                   data-api="/Admin/Course/DeleteCourse"
+                                   title="Xóa"><i class="fa fa-trash fa-fw"></i></a>
+                            </div>
+
+                            <div class="modal fade" id="myModaledit-@item.Id" role="dialog" aria-labelledby="myModalLabeledit" aria-hidden="true">
+                                <div class="modal-dialog ">
+                                    <form enctype="multipart/form-data" method="post">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabeledit">Update</h4>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                @Html.Partial("~/Areas/Admin/Views/Course/_partial_Edit_Course.cshtml", item)
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal" style="padding: 6px 12px;">Cancel</button>
+                                                <button type="submit" class="btn btn-primary btnEdit" style="padding: 6px 12px;">Save</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>*@
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="box-footer clearfix">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="dataTables_info" role="status" aria-live="polite">Total: <b>@Model.TotalItemCount</b> data</div>
+            </div>
+            <div class="col-sm-8">
+                @Html.PagedListPager(Model, page => "#" + page)
+            </div>
+        </div>
+    </div>
+</div>

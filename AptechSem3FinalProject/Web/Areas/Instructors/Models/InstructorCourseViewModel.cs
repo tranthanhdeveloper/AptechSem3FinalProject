@@ -19,8 +19,8 @@ namespace Web.Areas.Instructors.Models
         public long Price { get; set; }
         public byte Status { get; set; }
         public int CategoryId { get; set; }
-        public List<ModuleViewModel> ModuleViewModels { get; set; }
-        public CreateLessonViewModel CreateLessonViewModel { get; set; }
+        //public List<ModuleViewModel> ModuleViewModels { get; set; }
+        //public CreateLessonViewModel CreateLessonViewModel { get; set; }
     }
 
 }
