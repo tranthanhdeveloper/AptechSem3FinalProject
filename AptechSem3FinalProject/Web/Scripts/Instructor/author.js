@@ -74,7 +74,7 @@ $(function () {
             }
         });
     });
-
+    
     $(document).on('click', '.add-lesson-modal', function () {
         var moduleTitle = $(this).parents('.box-info').find('.box-header h3').text();
         var moduleId = $(this).data('module-id');
@@ -211,5 +211,14 @@ $(function () {
 
     $(document).on("click", "#hiddenAllTask", function () {
         TaskProcess.deleteAll();
+    });
+});
+
+$(document).ready(function () {
+    $(window).keydown(function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            return false;
+        }
     });
 });

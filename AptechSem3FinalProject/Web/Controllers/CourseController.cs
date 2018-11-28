@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -78,6 +79,10 @@ namespace Web.Controllers
             if (_courseService.ValidateCourseAccessible(loggedUserId, id))
             {
                 var course = _courseService.GetById(id);
+                if(course.Status == (byte)CourseStatus.DELETED)
+                {
+                    return RedirectToAction("Errors", "NotFound");
+                }
                 if (!_orderService.GetOrderByCourseAndUser(course.Id, loggedUserId).Any() && course.UserId != loggedUserId)
                 {
                     _orderService.AddOrder(course, loggedUserId, (int)(PaymentType.FREE));
