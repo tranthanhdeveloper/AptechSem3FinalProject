@@ -1,0 +1,34 @@
+﻿
+@using Context
+
+@model Context.Database.Course
+@if (Model != null)
+{
+    <input type="hidden" value="@Model.Id" name="Id">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Title</label>
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", placeholder = "Input Name" })
+
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Input Description", style="width:570px; height:150px;" })
+
+            </div>
+            <div class="form-group">
+                <label>Comment</label>
+                @Html.TextBoxFor(model => model.Comment, new { @class = "form-control", placeholder = "Input Comment" })
+
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                @Html.TextBoxFor(model => model.Price, new { @class = "form-control", placeholder = "Input Price" })
+
+            </div>
+
+           
+        </div>
+    </div>
+}

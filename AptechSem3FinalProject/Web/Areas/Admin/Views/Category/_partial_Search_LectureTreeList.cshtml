@@ -1,0 +1,59 @@
+﻿
+
+@using Context.Database
+@model IEnumerable<Context.Database.Lecture>
+@{
+    var listLecture = Model.ToList() as List<Lecture>;
+}
+
+<h4>Lecture</h4>
+<ul>
+    @foreach (var item in listLecture)
+    {
+        var videos = item.GetVideos();
+        var hasvideo = videos.Count() > 0;
+
+        <li class="@(hasvideo ? "parent_li_lecture" : "can-delete") ">
+            <span data-id="@item.Id" class="text-success">
+                <i class="@(hasvideo ? "fa fa-plus-square-o" : "")"></i>&nbsp;
+                &nbsp;
+                @item.Name &nbsp;
+
+                <a class="btn-edit-lecture"
+                   data-id="@item.Id"
+                   data-api="/Admin/Category/GetEditLecture"
+                   title="Edit">
+                    <i class="fa fa-edit fa-fw"></i>
+                </a>
+                <a class="btn-admin-action text-danger"
+                   data-id="@item.Id"
+                   data-action="Delete"
+                   data-api="/Admin/Category/DeleteLecture"
+                   title="Delete"><i class="fa fa-trash fa-fw"></i></a>
+
+                <div class="modal fade" id="myModaleditLecture" role="dialog" aria-labelledby="myModalLabeledit" aria-hidden="true">
+                    <div class="modal-dialog ">
+                        <form enctype="multipart/form-data" method="post" data-api="/Admin/Category/EditLecture">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabeledit">Update</h4>
+                                </div>
+                                <div class="modal-body">
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" style="padding: 6px 12px;">Cancel</button>
+                                    <button type="submit" class="btn btn-primary btnEdit" style="padding: 6px 12px;">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </span>
+        </li>
+    }
+</ul>
+
+

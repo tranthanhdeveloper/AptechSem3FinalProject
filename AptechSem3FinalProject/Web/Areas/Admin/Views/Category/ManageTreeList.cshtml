@@ -1,0 +1,22 @@
+﻿
+@using Context.Database
+@model IEnumerable<Context.Database.Category>
+@{
+    var listCategory = Model.ToList() as List<Category>;
+    Layout= "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/Admin/Category.js")
+}
+<section class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="tree top">
+                @Html.Partial("_partial_Search_CategoryTreeList", listCategory)
+
+            </div>
+        </div>
+    </div>
+</section>
+

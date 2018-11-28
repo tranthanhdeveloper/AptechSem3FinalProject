@@ -98,15 +98,16 @@ namespace Web.Areas.Instructors.Controllers
                 }
 
                 var module = lectureService.Get(id);
-                foreach(var lesson in module.Videos)
+                var courseId = module.CourseId;
+                foreach(var lesson in module.Videos.ToArray())
                 {
                     videoService.Delete(lesson);
                 }
                 lectureService.Delete(module);
 
-                if (!courseService.ValidatePublishState(module.CourseId))
+                if (!courseService.ValidatePublishState(courseId))
                 {
-                    var course = module.Course;
+                    var course = courseService.GetById(courseId);
                     course.Status = (byte)CourseStatus.CREATED;
                     courseService.Update(course);
                 }

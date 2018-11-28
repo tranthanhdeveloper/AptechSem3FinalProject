@@ -143,6 +143,12 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
       <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
     </Reference>
@@ -243,6 +249,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CourseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Models\FileMimeTypes.cs" />
+    <Compile Include="Areas\Admin\Models\LessonViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\LoginModel.cs" />
+    <Compile Include="Areas\Admin\Models\ReportModel.cs" />
     <Compile Include="Areas\Instructors\Controllers\CourseController.cs" />
     <Compile Include="Areas\Instructors\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Instructors\Controllers\LessonController.cs" />
@@ -295,6 +314,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Admin\AdminLTE.css" />
+    <Content Include="Content\Admin\style.css" />
+    <Content Include="Content\bootstrap-dialog.css" />
+    <Content Include="Content\bootstrap-dialog.min.css" />
     <Content Include="Areas\Instructors\Views\Course\Create.cshtml" />
     <Content Include="Areas\Instructors\Views\Course\Details.cshtml" />
     <Content Include="Areas\Instructors\Views\Course\Edit.cshtml" />
@@ -6829,6 +6852,7 @@
     <Content Include="Content\Instructor\plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="Content\Instructor\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Content\Instructor\plugins\timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -6945,6 +6969,18 @@
     <Content Include="img\search-bg.jpg" />
     <Content Include="img\top-banner.jpg" />
     <Content Include="img\video-bg.jpg" />
+    <Content Include="Scripts\Admin\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\Admin\bootstrap-dialog.js" />
+    <Content Include="Scripts\Admin\bootstrap-dialog.min.js" />
+    <Content Include="Scripts\Admin\Category.js" />
+    <Content Include="Scripts\Admin\chartjs\Chart.js" />
+    <Content Include="Scripts\Admin\chartjs\Chart.min.js" />
+    <Content Include="Scripts\Admin\Course.js" />
+    <Content Include="Scripts\Admin\DashBoard.js" />
+    <Content Include="Scripts\Admin\Form.js" />
+    <Content Include="Scripts\Admin\layout.js" />
+    <Content Include="Scripts\Admin\ManageDataTable.js" />
+    <Content Include="Scripts\Admin\User.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -7560,6 +7596,37 @@
     <Content Include="Content\Instructor\plugins\input-mask\phone-codes\phone-codes.json" />
     <Content Include="Areas\Instructors\Views\Lesson\Edit.cshtml" />
     <Content Include="Areas\Instructors\Views\Course\CourseItem.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdminHeader.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ListAccount.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAccount.cshtml" />
+    <Content Include="Areas\Admin\Views\User\ManageUser.cshtml" />
+    <Content Include="Areas\Admin\Views\User\_partial_Edit_User.cshtml" />
+    <Content Include="Scripts\Admin\chartjs\Chart.min.js.map" />
+    <Content Include="Areas\Admin\Views\User\_partial_Search_User.cshtml" />
+    <Content Include="Areas\Admin\Views\Course\ManageCourse.cshtml" />
+    <Content Include="Areas\Admin\Views\Course\_partial_Search_Course.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_partial_Edit_Course.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\ManageOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\_Partial_Search_Order.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\ManageCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_partial_Search_Category.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_partial_Edit_Category.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\ManageTreeList.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_partial_Search_CategoryTreeList.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_partial_Search_CourseTreeList.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_partial_Search_LectureTreeList.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_partial_CommonEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_partial_Edit_Lecture.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_partial_Search_LessonTreeList.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\_partial_Edit_Lesson.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\ReportByAuthor.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_partial_Search_ReportByAuthor.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Instructor\author.js" />
     <Content Include="Scripts\Instructor\TaskHandle.js" />
@@ -7654,6 +7721,7 @@
     <Content Include="Scripts\plyr\dist\plyr.polyfilled.min.js.map" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\WebCustom.config" />
     <Content Include="Views\Course\CourseDetail.cshtml" />
     <Content Include="Views\Course\CoursePlay.cshtml" />
     <Content Include="Views\Course\Index.cshtml" />
@@ -7674,6 +7742,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Admin\" />
     <Folder Include="ErrorPages\" />
   </ItemGroup>
   <ItemGroup>

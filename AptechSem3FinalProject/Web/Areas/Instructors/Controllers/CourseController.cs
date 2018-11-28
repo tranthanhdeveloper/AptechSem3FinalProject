@@ -220,11 +220,27 @@ namespace Web.Areas.Instructors.Controllers
             IEnumerable<Course> createdCourses = new List<Course>();
             if(searchOption.CategoryId != 0)
             {
-                createdCourses = courseService.GetAll(course => course.Title.Contains(searchOption.Title) && course.CategoryId == searchOption.CategoryId);
+                if (searchOption.Title == "" || searchOption.Title == null)
+                {
+                    createdCourses = courseService.GetAll(course => course.CategoryId == searchOption.CategoryId);
+                }
+                else
+                {
+                    createdCourses = courseService.GetAll(course => course.Title.Contains(searchOption.Title) && course.CategoryId == searchOption.CategoryId);
+                }
+                
             }
             else
             {
-                createdCourses = courseService.GetAll(course => course.Title.Contains(searchOption.Title));
+                if(searchOption.Title == "" || searchOption.Title == null)
+                {
+                    createdCourses = courseService.GetAll();
+                }
+                else
+                {
+                    createdCourses = courseService.GetAll(course => course.Title.Contains(searchOption.Title));
+                }
+                
             }
             var courseSearchResultView = Mapper.Map<List<CourseItemViewModel>>(createdCourses);
             return PartialView("Search", courseSearchResultView);

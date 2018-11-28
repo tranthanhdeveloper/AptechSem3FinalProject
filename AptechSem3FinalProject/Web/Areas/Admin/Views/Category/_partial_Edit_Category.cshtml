@@ -1,0 +1,27 @@
+﻿
+
+@using Context
+
+@model Context.Database.Category
+
+@if (Model != null)
+{
+    <input type="hidden" value="@Model.id" name="Id">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Title</label>
+                @Html.TextBoxFor(model => model.CategoryName, new { @class = "form-control", placeholder = "Input Name" })
+
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Input Description", style = "width:570px; height:150px;" })
+
+            </div>
+
+
+
+        </div>
+    </div>
+}

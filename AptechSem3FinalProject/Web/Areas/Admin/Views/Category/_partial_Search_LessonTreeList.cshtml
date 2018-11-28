@@ -1,0 +1,64 @@
+﻿
+
+
+@using Context.Database
+@model IEnumerable<Context.Database.Video>
+@{
+    var listLesson = Model.ToList() as List<Video>;
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/Admin/Course.js");
+}
+<h4>Lesson</h4>
+<ul>
+
+
+    @foreach (var item in listLesson)
+    {
+
+        <li class="can-delete">
+            <span data-id="@item.Id" class="text-success">
+                <i ></i>&nbsp;
+                &nbsp;
+                @item.Title &nbsp;
+
+                <a class="btn-edit-Lesson"
+                   data-id="@item.Id"
+                   data-api="/Admin/Category/GetEditLesson"
+                   title="Edit">
+                    <i class="fa fa-edit fa-fw"></i>
+                </a>
+                <a class="btn-admin-action text-danger"
+                   data-id="@item.Id"
+                   data-action="Delete"
+                   data-api="/Admin/Category/DeleteLesson"
+                   title="Delete"><i class="fa fa-trash fa-fw"></i></a>
+
+                <div class="modal fade" id="myModaleditLesson" role="dialog" aria-labelledby="myModalLabeledit" aria-hidden="true">
+                    <div class="modal-dialog ">
+                        <form enctype="multipart/form-data" method="post" data-api="/Admin/Category/EditLesson">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabeledit">Update</h4>
+                                </div>
+                                <div class="modal-body">
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" style="padding: 6px 12px;">Cancel</button>
+                                    <button type="submit" class="btn btn-primary btnEdit" style="padding: 6px 12px;">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </span>
+        </li>
+    }
+</ul>
+
+

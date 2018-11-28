@@ -1,0 +1,37 @@
+﻿@using Context
+
+@model Context.Database.User
+@if (Model != null)
+{
+    <input type="hidden" value="@Model.Id" name="Id">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Name</label>
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Input Name" })
+
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", placeholder = "Input Phone" })
+
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Input Email" })
+
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                @Html.TextBoxFor(model => model.Address, new { @class = "form-control", placeholder = "Input Address" })
+
+            </div>
+            
+            <div class="form-group">
+                <label>Birthday</label>
+                <input class="form-control" placeholder="Input Birthday" type="text"
+                       name="BirthDay" value="@Model.BirthDay"/>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,58 @@
+﻿
+@using PagedList;
+@using Context.Database;
+@using PagedList.Mvc
+
+@model IPagedList<User>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+@section Scripts
+{
+    @*@Scripts.Render("~/Scripts/Admin/User")*@
+}
+<input type="hidden" id="postEditLink" value="/Admin/Course/EditCourse" />
+<input type="hidden" id="postDeleteLink" value="/Admin/Course/DeleteCourse" />
+<section class="content">
+    <div class="row ajax-search-group">
+        <form id="filter-form" action="/Admin/Course/FilterCourse">
+            <div class="col-lg-12">
+                <div class="box box-default box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Search Box</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+
+                            <input type="hidden" name="page" value="1">
+                            <input type="hidden" name="page_size" value="10">
+                            <input type="hidden" name="pageChange" value="0">
+                            <div class="col-md-12" id="product_search_input">
+                                <div style="margin-bottom: 10px">
+                                    <input type="text" class="form-control" name="Model_Name" placeholder="Input name user to search...">
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="col-lg-12">
+            <div class="Search_Result">
+                @Html.Partial("_partial_Search_ReportByAuthor", Model)
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
