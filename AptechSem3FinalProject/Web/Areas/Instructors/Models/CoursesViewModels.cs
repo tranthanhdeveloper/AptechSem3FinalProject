@@ -22,6 +22,7 @@ namespace Web.Areas.Instructors.Models
         public int UserId { get; set; }
         public string Prerequisites { get; set; }
         public List<Order> Orders { get; set; }
+        public List<Comment> Comments { get; set; }
         public List<ModuleItemViewModel> ModuleItemViewModels { get; set; }
     }
 

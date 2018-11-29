@@ -1,77 +1,33 @@
 <header class="main-header">
-
-    <!-- Logo -->
     <a href="@Url.Action("Index","Dashboard", new {area="Instructors"})" class="logo">
         <span class="logo-mini"><b>D</b>B</span>
         <span class="logo-lg">Dashboard</span>
     </a>
-
-    <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
-        <!-- Sidebar toggle button-->
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
-        <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">               
+            <ul class="nav navbar-nav">
                 <li class="dropdown tasks-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-flag-o"></i>
                         <span class="label label-danger" id="taskCounter"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        @*<li class="header">You have 9 tasks</li>*@
                         <li>
-                            <ul class="menu task-list">                                
-                            </ul>
+                            <ul class="menu task-list"></ul>
                         </li>
                         <li class="footer">
                             <span id="hiddenAllTask" class="btn text-center">Hidden all</span>
                         </li>
                     </ul>
                 </li>
-                <!-- User Account: style can be found in dropdown.less -->
-                <li class="dropdown user user-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="~/Content/Instructor/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Alexander Pierce</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <!-- User image -->
-                        <li class="user-header">
-                            <img src="~/Content/Instructor/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                            <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
-                            </p>
-                        </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="row">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-                        </li>
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            </div>
-                            <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                            </div>
-                        </li>
-                    </ul>
+                <li class="">
+                    <a href="@Url.Action("Logout","Account", new {area="" })">Sign out</a>
+                </li>
+                <li class="">
+                    <a href="@Url.Action("Index","Home", new {area="" })">Home page</a>
                 </li>
             </ul>
         </div>
