@@ -3,21 +3,27 @@
 @using Context.Database;
 @using PagedList.Mvc
 
-@model IPagedList<User>
+@model IPagedList<Web.Areas.Admin.Models.ReportModel>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-
+    var title = "Report by author";
 }
 
 @section Scripts
 {
-    @*@Scripts.Render("~/Scripts/Admin/User")*@
+    @Scripts.Render("~/Scripts/Admin/User")
 }
 <input type="hidden" id="postEditLink" value="/Admin/Course/EditCourse" />
 <input type="hidden" id="postDeleteLink" value="/Admin/Course/DeleteCourse" />
+<section class="content-header">
+    <h1>
+        @title
+    </h1>
+
+</section>
 <section class="content">
     <div class="row ajax-search-group">
-        <form id="filter-form" action="/Admin/Course/FilterCourse">
+        <form id="filter-form" action="/Admin/Report/FilterReportAuthor">
             <div class="col-lg-12">
                 <div class="box box-default box-solid">
                     <div class="box-header with-border">

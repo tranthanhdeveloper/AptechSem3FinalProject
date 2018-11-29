@@ -48,18 +48,23 @@
                         <a href="@Url.Action("ManageUser","User")">
                             <i class="fa fa-user"></i>
                             <span>User</span>
-                            
+
                         </a>
-                        
-                    </li>
-                    
-                    <li class="active">
-                        <a href="widgets.html">
-                            <i class="fa fa-th"></i> <span>ManageAll</span>
-                            
-                        </a>
+
                     </li>
 
+                    <li class="active">
+                        <a href="@Url.Action("ManageTreeList", "Category")">
+                            <i class="fa fa-th"></i> <span>ManageAll</span>
+
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="@Url.Action("ReportByAuthor", "Report")">
+                            <i class="fa fa-th"></i> <span>Report</span>
+
+                        </a>
+                    </li>
                 </ul>
             </section>
             <!-- /.sidebar -->

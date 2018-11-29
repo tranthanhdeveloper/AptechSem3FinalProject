@@ -22,7 +22,7 @@
                         <tr>
                             <td>@order.Id</td>
                             <td>@order.CreatedDate</td>
-                            <td>@order.Course.Title</td>
+                            <td><a href="@Url.Action("CourseDetail", "Course", new {Id=order.CourseId})">@order.Course.Title</a></td>
                             @if (@order.Course.Price == 0)
                             {
                                 <td>No payment</td>

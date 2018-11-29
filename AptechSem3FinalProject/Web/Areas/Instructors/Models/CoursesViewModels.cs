@@ -14,7 +14,7 @@ namespace Web.Areas.Instructors.Models
         public string Description { get; set; }
         public DateTime CreateDate { get; set; }
         public string Comment { get; set; }
-        public string Image { get; set; }
+        public string Image { get; set; }        
         public long Price { get; set; }
         public byte Status { get; set; }
         public int CategoryId { get; set; }
@@ -39,6 +39,8 @@ namespace Web.Areas.Instructors.Models
         public string Image { get; set; }
 
         [Required]
+        [Range(0, 10000, ErrorMessage = @"Please enter a number between 0 and 10000")]
+        [DataType(DataType.Currency)]
         public long Price { get; set; }
         public byte Status { get; set; }
 
@@ -61,6 +63,8 @@ namespace Web.Areas.Instructors.Models
         public string Comment { get; set; }
 
         [Required]
+        [Range(0, 10000, ErrorMessage = @"Please enter a number between 0 and 10000")]
+        [DataType(DataType.Currency)]
         public long Price { get; set; }
         public byte Status { get; set; }
 

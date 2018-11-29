@@ -4,10 +4,11 @@
 
 @using Context.Database
 @using PagedList.Mvc
-@model PagedList.IPagedList<User>
+@using Web.Areas.Admin.Models
+@model PagedList.IPagedList<Web.Areas.Admin.Models.ReportModel>
 @{
 
-    var listUser = Model.ToList() as List<User>;
+    var listReport= Model.ToList() as List<ReportModel>;
 }
 
 <div class="box">
@@ -20,20 +21,19 @@
                     <th>Name</th>
                     <th>Total Course</th>
                     <th>Total Order</th>
-                    <th>Price</th>
-                    <th>Image</th>
-                    <th>Options</th>
+                    <th>Total Money</th>
+                    
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in listUser)
+                @foreach (var item in listReport)
                 {
 
-                    <tr id="item-@item.Id">
-                       
-                        
-                        
-                        
+                    <tr id="item-@item.UserId">
+                        <td>@item.Name</td>
+                        <td><a href="@Url.Action("ManageCourse", "Course", new { userId = item.UserId })">@item.CountCourse</a></td>
+                        <td><a href="@Url.Action("ManageOrder", "Order", new { userId = item.UserId })">@item.CountOrder</a></td>
+                        <td>@item.TotalMoney</td>
                     </tr>
 
                 }

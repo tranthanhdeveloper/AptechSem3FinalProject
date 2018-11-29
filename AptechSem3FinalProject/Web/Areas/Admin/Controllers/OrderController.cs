@@ -8,6 +8,7 @@ using Context.Database;
 using Model.Enum;
 using PagedList;
 using Service.Service;
+using WebGrease.Css.Extensions;
 
 namespace Web.Areas.Admin.Controllers
 {
@@ -15,19 +16,24 @@ namespace Web.Areas.Admin.Controllers
     public class OrderController : Controller
     {
         private IOrderService _orderService;
+        private IUserService _userService;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService, IUserService userService)
         {
             _orderService = orderService;
+            _userService = userService;
         }
         // GET: Admin/Order
-        public ActionResult ManageOrder(int? page)
+        public ActionResult ManageOrder(int? page, int userId)
         {
-            var listOrder = _orderService.GetAll(u => u.Status == (int) EntityStatus.Visible).OrderByDescending(u => u.Id) as IEnumerable<Order>;
+            
+            var orders = _orderService.GetAll(o => o.Course.UserId == userId).OrderByDescending(u => u.Id) as IEnumerable<Order>;
+            
             var pageSize =int.Parse(WebConfigurationManager.AppSettings["PageSize"]);
             pageSize = pageSize == 0 ? 1 : pageSize;
             int pageNumber = page ?? 1;
-            return View(listOrder.ToPagedList(pageNumber, pageSize));
+            ViewBag.Name_User = _userService.GetById(userId).Name;
+            return View(orders.ToPagedList(pageNumber, pageSize));
         }
 
         [HttpPost]

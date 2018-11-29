@@ -46,7 +46,7 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             var showCoursesViewModel = new ShowCoursesViewModel();
-            var popularCourses = _courseService.GetPublished().Take(8);
+            var popularCourses = _courseService.GetPublished().Take(4);
             var lastedCourses = _courseService.GetLastedCourse();
             showCoursesViewModel.PopularCourses = Mapper.Map<List<CourseItemViewModel>>(popularCourses);
             showCoursesViewModel.LastedCourses = Mapper.Map<List<CourseItemViewModel>>(lastedCourses);

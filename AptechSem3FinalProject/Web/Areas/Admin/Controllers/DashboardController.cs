@@ -29,7 +29,7 @@ namespace Web.Areas.Admin.Controllers
             
             ViewBag.TotalCourse = _courseService.GetAll().Count();
             ViewBag.TotalOrder = _orderService.GetAll().Count();
-            ViewBag.TotalUser = _orderService.GetAll().Count();
+            ViewBag.TotalUser = _userService.GetAll().Count();
             ViewBag.TotalMoney = totalPrice.Sum();
             return View();
         }

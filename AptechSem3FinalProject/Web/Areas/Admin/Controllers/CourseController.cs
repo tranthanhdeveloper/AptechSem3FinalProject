@@ -15,28 +15,32 @@ namespace Web.Areas.Admin.Controllers
     public class CourseController : AdminController
     {
         private ICourseService _courseService;
+        private IUserService _userService;
 
-        public CourseController(ICourseService courseService)
+        public CourseController(ICourseService courseService, IUserService userService)
         {
             _courseService = courseService;
+            _userService = userService;
         }
         // GET: Admin/Course
-        public ActionResult ManageCourse(int? page)
+        public ActionResult ManageCourse(int? page, int userId)
         {
-            var listCourse = _courseService.GetAll(u => u.Status != (int) CourseStatus.DELETED).OrderByDescending(u => u.Id) as IEnumerable<Course>;
+            var listCourse = _courseService.GetAll(u => u.UserId == userId).OrderByDescending(u => u.Id) as IEnumerable<Course>;
             var pageSize =int.Parse(WebConfigurationManager.AppSettings["PageSize"]);
             pageSize = pageSize == 0 ? 1 : pageSize;
             int pageNumber = page ?? 1;
+            ViewBag.userId = userId;
+            ViewBag.Name_User = _userService.GetById(userId).Name;
             return View(listCourse.ToPagedList(pageNumber, pageSize));
         }
 
         [HttpPost]
-        public ActionResult FilterCourse(int? page, string Model_Name)
+        public ActionResult FilterCourse(int? page, string Model_Name, int userId)
         {
             var pageSize = int.Parse(WebConfigurationManager.AppSettings["PageSize"]);
             pageSize = pageSize == 0 ? 1 : pageSize;
             int pageNumber = page ?? 1;
-            var listCourse = _courseService.GetAll(u => u.Status != (int) CourseStatus.DELETED).OrderByDescending(u => u.Id) as IEnumerable<Course>;
+            var listCourse = _courseService.GetAll(u => u.UserId == userId).OrderByDescending(u => u.Id) as IEnumerable<Course>;
             if (Model_Name != "")
             {
                 listCourse = listCourse.Where(l => l.Title.ToLower().Contains(Model_Name.ToLower()));
